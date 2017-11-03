@@ -9,15 +9,20 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col ><button ion-button block class="facebookButton">Login With Facebook</button></ion-col>
+        <ion-col ><button ion-button block class="facebookButton">
+            <ion-icon name="facebook"></ion-icon>
+            Login With Facebook</button></ion-col>
       </ion-row>
       <ion-row>
         <ion-col><button ion-button block class="instagramButton">Login With Instagram</button></ion-col>
       </ion-row>
     </ion-grid>
 
-    <div class="hrLine"><span>Or</span></div>
+    <div class="container">
+        <hr class="hr-text" data-content="OR">
+      </div>
 
+    
     <ion-list no-lines padding-top>
       <ion-item>
         <ion-input type="text" placeholder="Username"></ion-input>
@@ -29,7 +34,7 @@
     <button ion-button block round color="secondary">Login</button>
 
     <div padding-top>
-    <button ion-button block color="light" clear (click)="signupPage();">If new member ? SIGNUP</button>
+    <button ion-button block color="light" clear (click)="signupPage();">Don't have an account? Sign Up Now</button>
     <button ion-button block color="light" clear (click)="forgotPasswordPage();">Forgot Password</button>
   </div>
 

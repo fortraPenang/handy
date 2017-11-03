@@ -8,10 +8,14 @@ import { UserLogin } from '../pages/user-login/user-login';
 import { UserSignup } from '../pages/user-signup/user-signup';
 import { UserForgotpassword } from '../pages/user-forgotpassword/user-forgotpassword';
 import { Dashboard } from '../pages/dashboard/dashboard';
+import { ReviewPage } from '../pages/review/review';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+// Import ionic2-rating module
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 @NgModule({
   declarations: [
@@ -21,12 +25,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     UserSignup,
     UserForgotpassword,
     Dashboard,
+    ReviewPage,
 
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    Ionic2RatingModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,6 +42,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     UserSignup,
     UserForgotpassword,
     Dashboard,
+    ReviewPage,
   ],
   providers: [
     StatusBar,

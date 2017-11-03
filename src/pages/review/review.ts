@@ -1,29 +1,30 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { ReviewPage } from '../review/review';
 /**
- * Generated class for the Dashboard page.
+ * Generated class for the ReviewPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+var rating = 0;
 @IonicPage()
 @Component({
-  selector: 'page-dashboard',
-  templateUrl: 'dashboard.html',
+  selector: 'page-review',
+  templateUrl: 'review.html',
 })
-export class Dashboard {
+export class ReviewPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Dashboard');
+    console.log('ionViewDidLoad ReviewPage');
   }
 
-  goToReview(){
-    this.navCtrl.push(ReviewPage);
+  onModelChange($val){
+    rating = $val;
+    console.log(rating);
   }
 
 }
