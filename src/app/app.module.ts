@@ -14,6 +14,7 @@ import { ReviewPage } from '../pages/review/review';
 import { ViewServicePage } from '../pages/view-service/view-service';
 import { Geolocation} from '@ionic-native/geolocation';
 import { GoogleMaps } from '../providers/google-maps';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -55,7 +56,7 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-
+    
     UserLogin,
     UserSignup,
     UserForgotpassword,
@@ -67,7 +68,8 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GooglePlus    
   ]
 })
 export class AppModule {}

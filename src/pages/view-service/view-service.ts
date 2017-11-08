@@ -26,7 +26,7 @@ export class ViewServicePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, angFire: AngularFireDatabase) {
     this.handys = angFire.list('/Handys');
-    console.log(this.handys[0]);
+    console.log(this.handys['/Handys']);
   }
 
   
