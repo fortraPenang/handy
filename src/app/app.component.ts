@@ -27,6 +27,7 @@ export class MyApp {
   ) {
     this.initializeApp();
 
+
     // set our app's pages
     this.pages = [
       { title: 'Dashbaord',icon:'home', component: Dashboard },
