@@ -2,17 +2,35 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
+<<<<<<< HEAD
 import { Dashboard } from '../pages/dashboard/dashboard';
 // Do not import from 'firebase' as you'll lose the tree shaking benefits
 import * as firebase from 'firebase/app';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController } from 'ionic-angular';
+=======
+import { GooglePlus } from '@ionic-native/google-plus';
+import { IonicPage, LoadingController, ToastController, ModalController, NavParams, AlertController } from 
+'ionic-angular';
+import { Dashboard } from '../pages/dashboard/dashboard';
+// Do not import from 'firebase' as you'll lose the tree shaking benefits
+import * as firebase from 'firebase/app';
+>>>>>>> 95a965fe16b68332ef3888883401ad327299e322
 
 @Injectable()
 export class AuthService {
   private currentUser: firebase.User;
 
+<<<<<<< HEAD
   constructor(public alertCtrl: AlertController,public loadingCtrl: LoadingController,public navCtrl: NavController,public afAuth: AngularFireAuth, public googlePlus:GooglePlus) {
+=======
+  constructor(public afAuth: AngularFireAuth, 
+    public googlePlus: GooglePlus, 
+    public toastCtrl: ToastController,
+    public modalCtrl: ModalController,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,) {
+>>>>>>> 95a965fe16b68332ef3888883401ad327299e322
     afAuth.authState.subscribe((user: firebase.User) => this.currentUser = user);
   }
 
@@ -30,6 +48,7 @@ export class AuthService {
   }
 
   //TODO:
+<<<<<<< HEAD
   async loginGoogle(accountInfo: any){
       let loader = this.loadingCtrl.create({
         dismissOnPageChange: true,
@@ -54,6 +73,11 @@ export class AuthService {
       })
       loader.present();
   }
+=======
+  async loginGoogle(){
+
+    }
+>>>>>>> 95a965fe16b68332ef3888883401ad327299e322
 
   //TODO:
   async loginFacebook(accountInfo: any){

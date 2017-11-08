@@ -5,18 +5,24 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
-
+import { AngularFireAuth } from 'angularfire2/auth';
 import { UserLogin } from '../pages/user-login/user-login';
 import { UserSignup } from '../pages/user-signup/user-signup';
 import { UserForgotpassword } from '../pages/user-forgotpassword/user-forgotpassword';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { ReviewPage } from '../pages/review/review';
 import { ViewServicePage } from '../pages/view-service/view-service';
+<<<<<<< HEAD
 import { Geolocation} from '@ionic-native/geolocation';
 import { GoogleMaps } from '../providers/google-maps';
 import { GooglePlus } from '@ionic-native/google-plus';
 
+=======
+import { Geolocation } from '@ionic-native/geolocation';
+import { GooglePlus } from '@ionic-native/google-plus';
+>>>>>>> 95a965fe16b68332ef3888883401ad327299e322
 
+import { AuthService } from '../providers/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -69,7 +75,13 @@ export const firebaseConfig = {
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+<<<<<<< HEAD
     GooglePlus    
+=======
+    GooglePlus,
+    AuthService,
+    AngularFireAuth
+>>>>>>> 95a965fe16b68332ef3888883401ad327299e322
   ]
 })
 export class AppModule {}
