@@ -14,6 +14,8 @@ import { ReviewPage } from '../pages/review/review';
 import { ViewServicePage } from '../pages/view-service/view-service';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GooglePlus } from '@ionic-native/google-plus';
+import firebase from 'firebase'
+
 
 import { AuthService } from '../providers/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,7 +43,8 @@ export const firebaseConfig = {
     UserForgotpassword,
     Dashboard,
     ReviewPage,
-    ViewServicePage
+    ViewServicePage,
+
 
   ],
   imports: [
@@ -51,6 +54,8 @@ export const firebaseConfig = {
     Ionic2RatingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -70,7 +75,9 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GooglePlus,
     AuthService,
-    AngularFireAuth
+    AngularFireAuth,
+    
+    
   ]
 })
 export class AppModule {}

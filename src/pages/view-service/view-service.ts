@@ -1,8 +1,9 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
-
+import { AngularFireDatabase } from "angularfire2/database";
+import { Observable } from 'rxjs/observable';
+import firebase from 'firebase';
 
 declare var google;
 
@@ -20,20 +21,30 @@ declare var google;
 export class ViewServicePage {
 
   @ViewChild('map') mapElement: ElementRef;
+
+  obj: { Address: string,
+         Category: string};
   map: any;
 
-  handys: FirebaseListObservable<any[]>;
+  public handys: any;
+  database = firebase.database();
+  valueRef = firebase.database().ref('/Handys/');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, angFire: AngularFireDatabase) {
-    this.handys = angFire.list('/Handys');
-    console.log(this.handys[0]);
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
+    
   }
 
+  
+  
   
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewServicePage');
     this.loadMap();
+    this.valueRef.on('value', function(handy) {
+      //this.handys = handy.val();
+      console.log(handy.val()[0]['Address']);
+    });  
   }
 
   loadMap(){
