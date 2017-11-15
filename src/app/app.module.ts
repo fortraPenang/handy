@@ -12,16 +12,10 @@ import { UserForgotpassword } from '../pages/user-forgotpassword/user-forgotpass
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { ReviewPage } from '../pages/review/review';
 import { ViewServicePage } from '../pages/view-service/view-service';
-<<<<<<< HEAD
 import { Geolocation} from '@ionic-native/geolocation';
 import { GoogleMaps } from '../providers/google-maps';
 import { GooglePlus } from '@ionic-native/google-plus';
-
-=======
-import { Geolocation } from '@ionic-native/geolocation';
-import { GooglePlus } from '@ionic-native/google-plus';
->>>>>>> 95a965fe16b68332ef3888883401ad327299e322
-
+import firebase from 'firebase'
 import { AuthService } from '../providers/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -48,7 +42,8 @@ export const firebaseConfig = {
     UserForgotpassword,
     Dashboard,
     ReviewPage,
-    ViewServicePage
+    ViewServicePage,
+
 
   ],
   imports: [
@@ -58,6 +53,8 @@ export const firebaseConfig = {
     Ionic2RatingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -75,13 +72,9 @@ export const firebaseConfig = {
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-<<<<<<< HEAD
-    GooglePlus    
-=======
     GooglePlus,
     AuthService,
     AngularFireAuth
->>>>>>> 95a965fe16b68332ef3888883401ad327299e322
   ]
 })
 export class AppModule {}
