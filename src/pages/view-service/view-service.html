@@ -44,20 +44,19 @@
     </div> 
     <ion-list>
       <h1 ion-text text-center>Services Available</h1>
-     <!--  <ion-item *ngFor="let handy of handys">
+      <!--
+      <ion-item *ngFor="let handy of handys; let i = index">
         <ion-thumbnail item-left (click)="ShowInMap(ServiceCenter[3],ServiceCenter[4])">
-           <img src={{handy.Image}}> 
+          <img src={{handy.image}}>
         </ion-thumbnail>
-        <h2>{{handy.Name}}</h2>
-        <h2>{{handy.Category}}</h2>
-        <h2>{{handy.Email}}</h2>
-        <h2>{{handy.Info}}</h2>
-        <h2>{{handy.Address}}</h2>
-        <h2>{{handy.Phone}}</h2>
-      -->
+        <h2>{{handy.organisation_name}}</h2>
+        <h3>{{handy.info}}</h3>
+        <h4>{{handy.addressLine1}}</h4>
+        <h5>{{handy.phone_number1}}</h5>
+        <h6>{{i}}</h6>
+        <ion-icon name="star"style= "color: #ffb400;"></ion-icon>
         <rating [(ngModel)]="rate" readOnly="true" emptyStarIconName="star-outline" halfStarIconName="star-half" 
         starIconName="star" nullable="false"></rating>
-        <!--
         <button clear item-right (click)="gotoServiceCenter(ServiceCenter[0],ServiceCenter[2],ServiceCenter[1])">View</button>
       </ion-item> -->
      </ion-list>
