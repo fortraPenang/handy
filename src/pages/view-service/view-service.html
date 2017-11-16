@@ -43,12 +43,17 @@
               </ion-row>
              </div> 
     <ion-list>
-      <ion-item *ngFor="let handy of handys | async">
+      <ion-item *ngFor="let handy of handys; let i = index">
         <ion-thumbnail item-left (click)="ShowInMap(ServiceCenter[3],ServiceCenter[4])">
-          <img src={{ServiceCenter[1]}}>
+          <img src={{handy.image}}>
         </ion-thumbnail>
-        <h2>{{handy.Category}}</h2>
-        <h4>{{handy}} • <ion-icon name="ios-star-half"></ion-icon></h4>
+        <h2>{{handy.organisation_name}}</h2>
+        <h3>{{handy.info}}</h3>
+        <h4>{{handy.addressLine1}}</h4>
+        <h5>{{handy.phone_number1}}</h5>
+        <h6>{{i}}</h6>
+        <ion-icon name="star"style= "color: #ffb400;"></ion-icon>
+        
         <button clear item-right (click)="gotoServiceCenter(ServiceCenter[0],ServiceCenter[2],ServiceCenter[1])">View</button>
       </ion-item>
      </ion-list>
