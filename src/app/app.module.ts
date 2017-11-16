@@ -54,8 +54,6 @@ export const firebaseConfig = {
     Ionic2RatingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    
-    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

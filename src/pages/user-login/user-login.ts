@@ -52,7 +52,7 @@ export class UserLogin {
   signupPage(){ this.navCtrl.push(UserSignup); }
   forgotPasswordPage(){ this.navCtrl.push(UserForgotpassword); }
 
-
+  //attempt the normal login with email and password
   doLogin(){
     this.submitAttempt = true;
     let loader = this.loadingCtrl.create({
@@ -60,18 +60,27 @@ export class UserLogin {
     });
     if(this.loginForm.valid){
       console.log(this.account);
-      this.authService.login(this.account).then(authData => {
+      this.authService.login(this.account).then((authData) => {
         //successful
         console.log(authData);
+        //toast to inform user
+        let toast = this.toastCtrl.create({
+          message: 'Login Successful. Welcome ' + this.account.email + ' !',
+          duration: 3000,
+          position: 'button'
+        });
+        toast.onDidDismiss(() => {
+          console.log("Dismissed toast");
+        })
+        toast.present();
         this.menuCtrl.swipeEnable(true);
         this.navCtrl.setRoot(Dashboard);
-      }, error => {
+      }, (error) => {
         console.log(error);
         var errorCode = error.code;
         var errorMsg = error.message;
         //custom error message
-        if (errorCode == "auth/user-disabled" ||
-            errorCode == "auth/user-not-found" || errorCode == "auth/wrong-password") errorMsg = "Wrong username or password.";
+        if (errorCode == "auth/user-disabled" || errorCode == "auth/user-not-found" || errorCode == "auth/wrong-password") errorMsg = "Wrong username or password.";
         if(errorCode == "auth/invalid-email") errorMsg = "Please provide email with the correct format."; 
         let alert = this.alertCtrl.create({
           title: "Login Failed",
@@ -86,6 +95,7 @@ export class UserLogin {
     
   }
 
+  //sign in via google
   signInGoogle(){
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,

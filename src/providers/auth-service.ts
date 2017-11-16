@@ -45,4 +45,8 @@ export class AuthService {
 
   }
 
+  //TODO:
+  async logout(){
+    return this.afAuth.auth.signOut();
+  }
 }
