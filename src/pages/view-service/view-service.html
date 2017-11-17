@@ -13,13 +13,13 @@
 </ion-header>
 <ion-content no-padding class="fb">
   <div #map id="map"></div>
-  <ion-row>
+<!--   <ion-row>
    <ion-col style="transition:visibility .1s .9s;" [ngClass]="{'displayLoading':isLoadingClassVisible}">
    <div>
     <br/><br/><p>We are unable to find your location.. <br/><br/><i><ion-icon name="logo-freebsd-devil"></ion-icon></i></p><br/><p style="font-size:15px;"><b>Pls turn on your GPS or move to an Open space</b></p><br/><br/><button ion-button full (click)="showRefine()">Offline Service<ion-icon name="md-navigate"></ion-icon></button>
     </div>
     </ion-col>
-   </ion-row>  
+   </ion-row>   -->
   <ion-row style="height:0px;">
    <ion-col style="transition:transform 1s;transform:translate(0,-2000px)" [ngClass]="{'displayMap':isLoadingClassVisible}">
     <div> 
@@ -28,29 +28,37 @@
     </div>  
    </ion-col>
   </ion-row>
-            <div [ngClass]="{'refineClass':isrefineClass}"> 
-             <p style="text-align:center">RANGE <i>(KiloMeteres)</i></p>
-              <ion-row>
-              <ion-col col-9>
-              <ion-range [(ngModel)]="kmrange" min="0" max="100" pin="true" style="padding:0px 0px 0px 15px">
-                <ion-icon range-left small name="pin"></ion-icon>
-                <ion-icon range-right name="pin"></ion-icon>
-              </ion-range>
-              </ion-col>
-              <ion-col>
-                <button ion-button icon-only ><ion-icon name="ios-funnel-outline"></ion-icon></button>
-              </ion-col>
-              </ion-row>
-             </div> 
+  <div [ngClass]="{'refineClass':isrefineClass}"> 
+    <p style="text-align:center">Filter by range <i>(in KM)</i></p>
+    <ion-row>
+    <ion-col col-9>
+    <ion-range [(ngModel)]="kmrange" min="100" max="5000" pin="true" style="padding:0px 15px 0px 15px" (ngModelChange)="onModelChange($event)">
+      <ion-icon range-left small name="pin"></ion-icon>
+      <ion-icon range-right name="pin"></ion-icon>
+    </ion-range>
+    </ion-col>
+    <ion-col col-3>
+      <button ion-button icon-only ><ion-icon name="ios-funnel-outline"></ion-icon></button>
+    </ion-col>
+    </ion-row>
+    </div> 
     <ion-list>
-      <ion-item *ngFor="let handy of handys | async">
+      <h1 ion-text text-center>Services Available</h1>
+      <!--
+      <ion-item *ngFor="let handy of handys; let i = index">
         <ion-thumbnail item-left (click)="ShowInMap(ServiceCenter[3],ServiceCenter[4])">
-          <img src={{ServiceCenter[1]}}>
+          <img src={{handy.image}}>
         </ion-thumbnail>
-        <h2>{{handy.Category}}</h2>
-        <h4>{{handy}} • <ion-icon name="ios-star-half"></ion-icon></h4>
+        <h2>{{handy.organisation_name}}</h2>
+        <h3>{{handy.info}}</h3>
+        <h4>{{handy.addressLine1}}</h4>
+        <h5>{{handy.phone_number1}}</h5>
+        <h6>{{i}}</h6>
+        <ion-icon name="star"style= "color: #ffb400;"></ion-icon>
+        <rating [(ngModel)]="rate" readOnly="true" emptyStarIconName="star-outline" halfStarIconName="star-half" 
+        starIconName="star" nullable="false"></rating>
         <button clear item-right (click)="gotoServiceCenter(ServiceCenter[0],ServiceCenter[2],ServiceCenter[1])">View</button>
-      </ion-item>
+      </ion-item> -->
      </ion-list>
   
   

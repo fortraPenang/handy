@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.opensourcetechnologies.authentication" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Authentication</name>
-    <description>An user authentication theme.</description>
-    <author email="sales@opensourcetechnologies.com" href="http://opensourcetechnologies.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.93.39:8100" />
+    <name>Handy</name>
+    <description>Get your Handyman in one app.</description>
+    <author email="fortrapenang@gmail.com" href="http://opensourcetechnologies.com/">Fortra</author>
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -68,11 +68,7 @@
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-<<<<<<< HEAD
-    <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
-=======
     <plugin name="cordova-plugin-googleplus" spec="5.1.1">
->>>>>>> 95a965fe16b68332ef3888883401ad327299e322
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.825284463013-ic2o2mpf2rm5rk7l6knqpffj3atrf04h" />
     </plugin>
 </widget>
