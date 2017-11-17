@@ -43,12 +43,12 @@ export class UserLogin {
 
   }
 
-  ionViewDidLoad() {
+ ionViewDidLoad() {
     console.log('ionViewDidLoad UserLogin');
   }
   
 
-  dashboardPage(){ this.navCtrl.push(Dashboard); }
+ dashboardPage(){ this.navCtrl.push(Dashboard); }
   signupPage(){ this.navCtrl.push(UserSignup); }
   forgotPasswordPage(){ this.navCtrl.push(UserForgotpassword); }
 
@@ -96,7 +96,7 @@ export class UserLogin {
   }
 
   //sign in via google
-  signInGoogle(){
+  /*signInGoogle(){
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
     });
@@ -118,5 +118,5 @@ export class UserLogin {
         loader.dismiss();
       })
     })
-  }
+  } */
 }

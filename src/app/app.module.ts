@@ -14,10 +14,9 @@ import { ReviewPage } from '../pages/review/review';
 import { ViewServicePage } from '../pages/view-service/view-service';
 import { SearchCategoryPage } from '../pages/search-category/search-category';
 import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleMaps } from '../providers/google-maps';
 import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase'
-
-
 import { AuthService } from '../providers/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -60,7 +59,7 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-
+    
     UserLogin,
     UserSignup,
     UserForgotpassword,
@@ -76,9 +75,7 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GooglePlus,
     AuthService,
-    AngularFireAuth,
-    
-    
+    AngularFireAuth
   ]
 })
 export class AppModule {}
