@@ -12,6 +12,7 @@ import { UserForgotpassword } from '../pages/user-forgotpassword/user-forgotpass
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { ReviewPage } from '../pages/review/review';
 import { ViewServicePage } from '../pages/view-service/view-service';
+import { SearchCategoryPage } from '../pages/search-category/search-category';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase'
@@ -44,6 +45,7 @@ export const firebaseConfig = {
     Dashboard,
     ReviewPage,
     ViewServicePage,
+    SearchCategoryPage,
 
 
   ],
@@ -66,7 +68,8 @@ export const firebaseConfig = {
     UserForgotpassword,
     Dashboard,
     ReviewPage,
-    ViewServicePage
+    ViewServicePage,
+    SearchCategoryPage,
   ],
   providers: [
     StatusBar,

@@ -5,6 +5,9 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs/observable';
 import { NgZone } from '@angular/core';
 import firebase from 'firebase';
+import { SearchCategoryPage } from '../search-category/search-category';
+
+
 
 declare var google;
 
@@ -76,7 +79,7 @@ export class ViewServicePage {
             if( status == google.maps.GeocoderStatus.OK ) {
     
                 //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-                debugger;
+                
                 var lat = results[0].geometry.location.lat();
                 var lng = results[0].geometry.location.lng();
                 this.vndLat.push(lat);
@@ -200,4 +203,9 @@ export class ViewServicePage {
      //this.addInfoWindow(marker, content);
     
    }
+
+   goToSearchCategory(idx){
+    this.navCtrl.push(SearchCategoryPage,idx)
+
+  }
 }
