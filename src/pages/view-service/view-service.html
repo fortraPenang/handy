@@ -32,7 +32,7 @@
     <p style="text-align:center">Filter by range <i>(in KM)</i></p>
     <ion-row>
     <ion-col col-9>
-    <ion-range [(ngModel)]="kmrange" min="100" max="5000" pin="true" style="padding:0px 15px 0px 15px" (ngModelChange)="onModelChange($event)">
+    <ion-range [(ngModel)]="kmrange" min="0.1" max="100" pin="true" style="padding:0px 15px 0px 15px" (ngModelChange)="onModelChange($event)">
       <ion-icon range-left small name="pin"></ion-icon>
       <ion-icon range-right name="pin"></ion-icon>
     </ion-range>
@@ -43,22 +43,25 @@
     </ion-row>
     </div> 
     <ion-list>
-      <h1 ion-text text-center>Services Available</h1>
-      <!--
-      <ion-item *ngFor="let handy of handys; let i = index">
-        <ion-thumbnail item-left (click)="ShowInMap(ServiceCenter[3],ServiceCenter[4])">
-          <img src={{handy.image}}>
-        </ion-thumbnail>
-        <h2>{{handy.organisation_name}}</h2>
-        <h3>{{handy.info}}</h3>
-        <h4>{{handy.addressLine1}}</h4>
-        <h5>{{handy.phone_number1}}</h5>
-        <h6>{{i}}</h6>
-        <ion-icon name="star"style= "color: #ffb400;"></ion-icon>
-        <rating [(ngModel)]="rate" readOnly="true" emptyStarIconName="star-outline" halfStarIconName="star-half" 
-        starIconName="star" nullable="false"></rating>
-        <button clear item-right (click)="gotoServiceCenter(ServiceCenter[0],ServiceCenter[2],ServiceCenter[1])">View</button>
-      </ion-item> -->
+      <h3 ion-text text-center>Services Available</h3>
+      
+      <div *ngFor="let handy of handys; let i = index">
+        <ion-item *ngIf="distance[i] < radius;">
+            <ion-thumbnail item-left (click)="ShowInMap(ServiceCenter[3],ServiceCenter[4])">
+                <img src={{handy.image}}>
+              </ion-thumbnail>
+              <div text-wrap>
+            <h2>{{handy.organisation_name}}</h2>
+            <h3>{{handy.info}}</h3>
+            <h4>{{handy.addressLine1}}</h4>
+            <h5>{{handy.phone_number1}}</h5>
+            <h6 style="font-weight: bold; font-size: 20px;">{{distance[i]}}km from you</h6>
+            <p>4.5<ion-icon name="star"style= "color: #ffb400;"></ion-icon></p>
+          </div>
+            <button clear item-right (click)="gotoServiceCenter(ServiceCenter[0],ServiceCenter[2],ServiceCenter[1])">View</button>
+            
+        </ion-item>
+      </div>
      </ion-list>
   
   

@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs/observable';
-import { NgZone } from '@angular/core';
 import firebase from 'firebase';
 
 declare var google;
@@ -29,6 +28,7 @@ export class ViewServicePage {
   public kmrange: any;
   public curLat:any;
   public curLng:any;
+  public radius:any;
 
   public vndLat: number[] = [];  
   public vndLng:number[] = []; 
@@ -39,17 +39,17 @@ export class ViewServicePage {
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/vendor');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private zone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
     
   }
 
   setAddressArray(callback){
+    console.log("1. setAddressArray");
     for(var i = 0; i < this.handys.length; i++){
       var add = this.handys[i]['addressLine1'] + " " + this.handys[i]['addressLine2'] + " " + this.handys[i]['addressLine3'] + " " + this.handys[i]['postal_code'] + " " + this.handys[i]['city'] + " " + this.handys[i]['state'];
       this.vndAddress.push(add);
       //this.codeAddress(add);
     }
-    console.log("Set Address Array done");
     console.log(this.vndAddress);
     callback();
   }
@@ -62,7 +62,8 @@ export class ViewServicePage {
 
   geocoder = new google.maps.Geocoder();
   
-  codeAddress(add,callback) {
+  codeAddress(add) {
+    console.log("2. codeAddress");
     //In this case it gets the address from an element on the page, but obviously you  could just pass it to the method instead
     for(var i = 0; i < add.length; i++){
       var address = add[i];
@@ -71,22 +72,32 @@ export class ViewServicePage {
       this.geocoder.geocode( { 'address' : address }, (results, status) => {
           if( status == google.maps.GeocoderStatus.OK ) {
             //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-            debugger;
             var lat = results[0].geometry.location.lat();
             var lng = results[0].geometry.location.lng();
-            this.vndLat.push(lat);
-            this.vndLng.push(lng);
-            let marker = new google.maps.Marker({
+            tempLat = lat;
+            tempLng = lng;
+            console.log("3. setDistance");
+            console.log(lat+" lat")
+            console.log(lng+" lng")
+              /* var d = this.getDistanceFromLatLonInKm(this.curLat, this.curLng, this.vndLat[i], this.vndLng[i]); */
+              var latLngA = new google.maps.LatLng(this.curLat,this.curLng);
+              var latLngB = new google.maps.LatLng(lat, lng);
+              /* var d = google.maps.geometry.spherical.computeDistanceBetween(latLngA, latLngB); */
+              var d = this.getDistanceFromLatLonInKm(lat, lng,this.curLat,this.curLng);
+              this.distance.push(+(d.toFixed(2)));
+              console.log(d);
+            /* let marker = new google.maps.Marker({
               map: this.map,
               animation: google.maps.Animation.DROP,
               position: results[0].geometry.location
-            });
+            }); */
           } else {
               alert( 'Geocode was not successful for the following reason: ' + status);
           }
       });
+      this.vndLat.push(tempLat);
+      this.vndLng.push(tempLng);
     }
-    callback();
   }
 
   deg2rad(deg) {
@@ -106,47 +117,53 @@ export class ViewServicePage {
     return d;
   } 
 
-  setDistance(){
-    var i;
-    var self = this;
+  setDistance(Lat,Lng){
+    console.log("3. setDistance");
     console.log(this.vndLat.length);
-    for(i= 0; i < this.vndLat.length; i++){
-      var d = this.getDistanceFromLatLonInKm(this.curLat, this.curLng, this.vndLat[i], this.vndLng[i]);
+      /* var d = this.getDistanceFromLatLonInKm(this.curLat, this.curLng, this.vndLat[i], this.vndLng[i]); */
+      var latLngA = new google.maps.LatLng(this.curLat,this.curLng);
+      var latLngB = new google.maps.LatLng(Lat, Lng);
+      var d = google.maps.geometry.spherical.computeDistanceBetween(latLngA, latLngB);
       this.distance.push(d);
-      console.log(d);
-    }
+      console.log(this.distance);
   } 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewServicePage');
+    
+    
     this.valueRef.on('value', handy => {
+      
       this.handys = handy.val();
-      this.setAddressArray(() => {
-        this.codeAddress(this.vndAddress, () => {
-          this.setDistance();
+      this.loadMap(()=>{
+        this.setAddressArray(() => {
+          this.codeAddress(this.vndAddress);
+          
+          console.log(this.curLat+" user lat")
+          console.log(this.curLng+" user lng")
         });
       });
     });
-    this.loadMap();
-    console.log(this.distance);
   }
   
   //listening to ion-range changes and update the radius of google map
   onModelChange($event){
-    var radius = $event;
-    console.log(radius);
-    this.circle.setRadius(radius);
+    this.radius = $event;
+    console.log(this.radius);
+    this.circle.setRadius(this.radius * 1000); //convert to meter
   }
   
-  loadMap(){
+  loadMap(callback){
     //geolocation options 
+    console.log("0. loadMap")
     let options = {
       enableHighAccuracy: true,
-      timeout: 5000,
+      timeout: 10000,
     };
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.geolocation.getCurrentPosition(options).then((resp) => {
       this.curLat=resp.coords.latitude;
       this.curLng=resp.coords.longitude;
+    callback();
       //this.getDistanceFromLatLonInKm(resp.coords.latitude,resp.coords.longitude,resp.coords.latitude,resp.coords.longitude);
       let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let mapOptions = {
@@ -171,9 +188,9 @@ export class ViewServicePage {
         strokeOpacity: 0.8,
         strokeWeight: 2,
         fillColor: '#FF0000',
-        fillOpacity: 0.35,
+        fillOpacity: 0.15,
         center: latLng,
-        radius: 100
+        radius: 100 //in meters
       });
     }).catch((error) => {
       console.log('Please turn on your GPS or move to an open space', error);
