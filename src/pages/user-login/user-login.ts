@@ -95,6 +95,11 @@ export class UserLogin {
     
   }
 
+  openModal(){
+    const phoneLogin = this.modalCtrl.create('ModalPage');
+    phoneLogin.present();
+  }
+
   //sign in via google
   signInGoogle(){
     console.log("Google pressed");
