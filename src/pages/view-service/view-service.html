@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar  hideBackButton="false">
-    <ion-title text-center> Search Results</ion-title>
+    <ion-title text-center>View Services</ion-title>
     
   </ion-navbar>
   <ion-searchbar
@@ -43,26 +43,27 @@
     </ion-row>
     </div> 
     <ion-list>
-      <h3 ion-text text-center>Services Available</h3>
-      
-      <div *ngFor="let handy of handys; let i = index">
-        <ion-item *ngIf="distance[i] < radius;">
-            <ion-thumbnail item-left (click)="ShowInMap(ServiceCenter[3],ServiceCenter[4])">
-                <img src={{handy.image}}>
-              </ion-thumbnail>
-              <div text-wrap>
-            <h2>{{handy.organisation_name}}</h2>
-            <h3>{{handy.info}}</h3>
-            <h4>{{handy.addressLine1}}</h4>
-            <h5>{{handy.phone_number1}}</h5>
-            <h6 style="font-weight: bold; font-size: 20px;">{{distance[i]}}km from you</h6>
-            <p>4.5<ion-icon name="star"style= "color: #ffb400;"></ion-icon></p>
-          </div>
-            <button clear item-right (click)="goToSearchCategory(i)">View</button>
-            
-        </ion-item>
-      </div>
-     </ion-list>
+        <h3 ion-text text-center>Services Available</h3>
+        <div *ngFor="let handy of handys; let i = index">
+          
+         <button clear no-padding (click)="goToSearchCategory(i)" style="width: 100%;">
+            <div text-wrap >
+            <ion-item *ngIf="distance[i] < radius;" >
+                <ion-thumbnail item-left >
+                    <img src={{handy.image}}>
+                </ion-thumbnail>
+                  <h2>{{handy.organisation_name}}</h2>
+                  <h3>{{handy.info}}</h3>
+                  <h4>{{handy.addressLine1}}</h4>
+                  <h5>{{handy.phone_number1}}</h5>
+                  <h6 style="font-weight: bold; font-size: 20px;">{{distance[i]}}km from you</h6>
+                  <p>4.5<ion-icon name="star"style= "color: #ffb400;"></ion-icon></p>
+              </ion-item>
+            </div>  
+         </button>
+        </div>
+       </ion-list>
+  
   
   
   </ion-content>

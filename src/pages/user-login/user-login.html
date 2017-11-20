@@ -8,36 +8,24 @@
 <ion-content padding>
   <form [formGroup]="loginForm">
     <div text-center><img src="assets/images/wrench.png" width="100" ></div>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-            <button class="google-auth google-light">
-                <ion-icon name="logo-facebook" style="
-                size:18px;
-                display: inline-block;
-                vertical-align: middle;
-                width: 40px;
-                height: 40px;
-                border-radius: 1px;
-                margin-right: 16px; "></ion-icon>                
-                <!-- <i class="fa fa-facebook"></i> -->
-                <span class="google-text">Sign in with Facebook</span>
+    <ion-grid no-padding>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left block class="facebookButton">
+              <i class="fa fa-facebook fa-fw" aria-hidden="true"></i>
+              Sign in with Facebook
             </button>
-          <!-- <button ion-button icon-left block class="facebookButton">
-            <i class="fa fa-facebook-official fa-fw" aria-hidden="true"></i>
-            Sign in with Facebook
-          </button> --> 
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-            <button class="google-auth google-light">
-                <span class="google-icon"></span>
-                <span class="google-text" (click)="signInGoogle();">Sign in with Google</span>
-            </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left block class="googleButton">
+              <i class="fa fa-google fa-fw" style="color: #4285f4;" aria-hidden="true"></i>
+              Sign in with Google
+            </button> 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     <div class="container">
         <hr class="hr-text" data-content="OR">
     </div>
@@ -65,11 +53,12 @@
           </span>
         </div>
     </ion-list>
-    <button ion-button block round color="secondary" (click)="doLogin();">Sign in</button>
+    <button ion-button block round color="primary" (click)="doLogin();">Sign in</button>
     <button text-center ion-button block color="light" clear (click)="forgotPasswordPage();">Forgot Password?</button>
+    <button  ion-button block round color="primary" (click)="openModal();">Login with phone</button>
     <div padding-top>
       <div text-center ion-text color="light"> Don't have an account? </div>
-      <button ion-button block round color="secondary" (click)="signupPage();"> Register Now</button>
+      <button ion-button block round color="primary" (click)="signupPage();"> Register Now</button>
     </div>
   </form>
 </ion-content>
