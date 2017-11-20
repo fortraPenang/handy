@@ -30,17 +30,17 @@
   </ion-row>
   <div [ngClass]="{'refineClass':isrefineClass}"> 
     <p style="text-align:center">Filter by range <i>(in KM)</i></p>
-    <ion-row>
-    <ion-col col-9>
+    <!-- <ion-row>
+    <ion-col col-9> -->
     <ion-range [(ngModel)]="kmrange" min="0.1" max="100" pin="true" style="padding:0px 15px 0px 15px" (ngModelChange)="onModelChange($event)">
       <ion-icon range-left small name="pin"></ion-icon>
       <ion-icon range-right name="pin"></ion-icon>
     </ion-range>
-    </ion-col>
-    <ion-col col-3>
+    <!-- </ion-col>
+     <ion-col col-3>
       <button ion-button icon-only ><ion-icon name="ios-funnel-outline"></ion-icon></button>
     </ion-col>
-    </ion-row>
+    </ion-row> -->
     </div> 
     <ion-list>
         <h3 ion-text text-center>Services Available</h3>
@@ -52,12 +52,12 @@
                 <ion-thumbnail item-left >
                     <img src={{handy.image}}>
                 </ion-thumbnail>
-                  <h2>{{handy.organisation_name}}</h2>
-                  <h3>{{handy.info}}</h3>
-                  <h4>{{handy.addressLine1}}</h4>
-                  <h5>{{handy.phone_number1}}</h5>
-                  <h6 style="font-weight: bold; font-size: 20px;">{{distance[i]}}km from you</h6>
-                  <p>4.5<ion-icon name="star"style= "color: #ffb400;"></ion-icon></p>
+                <h2>{{handy.organisation_name}}</h2>
+                <p>{{handy.info}}</p>
+                <p><i class="fa fa-address-book-o fa-fw" aria-hidden="true"></i>{{handy.addressLine1}}</p>
+                <p><i class="fa fa-phone fa-fw" aria-hidden="true"></i>{{handy.phone_number1}}</p>
+                <p style="font-weight: bold;">{{distance[i]}}km from you</p>
+                <p><ion-icon name="star"style= "color: #ffb400;"></ion-icon>{{handy.rating}}</p>
               </ion-item>
             </div>  
          </button>
