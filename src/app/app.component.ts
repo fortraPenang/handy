@@ -38,7 +38,6 @@ export class MyApp {
     afAuth.auth.onAuthStateChanged((user) => {
       if(user) {
         // User is signed in
-        
         var user = afAuth.auth.currentUser;
         this.username = user.email;
         console.log(user);

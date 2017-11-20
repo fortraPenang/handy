@@ -8,38 +8,26 @@
 <ion-content padding>
   <form [formGroup]="loginForm">
     <div text-center><img src="assets/images/wrench.png" width="100" ></div>
-    <ion-grid>
+    <ion-grid no-padding>
       <ion-row>
         <ion-col>
-            <button class="google-auth google-light">
-                <ion-icon name="logo-facebook" style="
-                size:18px;
-                display: inline-block;
-                vertical-align: middle;
-                width: 40px;
-                height: 40px;
-                border-radius: 1px;
-                margin-right: 16px; "></ion-icon>                
-                <!-- <i class="fa fa-facebook"></i> -->
-                <span class="google-text">Sign in with Facebook</span>
-            </button>
-          <!-- <button ion-button icon-left block class="facebookButton">
-            <i class="fa fa-facebook-official fa-fw" aria-hidden="true"></i>
+          <button ion-button icon-left block class="facebookButton">
+            <i class="fa fa-facebook fa-fw" aria-hidden="true"></i>
             Sign in with Facebook
-          </button> --> 
+          </button>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-            <button class="google-auth google-light">
-                <span class="google-icon"></span>
-                <span class="google-text" (click)="signInGoogle();">Sign in with Google</span>
-            </button>
+          <button ion-button icon-left block class="googleButton">
+            <i class="fa fa-google fa-fw" style="color: #000000;" aria-hidden="true"></i>
+            Sign in with Google
+          </button> 
         </ion-col>
       </ion-row>
     </ion-grid>
     <div class="container">
-        <hr class="hr-text" data-content="OR">
+      <hr class="hr-text" data-content="OR">
     </div>
     <ion-list no-lines padding-top>
       <ion-item>
@@ -63,7 +51,7 @@
           <span ion-text color="danger" *ngIf="loginForm.controls.password.errors?.required" >
             *Password is required.
           </span>
-        </div>
+      </div>
     </ion-list>
     <button ion-button block round color="secondary" (click)="doLogin();">Sign in</button>
     <button text-center ion-button block color="light" clear (click)="forgotPasswordPage();">Forgot Password?</button>

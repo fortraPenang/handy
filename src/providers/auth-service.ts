@@ -41,7 +41,7 @@ export class AuthService {
     }
 
   //TODO:
-  async loginFacebook(accountInfo: any){
+  async loginFacebook(){
 
   }
 

@@ -96,7 +96,8 @@ export class UserLogin {
   }
 
   //sign in via google
-  /*signInGoogle(){
+  signInGoogle(){
+    console.log("Google pressed");
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
     });
@@ -118,5 +119,5 @@ export class UserLogin {
         loader.dismiss();
       })
     })
-  } */
+  }
 }
