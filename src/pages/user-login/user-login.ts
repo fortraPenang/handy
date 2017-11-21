@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // import UI controllers 
-import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController , MenuController} from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController , MenuController, App} from 'ionic-angular';
 import { Dashboard } from '../dashboard/dashboard';
 import { UserSignup } from '../user-signup/user-signup';
 import { UserForgotpassword } from '../user-forgotpassword/user-forgotpassword';
@@ -34,7 +34,9 @@ export class UserLogin {
     public builder: FormBuilder,
     public googlePlus: GooglePlus,
     public afAuth: AngularFireAuth,
-    public menuCtrl: MenuController) {
+    public menuCtrl: MenuController,
+    public app: App
+    ) {
 
     this.loginForm = builder.group({
       username: ['', Validators.required],
@@ -73,6 +75,7 @@ export class UserLogin {
           console.log("Dismissed toast");
         })
         toast.present();
+        this.navCtrl.popToRoot();
         this.menuCtrl.swipeEnable(true);
         this.navCtrl.setRoot(Dashboard);
       }, (error) => {
@@ -85,7 +88,12 @@ export class UserLogin {
         let alert = this.alertCtrl.create({
           title: "Login Failed",
           subTitle: errorMsg,
-          buttons: ['Confirm']
+          buttons: [{
+            text: "Cancel", handler: () => {
+              alert.dismiss(); 
+              return false;
+            }
+          }]
         });
         alert.present();
         loader.dismiss();

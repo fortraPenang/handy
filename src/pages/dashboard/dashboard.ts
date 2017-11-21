@@ -30,15 +30,15 @@ export class Dashboard {
   }
   
   
-      public checkFocus() {
+  public checkFocus() {
   
-          this.buttonClicked = !this.buttonClicked;
-      }
+    this.buttonClicked = !this.buttonClicked;
+  }
 
-      public checkBlur() {
+  public checkBlur() {
         
-                this.buttonClicked = !this.buttonClicked;
-            }
+    this.buttonClicked = !this.buttonClicked;
+  }
 
   goToViewService(){
     this.navCtrl.push(ViewServicePage)
