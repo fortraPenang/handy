@@ -36,7 +36,7 @@ export class BookservicePage  {
   myDate:any;
   myTime:any;
   address:any;
-  postcode:any;
+  postCode:any;
   city:any;
   state:any;
   budget:any;
@@ -142,7 +142,7 @@ export class BookservicePage  {
        "description":this.description,
        "date":this.myDate,
        "time":this.myTime,
-       "address":this.address+", "+this.postcode+", "+this.city+", "+this.state,
+       "address":this.address+", "+this.postCode+", "+this.city+", "+this.state,
        "budget":"RM "+this.budget
       }
     )

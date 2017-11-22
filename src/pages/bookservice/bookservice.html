@@ -92,7 +92,7 @@
             </ion-item>
              -->
               <ion-item><ion-input type="text" placeholder="Address" [(ngModel)]="address"></ion-input></ion-item>
-              <ion-item><ion-input type="text" placeholder="Postal Code" [(ngModel)]="postCode"></ion-input></ion-item>
+              <ion-item><ion-input type="number" placeholder="Postal Code" [(ngModel)]="postCode"></ion-input></ion-item>
               <ion-item><ion-input type="text" placeholder="City" [(ngModel)]="city"></ion-input></ion-item>
               <ion-item><ion-input type="text" placeholder="State" [(ngModel)]="state"></ion-input></ion-item>
     
@@ -149,11 +149,11 @@
                 <p><strong>Description:</strong></p>
                 {{description}}
                 <p><strong>Date & Time:</strong></p>
-                {{myDate}}  {{myTime}}
+                {{myDate}}, {{myTime}}
                 <p><strong>Address:</strong></p>
-                {{address}}  {{postCode}} {{city}} {{state}}
+                {{address}}, {{postCode}}, {{city}}, {{state}}
                 <p><strong>User Quotation:</strong></p>
-                {{budget}}
+                RM {{budget}}
               </ion-card-content>
             </ion-card>
             
