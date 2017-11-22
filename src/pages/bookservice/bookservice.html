@@ -1,0 +1,180 @@
+<!--
+  Generated template for the BookservicePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar  hideBackButton="false">
+    <ion-title text-center>Book Service</ion-title>
+    
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+ 	<div padding>
+      <ion-segment color="primary" [disabled]="true" [(ngModel)]="step">
+        <ion-segment-button value="step1">
+          Step 1
+        </ion-segment-button>
+        <ion-segment-button value="step2">
+          Step 2
+        </ion-segment-button>
+        <ion-segment-button value="step3">
+          Step 3
+        </ion-segment-button>
+        <ion-segment-button value="step4">
+          Step 4
+        </ion-segment-button>
+        <ion-segment-button value="step5">
+          Step 5
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    
+    <div [ngSwitch]="step">
+      <ion-list *ngSwitchCase="'step1'">
+          <ion-icon name='planet' item-left></ion-icon>
+          <ion-label>CHOOSE SERVICE</ion-label>
+          <ion-list no-lines radio-group [(ngModel)]="service">
+              <ion-item>
+                <ion-label>Installing</ion-label>
+                <ion-radio value="Installing" checked></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Repairing</ion-label>
+                <ion-radio value="Repairing"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Others</ion-label>
+                <ion-radio value="Others" [disabled]="isDisabled"></ion-radio>
+              </ion-item>
+            </ion-list>
+      </ion-list>
+    
+      <ion-list *ngSwitchCase="'step2'" [(ngModel)]="description">
+        
+          <h2>Problem</h2>
+          <ion-item>
+              <ion-label color="primary" floating>Specify your problem</ion-label>
+              <ion-input></ion-input>
+          </ion-item>
+        
+      </ion-list>
+
+
+      <ion-list *ngSwitchCase="'step3'">
+        
+          <h2>Select your Date & Time<ion-icon end ios="ios-time" md="md-time"></ion-icon></h2>
+          
+          <ion-list>
+            <ion-item>
+              <ion-label>Date</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DDDD MMMM YYYY" [(ngModel)]="myDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>Time</ion-label>
+              <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="myTime"></ion-datetime>
+            </ion-item>
+            <h3>Type in your Address<ion-icon end ios="ios-home" md="md-home"></ion-icon></h3>
+            <!-- <ion-searchbar 
+            [(ngModel)]="autocomplete.query" 
+            [showCancelButton]="true" 
+            (ionInput)="updateSearch()" 
+            (ionCancel)="dismiss()"
+            placeholder="Type your place ...">
+            </ion-searchbar>
+            <ion-list>
+            <ion-item *ngFor="let item of autocompleteItems" 
+            (click)="chooseItem(item)">
+            {{ item.description }}
+            </ion-item>
+             -->
+              <ion-item><ion-input type="text" placeholder="Address" [(ngModel)]="address"></ion-input></ion-item>
+              <ion-item><ion-input type="text" placeholder="Postal Code" [(ngModel)]="postCode"></ion-input></ion-item>
+              <ion-item><ion-input type="text" placeholder="City" [(ngModel)]="city"></ion-input></ion-item>
+              <ion-item><ion-input type="text" placeholder="State" [(ngModel)]="state"></ion-input></ion-item>
+    
+          </ion-list>
+        
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'step4'">
+        
+          <h2>Estimated Quotation</h2>
+          <ion-card>
+              
+              
+                <ion-card-content>
+                    <ion-grid text-center>
+                        <ion-row>
+                          <ion-col width-50><strong>Services</strong></ion-col>
+                          <ion-col width-50><strong>Range (RM)</strong></ion-col>
+                        </ion-row>
+                    
+                        <ion-row>
+                          <ion-col width-50>Repairing</ion-col>
+                          <ion-col width-50>150-200</ion-col>
+                        </ion-row>
+                    
+                        <ion-row>
+                          <ion-col width-50>Installing</ion-col>
+                          <ion-col width-50>50-150</ion-col>
+                        </ion-row>
+  
+                        <ion-row>
+                            <ion-col width-50>Customising</ion-col>
+                            <ion-col width-50>30-100</ion-col>
+                        </ion-row>
+                      </ion-grid>
+                </ion-card-content>
+              
+              </ion-card>
+            
+              <h2>Specify your Quotation</h2>
+              
+                <ion-item>
+                  <ion-input type="number" placeholder="RM"[(ngModel)]="budget"></ion-input>
+                </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'step5'">
+          
+            <h2>Summary</h2>
+            <ion-card>
+              <ion-card-content>
+                <p><strong>Service Category:</strong></p>
+                {{service}}
+                <p><strong>Description:</strong></p>
+                {{description}}
+                <p><strong>Date & Time:</strong></p>
+                {{myDate}}  {{myTime}}
+                <p><strong>Address:</strong></p>
+                {{address}}  {{postCode}} {{city}} {{state}}
+                <p><strong>User Quotation:</strong></p>
+                {{budget}}
+              </ion-card-content>
+            </ion-card>
+            
+            <button ion-button (click)="goToViewService()" color="danger" style="position:absolute; left:25px; bottom:40px; padding:0.5cm 1.0cm 0.5cm 1.0cm">Cancel</button>
+            <button ion-button (click)="pushData()" color="accept" style ="color:white; position:absolute; right:25px; bottom:40px; padding:0.5cm 1.0cm 0.5cm 1.0cm" >Request Service</button>
+          
+      </ion-list>
+    </div>
+
+    
+    
+</ion-content>
+<ion-footer no-border text-center>
+    <ion-toolbar>
+        <ion-buttons left>
+            <button *ngIf="step!='step1'" ion-button (click)="back()"> Back
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button *ngIf="step!='step5'" ion-button (click)="next()"> Next
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
