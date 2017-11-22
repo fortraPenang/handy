@@ -49,8 +49,8 @@ export class UserLogin {
   
 
  dashboardPage(){ this.navCtrl.push(Dashboard); }
-  signupPage(){ this.navCtrl.push(UserSignup); }
-  forgotPasswordPage(){ this.navCtrl.push(UserForgotpassword); }
+ signupPage(){ this.navCtrl.push(UserSignup); }
+ forgotPasswordPage(){ this.navCtrl.push(UserForgotpassword); }
 
   //attempt the normal login with email and password
   doLogin(){
@@ -101,7 +101,7 @@ export class UserLogin {
   }
 
   //sign in via google
-  /*signInGoogle(){
+  signInGoogle(){
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
     });
@@ -123,5 +123,5 @@ export class UserLogin {
         loader.dismiss();
       })
     })
-  } */
+  }
 }
