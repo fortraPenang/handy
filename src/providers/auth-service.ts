@@ -37,8 +37,11 @@ export class AuthService {
 
   //TODO:
   async loginGoogle(){
-
-    }
+    return this.googlePlus.login({
+      'webClientId' : '447284265080-llk2rv349uf9lv2iah4oiftuq6secopg.apps.googleusercontent.com',
+      'offline' : true,  
+    });
+  }
 
   //TODO:
   async loginFacebook(){

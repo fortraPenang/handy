@@ -9,6 +9,11 @@
     }
     //.scroll-content { display: table; width: 100%; height: 100%; }
     //.centerAlign { display: table-cell; vertical-align: middle; }
+    .warning-msg {
+      display:inline-block;
+      color: red;
+      margin-bottom: 10px;
+    }
 
     .item{border:$border-color 1px solid !important; margin-bottom:10px;}
   }

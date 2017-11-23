@@ -25,7 +25,7 @@ $font-path: "../assets/fonts";
 
 $colors: (
   primary:    #6D213C,
-  secondary:  #A77A8A,
+  secondary:  #DECDD3,
   danger:     #ff0000,
   light:      #CFDBD5,
   dark:       #333333
@@ -54,9 +54,9 @@ $menu_bg_color:color($colors, secondary);
 $menu_font_color:$rsecondary;
 $menu_font_size:$size_normal;
 $menu_separator_line_color:#4f0306;
-$menu_avatar_bg_color:color($colors, light);
+$menu_avatar_bg_color:color($colors, dark);
 $menu_avatar_font_color:color($colors, dark);
-$menu_avatar_text_color:color($colors, light);
+$menu_avatar_text_color:color($colors, dark);
 
 
 

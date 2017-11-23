@@ -1,31 +1,25 @@
 <ion-header >
   <ion-navbar hideBackButton="true">
     <ion-buttons end>
-     <button ion-button icon-right color="light" (click)="dashboardPage()">SKIP<ion-icon name="ios-arrow-forward"></ion-icon></button>
-   </ion-buttons>
+      <button ion-button icon-right color="dark" (click)="dashboardPage()">SKIP<ion-icon name="ios-arrow-forward"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <form [formGroup]="loginForm">
     <div text-center><img src="assets/images/wrench.png" width="100" ></div>
     <ion-grid no-padding>
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-left block class="facebookButton">
-              <i class="fa fa-facebook fa-fw" aria-hidden="true"></i>
-              Sign in with Facebook
-            </button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-left block class="googleButton">
-              <i class="fa fa-google fa-fw" aria-hidden="true"></i>
-              Sign in with Google
-            </button> 
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <button ion-button icon-left block class="facebookButton">
+        <i class="fa fa-facebook fa-fw" aria-hidden="true"></i>
+        Sign in with Facebook
+      </button>
+      <button ion-button icon-left block class="googleButton" (click)="signInGoogle();">
+        <i class="fa fa-google fa-fw" aria-hidden="true"></i>
+        Sign in with Google
+      </button> 
+      <button ion-button block color="primary" (click)="openModal();"><i class="fa fa-phone fa-fw" aria-hidden="true"></i>Sign in with Phone
+      </button>
+    </ion-grid>
     <div class="container">
       <hr class="hr-text" data-content="OR">
     </div>
@@ -38,14 +32,10 @@
         <span ion-text padding-bottom color="danger" [hidden]="!(submitAttempt && loginForm.controls.username.errors?.required)" style="display:inline-block;">
           * Email is required.
         </span>
-        <br />
-        <!--<span ion-text color="danger" no-padding-top [hidden]="!((submitAttempt && !loginForm.controls.username.errors?.required) && loginForm.controls.username.errors?.email)" style="display:inline-block;">
-          *Invalid email format.
-        </span> -->
       </div>
       <ion-item>
         <ion-label><i class="fa fa-lock fa-fw" style="color:#999999;" aria-hidden="true"></i></ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" placeholder="Password" name="password" formControlName="password" required ></ion-input>
+        <ion-input type="password" [(ngModel)]="account.password" placeholder="Password" name="password" formControlName="password" required></ion-input>
       </ion-item>
       <div *ngIf="(loginForm.controls.password.dirty || submitAttempt) && !loginForm.controls.password.valid" >
           <span ion-text color="danger" *ngIf="loginForm.controls.password.errors?.required" >
@@ -54,10 +44,9 @@
       </div>
     </ion-list>
     <button ion-button block round color="primary" (click)="doLogin();">Sign in</button>
-    <button text-center ion-button block color="light" clear (click)="forgotPasswordPage();">Forgot Password?</button>
-    <button  ion-button block round color="primary" (click)="openModal();">Login with phone</button>
+    <button text-center ion-button block color="dark" clear (click)="forgotPasswordPage();">Forgot Password?</button>
     <div padding-top>
-      <div text-center ion-text color="light"> Don't have an account? </div>
+      <div text-center ion-text color="dark"> Don't have an account? </div>
       <button ion-button block round color="primary" (click)="signupPage();"> Register Now</button>
     </div>
   </form>

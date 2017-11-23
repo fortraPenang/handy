@@ -8,6 +8,7 @@ import { SearchCategoryPage } from '../pages/search-category/search-category';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthService } from '../providers/auth-service';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -25,12 +26,14 @@ export class MyApp {
     public menu: MenuController,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public afAuth: AngularFireAuth) {
+    public afAuth: AngularFireAuth,
+    public authService: AuthService,
+  ) {
 
     this.initializeApp();
     // set our app's pages
     this.pages = [
-      { title: 'Dashbaord', icon:'home', component: Dashboard },
+      { title: 'Dashboard', icon:'home', component: Dashboard },
       { title: 'Search Services', icon: '' , component: SearchCategoryPage },
       { title: 'Logout', icon:'lock', component: UserLogin }
     ];
@@ -41,9 +44,16 @@ export class MyApp {
         var user = afAuth.auth.currentUser;
         this.username = user.email;
         console.log(user);
+        console.log("Signed in!");
+        this.menu.swipeEnable(true);
+        this.nav.popToRoot();
+        this.nav.setRoot(Dashboard);
       } else {
-        // No user is signed in
-
+        // No user is signed in, go to login page
+        console.log("Signed out!");
+        this.menu.swipeEnable(false);
+        this.nav.popToRoot();
+        this.nav.setRoot(UserLogin);
       }
     })
   }
@@ -61,7 +71,14 @@ export class MyApp {
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
+    if(page.title == "Logout") 
+      this.authService.logout().then(() => {
+        this.nav.setRoot(UserLogin);
+      }); 
+    else {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
+    }
+
   }
 }

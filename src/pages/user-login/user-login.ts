@@ -22,6 +22,7 @@ export class UserLogin {
     email: '',
     password: ''
   }; 
+  
   public loginForm :any;
   submitAttempt: boolean = false;  
   constructor(public navCtrl: NavController, 
@@ -45,12 +46,13 @@ export class UserLogin {
 
  ionViewDidLoad() {
     console.log('ionViewDidLoad UserLogin');
+    this.menuCtrl.swipeEnable(false);
   }
   
 
  dashboardPage(){ this.navCtrl.push(Dashboard); }
-  signupPage(){ this.navCtrl.push(UserSignup); }
-  forgotPasswordPage(){ this.navCtrl.push(UserForgotpassword); }
+ signupPage(){ this.navCtrl.push(UserSignup); }
+ forgotPasswordPage(){ this.navCtrl.push(UserForgotpassword); }
 
   //attempt the normal login with email and password
   doLogin(){
@@ -58,6 +60,7 @@ export class UserLogin {
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
     });
+    //check client-side validation
     if(this.loginForm.valid){
       console.log(this.account);
       this.authService.login(this.account).then((authData) => {
@@ -74,7 +77,8 @@ export class UserLogin {
         })
         toast.present();
         this.menuCtrl.swipeEnable(true);
-        this.navCtrl.setRoot(Dashboard);
+        this.navCtrl.popToRoot();
+        this.dashboardPage();
       }, (error) => {
         console.log(error);
         var errorCode = error.code;
@@ -106,15 +110,12 @@ export class UserLogin {
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
     });
-    this.googlePlus.login({
-      'webClientId' : '447284265080-llk2rv349uf9lv2iah4oiftuq6secopg.apps.googleusercontent.com',
-      'offline' : true,  
-    }).then((res) => {
+    this.authService.loginGoogle().then((res) => {
       this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
       .then((suc) => {
         console.log(suc);
         this.navCtrl.setRoot(Dashboard);
-      }).catch((err) =>{
+      }).catch((err) => {
         let alert = this.alertCtrl.create({
           title: "Login Failed",
           subTitle: err,
@@ -122,7 +123,7 @@ export class UserLogin {
         });
         alert.present();
         loader.dismiss();
-      })
-    })
+      });
+    });
   }
 }
