@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ReviewPage } from '../review/review';
 import { ViewServicePage } from '../view-service/view-service';
+import { ServiceRequestPage } from '../service-request/service-request';
 /**
  * Generated class for the Dashboard page.
  *
@@ -27,6 +28,10 @@ export class Dashboard {
 
   goToReview(){
     this.navCtrl.push(ReviewPage);
+  }
+
+  goToServiceRequest(){
+    this.navCtrl.push(ServiceRequestPage);
   }
   
   

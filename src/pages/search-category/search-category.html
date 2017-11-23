@@ -102,9 +102,15 @@
 
   </ion-slides> -->
        <ion-card padding>
-				 <h2 Heading>BOOK SERVICE</h2>
-				 <hr>
+				 
+				 <button (click)="goToBookService()"><h2 Heading>BOOK SERVICE</h2></button>
+				
+				 
 			 </ion-card>
+
+			 
+
+			 
 
         <ion-card-header style="padding:0px;">
 		<ion-label>QUICK SERVICE</ion-label>
@@ -112,7 +118,7 @@
 		  <ion-list no-border>
 
 		      <ion-list-header>
-			<button full (click)="Submit()">Get Service<ion-icon name="md-fastforward"></ion-icon></button>
+			<button full (click)="Submit()">Get Service<ion-icon name="md-fastforward" ></ion-icon></button>
 		      </ion-list-header>
 
 		      <ion-item style="font-size: 13px;height:58px;" >

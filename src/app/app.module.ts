@@ -13,6 +13,11 @@ import { Dashboard } from '../pages/dashboard/dashboard';
 import { ReviewPage } from '../pages/review/review';
 import { ViewServicePage } from '../pages/view-service/view-service';
 import { SearchCategoryPage } from '../pages/search-category/search-category';
+import { BookservicePage } from '../pages/bookservice/bookservice';
+import { ServiceRequestPage} from '../pages/service-request/service-request';
+
+
+
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '../providers/google-maps';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -20,6 +25,15 @@ import firebase from 'firebase'
 import { AuthService } from '../providers/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FormsModule } from '@angular/forms';
+
+
+
+
+
+
+
+
 
 // Import ionic2-rating module
 import { Ionic2RatingModule } from 'ionic2-rating';
@@ -45,16 +59,22 @@ export const firebaseConfig = {
     ReviewPage,
     ViewServicePage,
     SearchCategoryPage,
-
+    BookservicePage,
+    ServiceRequestPage,
 
   ],
   imports: [
+
+ 
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     Ionic2RatingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    FormsModule,
+    
+   
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -67,6 +87,9 @@ export const firebaseConfig = {
     ReviewPage,
     ViewServicePage,
     SearchCategoryPage,
+    BookservicePage,
+    ServiceRequestPage,
+    
   ],
   providers: [
     StatusBar,
@@ -75,7 +98,7 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GooglePlus,
     AuthService,
-    AngularFireAuth
+    AngularFireAuth,
   ]
 })
 export class AppModule {}

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import firebase from 'firebase';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { BookservicePage } from '../bookservice/bookservice';
+
 
 /**
  * Generated class for the SearchCategoryPage page.
@@ -40,5 +42,7 @@ export class SearchCategoryPage {
       this.img = this.handys[0]['image']; */
     });
   }
-
+  goToBookService(idx){
+    this.navCtrl.push(BookservicePage,idx)
+}
 }
