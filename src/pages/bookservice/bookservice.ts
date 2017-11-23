@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angul
 import { GoogleMaps } from '../providers/google-maps';
 import { FormsModule} from '@angular/forms';
 import firebase from 'firebase';
+import { AlertController } from 'ionic-angular';
+
 
 
 
@@ -46,7 +48,7 @@ export class BookservicePage  {
   placesService: any; */
 
   public step:any
-  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,public alertCtrl: AlertController) {
     this.step = "step1";
    
   }
@@ -146,5 +148,13 @@ export class BookservicePage  {
        "budget":"RM "+this.budget
       }
     )
+  }
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirmation',
+      subTitle: 'Your request have been sent to the vendor!',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

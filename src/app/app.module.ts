@@ -14,6 +14,7 @@ import { ReviewPage } from '../pages/review/review';
 import { ViewServicePage } from '../pages/view-service/view-service';
 import { SearchCategoryPage } from '../pages/search-category/search-category';
 import { BookservicePage } from '../pages/bookservice/bookservice';
+import { ServiceRequestPage} from '../pages/service-request/service-request';
 
 
 
@@ -25,6 +26,8 @@ import { AuthService } from '../providers/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FormsModule } from '@angular/forms';
+
+
 
 
 
@@ -57,6 +60,7 @@ export const firebaseConfig = {
     ViewServicePage,
     SearchCategoryPage,
     BookservicePage,
+    ServiceRequestPage,
 
   ],
   imports: [
@@ -69,6 +73,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule,
+    
    
   ],
   bootstrap: [IonicApp],
@@ -82,7 +87,9 @@ export const firebaseConfig = {
     ReviewPage,
     ViewServicePage,
     SearchCategoryPage,
-    BookservicePage
+    BookservicePage,
+    ServiceRequestPage,
+    
   ],
   providers: [
     StatusBar,
