@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 // form builder and validators
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
+import { Facebook } from '@ionic-native/facebook';
 
 @IonicPage()
 @Component({
@@ -35,7 +36,8 @@ export class UserLogin {
     public googlePlus: GooglePlus,
     public afAuth: AngularFireAuth,
     public menuCtrl: MenuController,
-    public app: App
+    public app: App,
+    public facebook: Facebook
     ) {
 
     this.loginForm = builder.group({
@@ -114,22 +116,47 @@ export class UserLogin {
       dismissOnPageChange: true,
     });
     this.googlePlus.login({
-      'webClientId' : '447284265080-llk2rv349uf9lv2iah4oiftuq6secopg.apps.googleusercontent.com',
+      'webClientId' : '825284463013-086mnmjrvlgetv912evn86nipekiijmd.apps.googleusercontent.com',
       'offline' : true,  
     }).then((res) => {
       this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
       .then((suc) => {
+        alert(JSON.stringify(suc));
         console.log(suc);
         this.navCtrl.setRoot(Dashboard);
       }).catch((err) =>{
         let alert = this.alertCtrl.create({
           title: "Login Failed",
-          subTitle: err,
+          subTitle: err.errorMessage,
           buttons: ['Confirm']
         });
         alert.present();
         loader.dismiss();
       })
+    })
+  }
+
+  //Sign in via Facebook
+  signInFacebook(){
+    let loader = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+    
+    this.facebook.login(["email"]).then((loginResponse) =>{
+
+      let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken);
+      
+      this.afAuth.auth.signInWithCredential(credential).then((info)=>{
+        alert(JSON.stringify(info));
+      });
+    }).catch((err) =>{
+      let alert = this.alertCtrl.create({
+        title: "Login Failed",
+        subTitle: err.errorMessage,
+        buttons: ['Confirm']
+      });
+      alert.present();
+      loader.dismiss();
     })
   }
 }

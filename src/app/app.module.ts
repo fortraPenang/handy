@@ -20,6 +20,7 @@ import firebase from 'firebase'
 import { AuthService } from '../providers/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Facebook } from '@ionic-native/facebook';
 
 // Import ionic2-rating module
 import { Ionic2RatingModule } from 'ionic2-rating';
@@ -75,7 +76,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GooglePlus,
     AuthService,
-    AngularFireAuth
+    AngularFireAuth,
+    Facebook
   ]
 })
 export class AppModule {}

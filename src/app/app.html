@@ -4,7 +4,7 @@
   <ion-toolbar>
     <ion-item no-lines>
       <ion-avatar item-left>
-        <h2>G</h2>
+        <img src={{profilePic}}>
       </ion-avatar>
       <h2>Hello,</h2>
       <p>{{username}}</p>
@@ -19,7 +19,7 @@
 
 <ion-content>
   <ion-list no-lines>
-    <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    <button color=primary ion-item *ngFor="let p of pages" (click)="openPage(p)">
       <ion-icon name="{{p.icon}}"></ion-icon>  {{p.title}}
     </button>
   </ion-list>

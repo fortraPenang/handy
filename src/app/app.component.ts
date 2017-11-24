@@ -21,6 +21,7 @@ export class MyApp {
   rootPage = UserLogin;
   pages: Array<{title: string,icon:string, component: any}>;
   username: any;
+  profilePic: any = "G";
   constructor(
     public platform: Platform,
     public menu: MenuController,
@@ -43,7 +44,8 @@ export class MyApp {
         // User is signed in
         
         var user = afAuth.auth.currentUser;
-        this.username = user.email;
+        this.username = user.displayName;
+        this.profilePic = user.photoURL;
         this.menu.swipeEnable(true);
         this.nav.setRoot(Dashboard);
         console.log(user);
@@ -74,9 +76,7 @@ export class MyApp {
 
   openPage(page) {
     
-    if(page.title == 'Logout'){
-
-    
+    if(page.title === 'Logout'){
       // close the menu when clicking a link from the menu
     this.menu.close();
     this.menu.swipeEnable(false);
