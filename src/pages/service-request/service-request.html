@@ -17,20 +17,19 @@
   
       <ion-segment [(ngModel)]="notification">
           <ion-segment-button value="pending">
-            Pending
             <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+             Pending
           </ion-segment-button>
           <ion-segment-button value="accepted">
-            Accepted
             <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
+             Accepted
           </ion-segment-button>
           <ion-segment-button value="rejected">
-              Rejected
               <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
-            </ion-segment-button>
+               Rejected
+          </ion-segment-button>
       </ion-segment>
       <div [ngSwitch]="notification" >
-        
           <ion-list *ngSwitchCase="'pending'" >
               <ion-card *ngFor="let request of requests; ">
                   <ion-card-content>

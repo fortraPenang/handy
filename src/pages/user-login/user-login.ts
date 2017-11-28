@@ -104,6 +104,7 @@ export class UserLogin {
     phoneLogin.present();
   }
 
+  
   //sign in via google
   signInGoogle(){
     console.log("Google pressed");

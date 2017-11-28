@@ -30,7 +30,7 @@
       </ion-item>
       <div>
         <span ion-text padding-bottom color="danger" [hidden]="!(submitAttempt && loginForm.controls.username.errors?.required)" style="display:inline-block;">
-          * Email is required.
+          *Email is required.
         </span>
       </div>
       <ion-item>
@@ -39,7 +39,7 @@
       </ion-item>
       <div *ngIf="(loginForm.controls.password.dirty || submitAttempt) && !loginForm.controls.password.valid" >
           <span ion-text color="danger" *ngIf="loginForm.controls.password.errors?.required" >
-            * Password is required.
+            *Password is required.
           </span>
       </div>
     </ion-list>
