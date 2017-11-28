@@ -3,7 +3,7 @@
     .toolbar-background{ background:primary; border-style:none;}
     .toolbar::after,.header-md::after{ background-image:none;}
     ion-content{
-      background-color:#fff;
+      background-color:color($colors,secondary);
       //background-image:url('../assets/images/bg-pattern.png');
       //background-size:100% auto;
     }
@@ -17,10 +17,12 @@
 
     ion-input [disabled] {
       color: black;
+      opacity: 1;
     }
 
     ion-segment [disabled] {
       color: color($colors, primary);
+      opacity: 1;
     }
 
     .item{border:$border-color 1px solid !important; margin-bottom:10px;}
