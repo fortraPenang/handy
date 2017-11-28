@@ -1,35 +1,20 @@
-import { Component,OnInit  } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
-import { GoogleMaps } from '../providers/google-maps';
-import { FormsModule} from '@angular/forms';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
 
-
-
-
-
-
-
-
-
 /**
- * Generated class for the BookservicePage page.
+ * Generated class for the QuickServicePage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
 @IonicPage()
 @Component({
-  selector: 'page-bookservice',
-  templateUrl: 'bookservice.html',
-  
-  
+  selector: 'page-quick-service',
+  templateUrl: 'quick-service.html',
 })
-export class BookservicePage  {
-
-  
+export class QuickServicePage {
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/request');
 
@@ -42,48 +27,15 @@ export class BookservicePage  {
   city:any;
   state:any;
   budget:any;
-  /* autocompleteItems: any;
-  autocomplete: any;
-  acService:any;
-  placesService: any; */
 
   public step:any
-  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.step = "step1";
-   
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BookservicePage');
+    console.log('ionViewDidLoad QuickServicePage');
   }
-  /* ngOnInit() {
-    this.acService = new google.maps.places.AutocompleteService();        
-    this.autocompleteItems = [];
-    this.autocomplete = {
-    query: ''
-    };        
-    }
-    updateSearch() {
-      console.log('modal > updateSearch');
-      if (this.autocomplete.query == '') {
-      this.autocompleteItems = [];
-      return;
-      }
-      let self = this; 
-      let config = { 
-      //types:  ['geocode'], // other types available in the API: 'establishment', 'regions', and 'cities'
-      input: this.autocomplete.query, 
-      componentRestrictions: {  } 
-      }
-      this.acService.getPlacePredictions(config, function (predictions, status) {
-        console.log('modal > getPlacePredictions > status > ', status);
-        self.autocompleteItems = [];            
-        predictions.forEach(function (prediction) {              
-        self.autocompleteItems.push(prediction);
-        });
-        });
-        }
-   */  
   back(){
     switch(this.step) { 
       case "step1": { 
@@ -145,8 +97,7 @@ export class BookservicePage  {
        "date":this.myDate,
        "time":this.myTime,
        "address":this.address+", "+this.postCode+", "+this.city+", "+this.state,
-       "budget":"RM "+this.budget,
-       "status":"pending"
+       "budget":"RM "+this.budget
       }
     )
   }
