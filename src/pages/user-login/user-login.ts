@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // import UI controllers 
-import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController , MenuController, App} from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController , MenuController, App, ViewController} from 'ionic-angular';
 import { Dashboard } from '../dashboard/dashboard';
 import { UserSignup } from '../user-signup/user-signup';
 import { UserForgotpassword } from '../user-forgotpassword/user-forgotpassword';
@@ -12,6 +12,7 @@ import { AngularFireModule } from 'angularfire2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook';
+import { SignupTypePage } from '../signup-type/signup-type';
 
 @IonicPage()
 @Component({
@@ -37,7 +38,8 @@ export class UserLogin {
     public afAuth: AngularFireAuth,
     public menuCtrl: MenuController,
     public app: App,
-    public facebook: Facebook
+    public facebook: Facebook,
+    private modal:ModalController,
     ) {
 
     this.loginForm = builder.group({
@@ -54,7 +56,11 @@ export class UserLogin {
 
  dashboardPage(){ this.navCtrl.push(Dashboard); }
  signupPage(){ this.navCtrl.push(UserSignup); }
- forgotPasswordPage(){ this.navCtrl.push(UserForgotpassword); }
+ signup(){
+   const myModal= this.modal.create('SignupModalPage');
+    myModal.present();
+}
+ forgotPasswordPage(){this.navCtrl.push(UserForgotpassword); }
 
   //attempt the normal login with email and password
   doLogin(){
@@ -109,6 +115,8 @@ export class UserLogin {
     const phoneLogin = this.modalCtrl.create('ModalPage');
     phoneLogin.present();
   }
+
+ 
 
   //sign in via google
   signInGoogle(){

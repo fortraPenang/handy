@@ -42,7 +42,7 @@
 
   <div class="spacer" style="width: 300px; height: 20px;"></div>
   <ion-list id="services-list16">
-    <ion-item  (click)="goToViewService()" class="item-icon-left" id="services-list-item52">
+    <ion-item  (click)="showAlert()" class="item-icon-left" id="services-list-item52">
     <ion-icon ios="ios-home" md="md-home"></ion-icon> Home Services and repair </ion-item>
     <ion-item class="item-icon-left" id="services-list-item53">
     <ion-icon ios="ios-medkit" md="md-medkit"></ion-icon> Beauty and health</ion-item>
@@ -60,6 +60,7 @@
   </ion-list>
 
   <button ion-button secondary block (click)="goToReview();">Review</button>
-  <button ion-button secondary block (click)="goToServiceRequest();">Service Request</button>
+  <button ion-button secondary block (click)="goToServiceRequest();">Incoming Request for Vendor</button>
+  <button ion-button secondary block (click)="goToVendorDashboard();">Vendor Dashboard</button>
 </ion-content>
 

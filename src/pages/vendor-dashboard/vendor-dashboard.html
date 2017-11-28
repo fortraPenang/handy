@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar  hideBackButton="false">
+      <ion-title text-center>Vendor Dashboard</ion-title>
+      
+    </ion-navbar>
+    <ion-searchbar
+    [(ngModel)]="myInput"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)"
+    (ionFocus)="checkFocus()"
+    (ionBlur)="checkBlur()">
+  </ion-searchbar>
+  </ion-header>
+  <ion-content padding>
+  
+  </ion-content>
+  
+  

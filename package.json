@@ -57,7 +57,6 @@
     "ionic2-super-tabs": "^4.1.5",
     "ionicons": "3.0.0",
     "node": "8.9.1",
-    "nvm-win": "^0.2.4",
     "rxjs": "5.1.1",
     "stable-node-version": "^1.0.0",
     "sw-toolbox": "3.4.0",
