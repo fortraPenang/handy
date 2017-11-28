@@ -15,6 +15,12 @@ import { ViewServicePage } from '../pages/view-service/view-service';
 import { SearchCategoryPage } from '../pages/search-category/search-category';
 import { BookservicePage } from '../pages/bookservice/bookservice';
 import { ServiceRequestPage} from '../pages/service-request/service-request';
+import { SignupTypePage } from '../pages/signup-type/signup-type';
+import { SignupModalPageModule} from '../pages/signup-modal/signup-modal.module';
+import { SignupModalPage} from '../pages/signup-modal/signup-modal';
+import { VendorSignupPage } from '../pages/vendor-signup/vendor-signup';
+import { QuickServicePage } from '../pages/quick-service/quick-service';
+import { VendorDashboardPage } from '../pages/vendor-dashboard/vendor-dashboard';
 
 
 
@@ -61,6 +67,11 @@ export const firebaseConfig = {
     SearchCategoryPage,
     BookservicePage,
     ServiceRequestPage,
+    SignupTypePage,
+    VendorSignupPage,
+    QuickServicePage,
+    VendorDashboardPage,
+    
 
   ],
   imports: [
@@ -73,6 +84,9 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule,
+    SignupModalPageModule,
+    
+    
     
    
   ],
@@ -89,6 +103,11 @@ export const firebaseConfig = {
     SearchCategoryPage,
     BookservicePage,
     ServiceRequestPage,
+    SignupTypePage,
+    SignupModalPage,
+    VendorSignupPage,
+    QuickServicePage,
+    VendorDashboardPage
     
   ],
   providers: [

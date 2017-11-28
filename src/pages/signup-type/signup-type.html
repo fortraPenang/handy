@@ -1,0 +1,113 @@
+<ion-header >
+    <ion-navbar  hideBackButton="false">
+      <!-- <ion-buttons end>
+        <button ion-button icon-right color="light" (click)="dashboardPage()">SKIP<ion-icon name="ios-arrow-forward"></ion-icon></button>
+      </ion-buttons> -->
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+      
+    
+          <ion-list>
+            <form>
+              <div class="row">
+                  <h4>Account</h4>
+              </div>
+                  <div class="input-group input-group-icon">
+                    <input type="text" placeholder="Full Name" [(ngModel)]="fullname" name="fullname"/>
+                    <div class="input-icon"><i class="fa fa-user"></i></div>
+                  </div>
+                  <div class="input-group input-group-icon">
+                    <input type="email" placeholder="Email Adress" [(ngModel)]="email" name="email"/>
+                    <div class="input-icon"><i class="fa fa-envelope"></i></div>
+                  </div>
+                  <div class="input-group input-group-icon">
+                    <input type="password" placeholder="Password" [(ngModel)]="password" name="password"/>
+                    <div class="input-icon"><i class="fa fa-key"></i></div>
+                  </div>
+                  <div class="input-group input-group-icon">
+                      <input type="number" placeholder="H/P Number" [(ngModel)]="hpnumber" name="hpnumbe"/>
+                      <div class="input-icon"><i class="fa fa-mobile-phone"></i></div>
+                    </div>
+                
+                <div class="row">
+                  <div class="col-half">
+                    <h4>Date of Birth</h4>
+                    <div class="input-group">
+                      <div class="col-third">
+                        <input type="text" placeholder="DD" [(ngModel)]="dd" name="dd"/>
+                      </div>
+                      <div class="col-third">
+                        <input type="text" placeholder="MM" [(ngModel)]="mm" name="mm"/>
+                      </div>
+                      <div class="col-third">
+                        <input type="text" placeholder="YYYY" [(ngModel)]="yy" name="yy"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-half">
+                      <ion-item>
+                          <ion-label>Gender</ion-label>
+                          <ion-select [(ngModel)]="gender" name="gender">
+                            <ion-option value="f">Female</ion-option>
+                            <ion-option value="m">Male</ion-option>
+                          </ion-select>
+                        </ion-item>
+                  </div>
+                </div>
+
+                <div class="row">
+                    <h4>Address</h4>
+                </div>
+                    <div class="input-group input-group-icon">
+                      <input type="text" placeholder="Address Line 1" [(ngModel)]="address1" name="address1"/>
+                      <input type="text" placeholder="Address Line 1" [(ngModel)]="address2" name="address2"/>
+                      <input type="text" placeholder="Postcode" [(ngModel)]="postCode" name="postCode"/>
+                      <input type="text" placeholder="City" [(ngModel)]="city" name="city"/>
+                      <input type="text" placeholder="State" [(ngModel)]="state" name="state"/>
+                      <div class="input-icon"><i class="fa fa-address-book" ></i></div>
+                   </div>
+                   <button block ion-button (click)= "pushData()">Submit</button>
+
+          
+                 <!--  <div class="row">
+                    <h4>Payment Details</h4>
+                    <div class="input-group">
+                      <input type="radio" name="payment-method" value="card" id="payment-method-card" checked="true"/>
+                      <label for="payment-method-card"><span><i class="fa fa-cc-visa"></i>Credit Card</span></label>
+                      <input type="radio" name="payment-method" value="paypal" id="payment-method-paypal"/>
+                      <label for="payment-method-paypal"> <span><i class="fa fa-cc-paypal"></i>Paypal</span></label>
+                    </div>
+                    <div class="input-group input-group-icon">
+                      <input type="text" placeholder="Card Number"/>
+                      <div class="input-icon"><i class="fa fa-credit-card"></i></div>
+                    </div>
+                    <div class="col-half">
+                      <div class="input-group input-group-icon">
+                        <input type="text" placeholder="Card CVC"/>
+                        <div class="input-icon"><i class="fa fa-user"></i></div>
+                      </div>
+                    </div>
+                    <div class="col-half">
+                      <div class="input-group">
+                        <select>
+                          <option>01 Jan</option>
+                          <option>02 Jan</option>
+                        </select>
+                        <select>
+                          <option>2015</option>
+                          <option>2016</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div> -->
+                
+                </form>
+              
+          </ion-list>
+        
+        
+      </ion-content>
+
+     
+      

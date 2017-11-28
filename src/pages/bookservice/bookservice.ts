@@ -135,7 +135,8 @@ export class BookservicePage  {
        "date":this.myDate,
        "time":this.myTime,
        "address":this.address+", "+this.postCode+", "+this.city+", "+this.state,
-       "budget":"RM "+this.budget
+       "budget":"RM "+this.budget,
+       "status":"pending"
       }
     )
   }

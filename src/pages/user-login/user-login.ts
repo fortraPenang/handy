@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // import UI controllers 
-import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController , MenuController} from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController , MenuController, ViewController} from 'ionic-angular';
 import { Dashboard } from '../dashboard/dashboard';
 import { UserSignup } from '../user-signup/user-signup';
 import { UserForgotpassword } from '../user-forgotpassword/user-forgotpassword';
@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 // form builder and validators
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
+import { SignupTypePage } from '../signup-type/signup-type';
 
 @IonicPage()
 @Component({
@@ -35,7 +36,9 @@ export class UserLogin {
     public builder: FormBuilder,
     public googlePlus: GooglePlus,
     public afAuth: AngularFireAuth,
-    public menuCtrl: MenuController) {
+    public menuCtrl: MenuController,
+    private modal:ModalController,
+    ) {
 
     this.loginForm = builder.group({
       username: ['', Validators.required],
@@ -52,7 +55,11 @@ export class UserLogin {
 
  dashboardPage(){ this.navCtrl.push(Dashboard); }
  signupPage(){ this.navCtrl.push(UserSignup); }
- forgotPasswordPage(){ this.navCtrl.push(UserForgotpassword); }
+ signup(){
+   const myModal= this.modal.create('SignupModalPage');
+    myModal.present();
+}
+ forgotPasswordPage(){this.navCtrl.push(UserForgotpassword); }
 
   //attempt the normal login with email and password
   doLogin(){

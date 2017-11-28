@@ -1,0 +1,182 @@
+<ion-header >
+    <ion-navbar  hideBackButton="false">
+      <!-- <ion-buttons end>
+        <button ion-button icon-right color="light" (click)="dashboardPage()">SKIP<ion-icon name="ios-arrow-forward"></ion-icon></button>
+      </ion-buttons> -->
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+      <div padding>
+          <ion-segment color="primary" [disabled]="true" [(ngModel)]="step">
+            <ion-segment-button value="step1">
+              Step 1
+            </ion-segment-button>
+            <ion-segment-button value="step2">
+              Step 2
+            </ion-segment-button>
+            <ion-segment-button value="step3">
+              Step 3
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+    
+        <div [ngSwitch]="step">
+            <ion-list *ngSwitchCase="'step1'">
+                <form>
+                    <div class="row">
+                        <h4>Account</h4>
+                    </div>
+                        <div class="input-group input-group-icon">
+                          <input type="text" placeholder="First Name"/>
+                          <input type="text" placeholder="Last Name"/>
+                          <div class="input-icon"><i class="fa fa-user"></i></div>
+                          
+                        </div>
+                        <div class="input-group input-group-icon">
+                          <input type="email" placeholder="Email Adress"/>
+                          <div class="input-icon"><i class="fa fa-envelope"></i></div>
+                        </div>
+                        <div class="input-group input-group-icon">
+                          <input type="password" placeholder="Password"/>
+                          <div class="input-icon"><i class="fa fa-key"></i></div>
+                        </div>
+                        <div class="input-group input-group-icon">
+                            <input type="number" placeholder="Phone Number"/>
+                            <div class="input-icon"><i class="fa fa-mobile-phone"></i></div>
+                          </div>
+                      
+                      <div class="row">
+                        <div class="col-half">
+                          <h4>Date of Birth</h4>
+                          <div class="input-group">
+                            <div class="col-third">
+                              <input type="text" placeholder="DD"/>
+                            </div>
+                            <div class="col-third">
+                              <input type="text" placeholder="MM"/>
+                            </div>
+                            <div class="col-third">
+                              <input type="text" placeholder="YYYY"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-half">
+                          <h4>Gender</h4>
+                          <div class="input-group">
+                            <input type="radio" name="gender" value="male" id="gender-male"/>
+                            <label for="gender-male">Male</label>
+                            <input type="radio" name="gender" value="female" id="gender-female"/>
+                            <label for="gender-female">Female</label>
+                          </div>
+                        </div>
+                      </div>     
+                      </form>
+            </ion-list>
+          
+            <ion-list *ngSwitchCase="'step2'">
+                <form>
+                    <div class="row">
+                        <h4>Organisation</h4>
+                    </div>
+                        <div class="input-group input-group-icon">
+                          <input type="text" placeholder="Organisation Name"/>
+                          <div class="input-icon"><i class="fa fa-building"></i></div>
+                          
+                        </div>
+                        <div class="input-group input-group-icon">
+                            <input type="text" placeholder="Organisation Info"/>
+                            <div class="input-icon"><i class="fa fa-info"></i></div>
+                          </div>
+                        <div class="input-group input-group-icon">
+                          <input type="number" placeholder="SSM Number"/>
+                          <div class="input-icon"><i class="fa fa-phone"></i></div>
+                        </div>
+                        
+                        <div class="input-group input-group-icon">
+                            <input type="number" placeholder="Office Number 1"/>
+                            <input type="number" placeholder="Office Number 2"/>
+                            <div class="input-icon"><i class="fa fa-mobile-phone"></i></div>
+                          </div>
+      
+                      <div class="row">
+                          <h4>Address</h4>
+                      </div>
+                          <div class="input-group input-group-icon">
+                            <input type="text" placeholder="Address Line 1"/>
+                            <input type="text" placeholder="Address Line 2"/>
+                            <input type="text" placeholder="Address Line 3"/>
+                            <input type="text" placeholder="Postcode"/>
+                            <input type="text" placeholder="City"/>
+                            <input type="text" placeholder="State"/>
+                            <div class="input-icon"><i class="fa fa-address-book"></i></div>
+                            
+                            
+                          </div>       
+                      </form>
+                
+               
+              
+            </ion-list>
+      
+      
+            <ion-list *ngSwitchCase="'step3'">
+                <form>
+                    <div class="row">
+                        <h4>Opening Hours</h4>
+                    </div>
+                        <div class="input-group input-group-icon">
+                          <input type="text" placeholder="Opening Hours"/>
+                          <input type="text" placeholder="Closing Hours"/>
+                          <div class="input-icon"><i class="fa fa-clock-o"></i></div>
+                          
+                        </div>
+                      <div class="row">
+                    <h4>Payment Details</h4>
+                    
+                    <div class="input-group input-group-icon">
+                      <input type="text" placeholder="Bank Account Number"/>
+                      <div class="input-icon"><i class="fa fa-credit-card"></i></div>
+                    </div>
+                    
+                  </div> 
+                        <div class="input-group input-group-icon">
+                          <input type="number" placeholder="SSM Number"/>
+                          <div class="input-icon"><i class="fa fa-phone"></i></div>
+                        </div>
+                        
+                        <div class="input-group input-group-icon">
+                            <input type="number" placeholder="Office Number 1"/>
+                            <input type="number" placeholder="Office Number 2"/>
+                            <div class="input-icon"><i class="fa fa-mobile-phone"></i></div>
+                          </div>
+                          
+                          <div class="row">
+                          <h4>Upload Organisation Image</h4>
+                          <div class="input-group input-group-icon">
+                              <input type="file" name="pic" accept="image/*">
+                              <input type="submit">
+                              <div class="input-icon"><i class="fa fa-file-image-o"></i></div>
+                            </div>
+                          </div> 
+      
+                         
+                      </form>
+            </ion-list>
+          </div>
+      
+      </ion-content>
+      <ion-footer no-border text-center>
+          <ion-toolbar>
+              <ion-buttons left>
+                  <button *ngIf="step!='step1'" ion-button (click)="back()"> Back
+                  </button>
+              </ion-buttons>
+              <ion-buttons right>
+                  <button *ngIf="step!='step5'" ion-button (click)="next()"> Next
+                  </button>
+              </ion-buttons>
+          </ion-toolbar>
+      </ion-footer>
+
+     
+      
