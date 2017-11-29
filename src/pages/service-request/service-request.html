@@ -33,7 +33,7 @@
       <div [ngSwitch]="notification" >
           <ion-list *ngSwitchCase="'pending'" >
               <ng-container *ngFor="let key of requestsKeys; let i = index" >
-                  <ion-card *ngIf="requests[key].status=='pending'">
+                  <ion-card *ngIf="requests[key].status=='pending' || requests[key].status=='negotiate'">
                     <ion-card-content (click)="returnSwitch(i)">
                       <ion-list>
                           <ion-item-sliding>
@@ -63,8 +63,11 @@
                         <div class="text-wrap">{{requests[key].description}}</div>
                         <p><strong>Address:</strong></p>
                         <div class="text-wrap">{{requests[key].address}}</div>
-                        <p><strong>User Quotation:</strong></p>
-                        RM {{requests[key].budget}}
+                        <p><strong>Quotation:</strong></p>
+                        {{requests[key].budget}}
+                        <div>
+                            <button (click)="goToSend(key)" ion-button round>Click here to Send Quotation</button>
+                      </div>
                         </ion-item>
                       </ion-list>
                     </ion-card-content>
@@ -86,9 +89,9 @@
                             {{requests[key].date}}, {{requests[key].time}}
                           </ion-item>
                           <ion-item-options side="right">
-                            <button ion-button color="primary" (click)="requestStatus(key,'pending')">
-                              <ion-icon name="undo"></ion-icon>
-                              Undo
+                            <button ion-button color="accept" (click)="requestStatus(key,'completed')">
+                              <ion-icon ios="ios-done-all" md="md-done-all"></ion-icon>
+                              Complete
                             </button>
                             <button ion-button color="secondary">
                               <ion-icon name="call"></ion-icon>
@@ -101,7 +104,7 @@
                         <div class="text-wrap">{{requests[key].description}}</div>
                         <p><strong>Address:</strong></p>
                         <div class="text-wrap">{{requests[key].address}}</div>
-                        <p><strong>User Quotation:</strong></p>
+                        <p><strong>Quotation:</strong></p>
                         RM {{requests[key].budget}}
                         </ion-item>
                       </ion-list>
@@ -139,7 +142,7 @@
                       <div class="text-wrap">{{requests[key].description}}</div>
                       <p><strong>Address:</strong></p>
                       <div class="text-wrap">{{requests[key].address}}</div>
-                      <p><strong>User Quotation:</strong></p>
+                      <p><strong>Quotation:</strong></p>
                       RM {{requests[key].budget}}
                       </ion-item>
                     </ion-list>
