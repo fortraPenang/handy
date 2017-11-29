@@ -84,7 +84,6 @@ export class UserLogin {
         toast.present();
         this.navCtrl.popToRoot();
         this.menuCtrl.swipeEnable(true);
-        this.navCtrl.popToRoot();
         this.dashboardPage();
       }, (error) => {
         console.log(error);
