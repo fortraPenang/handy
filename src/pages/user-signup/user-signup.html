@@ -258,9 +258,23 @@
           <button *ngIf="step!='step1'" ion-button (click)="back()"> Back
           </button>
       </ion-buttons>
+
       <ion-buttons right>
-          <button *ngIf="step!='step4'&&step!='step1'" ion-button (click)="next()"> Next
+
+          <ng-container *ngIf="isUserSelected;else handy_content">
+              <button *ngIf="step!='step3'&&step!='step1'" ion-button (click)="next()"> Next
+                </button>
+          <button *ngIf="step=='step3'" ion-button (click)="signup()"> <strong>Submit</strong>
           </button>
+        </ng-container>
+
+        <ng-template #handy_content>
+            <button *ngIf="step!='step4'&&step!='step1'" ion-button (click)="next()"> Next
+              </button>
+            <button *ngIf="step=='step4'" ion-button (click)="signup()"> <strong>Submit</strong>
+            </button>
+        </ng-template>
+
       </ion-buttons>
   </ion-toolbar>
 </ion-footer>
