@@ -33,6 +33,7 @@ export class ViewServicePage {
   public curLat:any;
   public curLng:any;
   public radius:any;
+  public handysKeys:any;
 
   public vndLat: number[] = [];  
   public vndLng:number[] = []; 
@@ -52,8 +53,10 @@ export class ViewServicePage {
 
   setAddressArray(callback){
     console.log("1. setAddressArray");
-    for(var i = 0; i < this.handys.length; i++){
-      var add = this.handys[i]['addressLine1'] + " " + this.handys[i]['addressLine2'] + " " + this.handys[i]['addressLine3'] + " " + this.handys[i]['postal_code'] + " " + this.handys[i]['city'] + " " + this.handys[i]['state'];
+    var len = Object.keys(this.handys).length
+    for(var i = 0; i < len; i++){
+      var j = this.handysKeys[i];
+      var add = this.handys[j]['cAddress1'] + " " + this.handys[j]['cAddress2'] + " " + this.handys[j]['postcode'] + " " + this.handys[j]['city'] + " " + this.handys[j]['state'];
       this.vndAddress.push(add);
       //this.codeAddress(add);
     }
@@ -124,6 +127,8 @@ export class ViewServicePage {
     console.log('ionViewDidLoad ViewServicePage');
     this.valueRef.on('value', handy => {
       this.handys = handy.val();
+      this.handysKeys = Object.keys(this.handys);
+      console.log(this.handys)
       this.loadMap(() => {
         this.setAddressArray(() => {
           this.codeAddress(this.vndAddress);

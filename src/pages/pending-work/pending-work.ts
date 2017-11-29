@@ -1,23 +1,19 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import firebase from 'firebase';
-import { UserSendquotationPage } from "../user-sendquotation/user-sendquotation";
-
 
 /**
- * Generated class for the ServiceRequestPage page.
+ * Generated class for the PendingWorkPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-service-request',
-  templateUrl: 'service-request.html',
+  selector: 'page-pending-work',
+  templateUrl: 'pending-work.html',
 })
-
-
-export class ServiceRequestPage {
+export class PendingWorkPage {
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/request/');
 
@@ -32,13 +28,15 @@ export class ServiceRequestPage {
   state:any;
   budget:any;
   show:any;
+  title:any;
+
   bool:any [] = [];
 
   public notification:any
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
-    this.notification = "pending";
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    this.title = "Pending Work";
+    this.notification = "pending";
   }
 
   ionViewDidLoad() {
@@ -96,9 +94,22 @@ requestStatus(key:any,statusUpdate:any){
     }
     console.log(boolKey,key);
   }
-  goToSend(key: string){
-    console.log(key); 
-    this.navCtrl.push(UserSendquotationPage,{"data":key});
-  }
-
+  name(){
+    switch(this.notification){
+      case "pending":{
+       this.title = "Pending Work";
+       break;
+      }
+      case "accepted":{
+       this.title = "Completed";
+       break;
+        }
+      
+       
+   }
+ 
+ }
+  
+ 
 }
+

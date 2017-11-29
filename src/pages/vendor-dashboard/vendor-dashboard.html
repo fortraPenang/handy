@@ -1,19 +1,21 @@
 <ion-header>
     <ion-navbar  hideBackButton="false">
-      <ion-title text-center>Vendor Dashboard</ion-title>
+      
       
     </ion-navbar>
-    <ion-searchbar
-    [(ngModel)]="myInput"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)"
-    (ionFocus)="checkFocus()"
-    (ionBlur)="checkBlur()">
-  </ion-searchbar>
+    
   </ion-header>
+  
   <ion-content padding>
-  
+      <ion-tabs>
+          <ion-tab tabIcon="water" tabTitle="New Request" [root]="tab1" ></ion-tab>
+          <ion-tab tabIcon="leaf" tabTitle="Pending Work Completion" [root]="tab2"></ion-tab>
+          <ion-tab tabIcon="flame" tabTitle="Fire" [root]="tab3"></ion-tab>
+          <ion-tab tabIcon="magnet" tabTitle="Force" [root]="tab4"></ion-tab>
+      </ion-tabs>`
   </ion-content>
+
   
+
+
   

@@ -1,23 +1,20 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import firebase from 'firebase';
-import { UserSendquotationPage } from "../user-sendquotation/user-sendquotation";
-
+import { SendquotationModalPage } from '../sendquotation-modal/sendquotation-modal';
 
 /**
- * Generated class for the ServiceRequestPage page.
+ * Generated class for the NewrequestServicePage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-service-request',
-  templateUrl: 'service-request.html',
+  selector: 'page-newrequest-service',
+  templateUrl: 'newrequest-service.html',
 })
-
-
-export class ServiceRequestPage {
+export class NewrequestServicePage {
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/request/');
 
@@ -33,13 +30,20 @@ export class ServiceRequestPage {
   budget:any;
   show:any;
   bool:any [] = [];
+  title:any;
+  
+
 
   public notification:any
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
-    this.notification = "pending";
 
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    this.title = "Incoming Request";
+    this.notification = "pending";
+    
   }
+  
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceRequestPage');
@@ -79,26 +83,43 @@ requestStatus(key:any,statusUpdate:any){
     ]
   });
   confirm.present();
-  
+}
+returnSwitch(key:any){
+  var boolKey = this.bool[key];
+
+  if(boolKey==true){
+    this.bool[key] = !boolKey;
+  }else{
+    var j = this.bool;
+    for(var i in j){
+      this.bool[i] = false;
+    }
+    this.bool[key] = !boolKey;
+  }
+  console.log(boolKey,key);
 }
 
-  returnSwitch(key:any){
-    var boolKey = this.bool[key];
+name(){
+   switch(this.notification){
+     case "pending":{
+      this.title = "Incoming Request";
+      break;
+     }
+     case "accepted":{
+      this.title = "Accepted";
+      break;
+       }
+      case "rejected":{
+      this.title = "Rejected";
+      break;
+        }
+      
+  }
 
-    if(boolKey==true){
-      this.bool[key] = !boolKey;
-    }else{
-      var j = this.bool;
-      for(var i in j){
-        this.bool[i] = false;
-      }
-      this.bool[key] = !boolKey;
-    }
-    console.log(boolKey,key);
-  }
-  goToSend(key: string){
-    console.log(key); 
-    this.navCtrl.push(UserSendquotationPage,{"data":key});
-  }
+}
+goToSend(key: string){
+  console.log(key); 
+  this.navCtrl.push(SendquotationModalPage,{"data":key});
+}
 
 }
