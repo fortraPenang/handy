@@ -21,6 +21,10 @@ import { SignupModalPage} from '../pages/signup-modal/signup-modal';
 import { VendorSignupPage } from '../pages/vendor-signup/vendor-signup';
 import { QuickServicePage } from '../pages/quick-service/quick-service';
 import { VendorDashboardPage } from '../pages/vendor-dashboard/vendor-dashboard';
+import { NewrequestServicePage } from '../pages/newrequest-service/newrequest-service';
+import { SendquotationModalPage } from '../pages/sendquotation-modal/sendquotation-modal';
+import { SendquotationModalPageModule } from '../pages/sendquotation-modal/sendquotation-modal.module';
+import { UserSendquotationPage } from '../pages/user-sendquotation/user-sendquotation';
 
 
 
@@ -71,6 +75,10 @@ export const firebaseConfig = {
     VendorSignupPage,
     QuickServicePage,
     VendorDashboardPage,
+    NewrequestServicePage,
+    UserSendquotationPage
+    
+   
     
 
   ],
@@ -79,12 +87,13 @@ export const firebaseConfig = {
  
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{tabsPlacement:'bottom'}),
     Ionic2RatingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule,
     SignupModalPageModule,
+    SendquotationModalPageModule,
     
     
     
@@ -107,7 +116,11 @@ export const firebaseConfig = {
     SignupModalPage,
     VendorSignupPage,
     QuickServicePage,
-    VendorDashboardPage
+    VendorDashboardPage,
+    NewrequestServicePage,
+    SendquotationModalPage,
+    UserSendquotationPage,
+  
     
   ],
   providers: [

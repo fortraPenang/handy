@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,  } from 'ionic-angular';
+import {NewrequestServicePage} from '../newrequest-service/newrequest-service';
 
 /**
  * Generated class for the VendorDashboardPage page.
@@ -14,11 +15,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class VendorDashboardPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, ) {
+  
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VendorDashboardPage');
   }
+
+  tab1 = NewrequestServicePage;
+  
+  
+  
 
 }

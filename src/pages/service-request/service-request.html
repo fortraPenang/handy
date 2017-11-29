@@ -34,7 +34,7 @@
         
           <ion-list *ngSwitchCase="'pending'" >
               <ng-container *ngFor="let key of requestsKeys; let i = index" >
-                  <ion-card *ngIf="requests[key].status=='pending'">
+                  <ion-card *ngIf="requests[key].status=='pending' || requests[key].status=='negotiate'">
                     <ion-card-content (click)="returnSwitch(i)">
                       <ion-list>
                           <ion-item-sliding>
@@ -65,7 +65,10 @@
                         <p><strong>Address:</strong></p>
                         <div class="text-wrap">{{requests[key].address}}</div>
                         <p><strong>User Quotation:</strong></p>
-                        RM {{requests[key].budget}}
+                        {{requests[key].budget}}
+                        <div>
+                            <button (click)="goToSend(key)" ion-button round>Click here to Send Quotation</button>
+                      </div>
                         </ion-item>
                       </ion-list>
                     </ion-card-content>

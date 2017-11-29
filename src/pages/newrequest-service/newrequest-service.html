@@ -1,0 +1,156 @@
+<!--
+  Generated template for the ServiceRequestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar  hideBackButton="false">
+      <ion-title text-center>Service Request</ion-title>
+      
+    </ion-navbar>
+  </ion-header>
+
+  
+  <ion-content padding>
+      <h1>{{title}}</h1>
+      
+          <ion-segment [(ngModel)]="notification">
+              <ion-segment-button (click)="name()" value="pending">
+                <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+              </ion-segment-button>
+              <ion-segment-button (click)="name()" value="accepted">
+                <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
+              </ion-segment-button>
+              <ion-segment-button (click)="name()" value="rejected">
+                  <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
+                </ion-segment-button>
+          </ion-segment>
+    
+          <div [ngSwitch]="notification" >
+            
+              <ion-list *ngSwitchCase="'pending'" >
+                  <ng-container *ngFor="let key of requestsKeys; let i = index" >
+                      <ion-card *ngIf="requests[key].status=='pending'">
+                        <ion-card-content (click)="returnSwitch(i)">
+                          <ion-list>
+                              <ion-item-sliding>
+                                  <ion-item>
+                                  <p><strong>Service Category:</strong></p>
+                                  {{requests[key].serviceCategory}}
+                                  <p><strong>Date & Time:</strong></p>
+                                  {{requests[key].date}}, {{requests[key].time}}
+                                </ion-item>
+                                <ion-item-options side="right">
+                                  <button ion-button color="primary" (click)="requestStatus(key,'accepted')">
+                                    <ion-icon name="checkmark"></ion-icon>
+                                    Accept
+                                  </button>
+                                  <button ion-button color="secondary">
+                                    <ion-icon name="call"></ion-icon>
+                                    Call
+                                  </button>
+                                  <button ion-button color="danger" (click)="requestStatus(key,'rejected')">
+                                    <ion-icon name="remove-circle"></ion-icon>
+                                    Reject
+                                  </button>
+                                </ion-item-options>
+                              </ion-item-sliding>
+                            <ion-item *ngIf="bool[i]">
+                            <p><strong>Description:</strong></p>
+                            <div class="text-wrap">{{requests[key].description}}</div>
+                            <p><strong>Address:</strong></p>
+                            <div class="text-wrap">{{requests[key].address}}</div>
+                            <p><strong>User Quotation:</strong></p>
+                            {{requests[key].budget}}
+                            <div>
+                                <button (click)="goToSend(key)" ion-button round>Click here to Send Quotation</button>
+                          </div>
+                            </ion-item>
+                          </ion-list>
+                        </ion-card-content>
+                      </ion-card>
+                </ng-container>
+              
+            </ion-list>
+    
+              <ion-list *ngSwitchCase="'accepted'" >
+                  <ng-container *ngFor="let key of requestsKeys; let i = index" >
+                      <ion-card *ngIf="requests[key].status=='accepted'">
+                    <ion-card-content (click)="returnSwitch(i)">
+                        <ion-list>
+                            <ion-item-sliding>
+                                <ion-item>
+                                <p><strong>Service Category:</strong></p>
+                                {{requests[key].serviceCategory}}
+                                <p><strong>Date & Time:</strong></p>
+                                {{requests[key].date}}, {{requests[key].time}}
+                              </ion-item>
+                              <ion-item-options side="right">
+                                <button ion-button color="primary" (click)="requestStatus(key,'pending')">
+                                  <ion-icon name="undo"></ion-icon>
+                                  Undo
+                                </button>
+                                <button ion-button color="secondary">
+                                  <ion-icon name="call"></ion-icon>
+                                  Call
+                                </button>
+                              </ion-item-options>
+                            </ion-item-sliding>
+                            <ion-item *ngIf="bool[i]">
+                            <p><strong>Description:</strong></p>
+                            <div class="text-wrap">{{requests[key].description}}</div>
+                            <p><strong>Address:</strong></p>
+                            <div class="text-wrap">{{requests[key].address}}</div>
+                            <p><strong>User Quotation:</strong></p>
+                            RM {{requests[key].budget}}
+                            </ion-item>
+                          </ion-list>
+                    </ion-card-content>
+                  </ion-card>
+                </ng-container>
+              
+            </ion-list>
+    
+            <ion-list *ngSwitchCase="'rejected'" >
+                <ng-container *ngFor="let key of requestsKeys; let i = index" >
+                    <ion-card *ngIf="requests[key].status=='rejected'">
+                  <ion-card-content (click)="returnSwitch(i)">
+                      <ion-list>
+                        <ion-item-sliding>
+                          <ion-item>
+                          <p><strong>Service Category:</strong></p>
+                          {{requests[key].serviceCategory}}
+                          <p><strong>Date & Time:</strong></p>
+                          {{requests[key].date}}, {{requests[key].time}}
+                        </ion-item>
+                        <ion-item-options side="right">
+                          <button ion-button color="primary" (click)="requestStatus(key,'pending')">
+                            <ion-icon name="undo"></ion-icon>
+                            Undo
+                          </button>
+                          <button ion-button color="danger">
+                            <ion-icon name="trash"></ion-icon>
+                            Remove
+                          </button>
+                        </ion-item-options>
+                      </ion-item-sliding>
+                          <ion-item *ngIf="bool[i]">
+                          <p><strong>Description:</strong></p>
+                          <div class="text-wrap">{{requests[key].description}}</div>
+                          <p><strong>Address:</strong></p>
+                          <div class="text-wrap">{{requests[key].address}}</div>
+                          <p><strong>User Quotation:</strong></p>
+                          RM {{requests[key].budget}}
+                          </ion-item>
+                        </ion-list>
+                  </ion-card-content>
+                </ion-card>
+              </ng-container>
+            
+          </ion-list>
+            </div>
+            
+     
+    </ion-content>
+    
