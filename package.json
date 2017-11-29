@@ -99,8 +99,6 @@
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.825284463013-ic2o2mpf2rm5rk7l6knqpffj3atrf04h"
       }
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

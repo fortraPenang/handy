@@ -84,56 +84,46 @@ export class BookservicePage  {
         });
         }
    */  
+
+  //to navigate back to previous segment
   back(){
     switch(this.step) { 
-      case "step1": { 
-  
-         break; 
-      } 
-      case "step2": { 
+      case "step1": 
+         break;
+      case "step2":
          this.step ="step1"; 
          break; 
-      } 
-      case "step3": { 
+      case "step3":
         this.step ="step2"; 
         break; 
-      } 
-     case "step4": { 
-      this.step ="step3"; 
-      break; 
-      }
-      case "step5": { 
-      this.step = "step4";
-      break; 
-      }  
-
+      case "step4":
+        this.step ="step3"; 
+        break; 
+      case "step5": 
+        this.step = "step4";
+        break; 
     }
   }
+  
   next(){
     switch(this.step) { 
-      case "step1": { 
+      case "step1": 
         this.step = "step2";
          break; 
-      } 
-      case "step2": { 
+      case "step2": 
          this.step ="step3"; 
          break; 
-      } 
-      case "step3": { 
+      case "step3": 
         this.step ="step4"; 
         break; 
-      } 
-     case "step4": { 
-      this.step ="step5"; 
-      break; 
-      }
-      case "step5": { 
-      break; 
-      }  
-
-   }
-    
+      case "step4": 
+        this.step ="step5"; 
+        break;
+      case "step5":
+        break; 
+    } 
   }
+
   goToViewService(){
     this.navCtrl.pop();
   }
@@ -153,7 +143,7 @@ export class BookservicePage  {
   showAlert() {
     let alert = this.alertCtrl.create({
       title: 'Confirmation',
-      subTitle: 'Your request have been sent to the vendor!',
+      subTitle: 'Your request has been sent to the vendor!',
       buttons: ['OK']
     });
     alert.present();

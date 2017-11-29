@@ -1,10 +1,11 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs/observable';
 import firebase from 'firebase';
 import { SearchCategoryPage } from '../search-category/search-category';
+import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 
 
 
@@ -42,8 +43,11 @@ export class ViewServicePage {
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/vendor');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
-    
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams, 
+              private geolocation: Geolocation,
+              public loadingCtrl: LoadingController,
+              public menuCtrl: MenuController) {
   }
 
   setAddressArray(callback){
@@ -57,11 +61,6 @@ export class ViewServicePage {
     callback();
   }
   
-  addToCoords(){
-    for(var i = 0; i < this.vndAddress.length; i++){
-
-    }
-  }
 
   geocoder = new google.maps.Geocoder();
   
@@ -80,14 +79,14 @@ export class ViewServicePage {
             tempLat = lat;
             tempLng = lng;
             console.log("3. setDistance");
-            console.log(lat+" lat")
-            console.log(lng+" lng")
+            console.log(lat + " lat");
+            console.log(lng + " lng");
               /* var d = this.getDistanceFromLatLonInKm(this.curLat, this.curLng, this.vndLat[i], this.vndLng[i]); */
-              var latLngA = new google.maps.LatLng(this.curLat,this.curLng);
-              var latLngB = new google.maps.LatLng(lat, lng);
+              //var latLngA = new google.maps.LatLng(this.curLat,this.curLng);
+              //var latLngB = new google.maps.LatLng(lat, lng);
               /* var d = google.maps.geometry.spherical.computeDistanceBetween(latLngA, latLngB); */
               var d = this.getDistanceFromLatLonInKm(lat, lng,this.curLat,this.curLng);
-              this.distance.push(+(d.toFixed(2)));
+              this.distance.push(+(d.toFixed(2))); //two decimal places
               console.log(d);
             /* let marker = new google.maps.Marker({
               map: this.map,
@@ -120,30 +119,16 @@ export class ViewServicePage {
     return d;
   } 
 
-  setDistance(Lat,Lng){
-    console.log("3. setDistance");
-    console.log(this.vndLat.length);
-      /* var d = this.getDistanceFromLatLonInKm(this.curLat, this.curLng, this.vndLat[i], this.vndLng[i]); */
-      var latLngA = new google.maps.LatLng(this.curLat,this.curLng);
-      var latLngB = new google.maps.LatLng(Lat, Lng);
-      var d = google.maps.geometry.spherical.computeDistanceBetween(latLngA, latLngB);
-      this.distance.push(d);
-      console.log(this.distance);
-  } 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewServicePage');
-    
-    
     this.valueRef.on('value', handy => {
-      
       this.handys = handy.val();
-      this.loadMap(()=>{
+      this.loadMap(() => {
         this.setAddressArray(() => {
           this.codeAddress(this.vndAddress);
-          
-          console.log(this.curLat+" user lat")
-          console.log(this.curLng+" user lng")
+          console.log(this.curLat + " user lat");
+          console.log(this.curLng + " user lng");
         });
       });
     });
@@ -156,24 +141,43 @@ export class ViewServicePage {
     this.circle.setRadius(this.radius * 1000); //convert to meter
   }
   
+  goToSearchCategory(idx){
+    this.navCtrl.push(SearchCategoryPage,idx)
+  }
+
   loadMap(callback){
     //geolocation options 
-    console.log("0. loadMap")
+    console.log("0. loadMap");
     let options = {
       enableHighAccuracy: true,
       timeout: 10000,
     };
+    //create loader
+    let loader = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+    loader.present();
+    //get current pos via gps
     this.geolocation.getCurrentPosition(options).then((resp) => {
-      this.curLat=resp.coords.latitude;
-      this.curLng=resp.coords.longitude;
-    callback();
-      //this.getDistanceFromLatLonInKm(resp.coords.latitude,resp.coords.longitude,resp.coords.latitude,resp.coords.longitude);
+      this.curLat = resp.coords.latitude;
+      this.curLng = resp.coords.longitude;
+      callback();
+
       let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let mapOptions = {
         center: latLng,
-        zoom: 18
+        zoom: 15
       }
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      //listen to idle event, close loadingCtrl if map loaded
+      google.maps.event.addListenerOnce(this.map, 'idle', () => {
+        loader.dismiss();
+        console.log("Map loaded");
+      },
+      (error) => {
+        loader.dismiss();
+        alert("Unable to load map. Error: " +  error);
+      });
       let marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
@@ -200,6 +204,7 @@ export class ViewServicePage {
     });
   }
    
+ /*UNUSED FUNCTIONS  
   addMarker(){
      let marker = new google.maps.Marker({
        map: this.map,
@@ -210,9 +215,22 @@ export class ViewServicePage {
      //this.addInfoWindow(marker, content);
     
    }
+   setDistance(Lat,Lng){
+    console.log("3. setDistance");
+    console.log(this.vndLat.length);
+      var d = this.getDistanceFromLatLonInKm(this.curLat, this.curLng, this.vndLat[i], this.vndLng[i]); 
+      var latLngA = new google.maps.LatLng(this.curLat,this.curLng);
+      var latLngB = new google.maps.LatLng(Lat, Lng);
+      var d = google.maps.geometry.spherical.computeDistanceBetween(latLngA, latLngB);
+      this.distance.push(d);
+      console.log(this.distance);
+  } 
+ 
+   addToCoords(){
+    for(var i = 0; i < this.vndAddress.length; i++){
 
-   goToSearchCategory(idx){
-    this.navCtrl.push(SearchCategoryPage,idx)
+    }
+  }  */
 
-  }
 }
+
