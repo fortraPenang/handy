@@ -31,7 +31,7 @@
             
               <ion-list *ngSwitchCase="'pending'" >
                   <ng-container *ngFor="let key of requestsKeys; let i = index" >
-                      <ion-card *ngIf="requests[key].status=='pending'">
+                      <ion-card *ngIf="requests[key].status=='pending' ||requests[key].status=='negotiate' ">
                         <ion-card-content (click)="returnSwitch(i)">
                           <ion-list>
                               <ion-item-sliding>
@@ -61,7 +61,7 @@
                             <div class="text-wrap">{{requests[key].description}}</div>
                             <p><strong>Address:</strong></p>
                             <div class="text-wrap">{{requests[key].address}}</div>
-                            <p><strong>User Quotation:</strong></p>
+                            <p><strong>Quotation:</strong></p>
                             {{requests[key].budget}}
                             <div>
                                 <button (click)="goToSend(key)" ion-button round>Click here to Send Quotation</button>
@@ -102,7 +102,7 @@
                             <div class="text-wrap">{{requests[key].description}}</div>
                             <p><strong>Address:</strong></p>
                             <div class="text-wrap">{{requests[key].address}}</div>
-                            <p><strong>User Quotation:</strong></p>
+                            <p><strong>Quotation:</strong></p>
                             RM {{requests[key].budget}}
                             </ion-item>
                           </ion-list>
@@ -140,7 +140,7 @@
                           <div class="text-wrap">{{requests[key].description}}</div>
                           <p><strong>Address:</strong></p>
                           <div class="text-wrap">{{requests[key].address}}</div>
-                          <p><strong>User Quotation:</strong></p>
+                          <p><strong>Quotation:</strong></p>
                           RM {{requests[key].budget}}
                           </ion-item>
                         </ion-list>

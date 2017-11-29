@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,  } from 'ionic-angular';
 import {NewrequestServicePage} from '../newrequest-service/newrequest-service';
+import { PendingWorkPage } from '../pending-work/pending-work';
 
 /**
  * Generated class for the VendorDashboardPage page.
@@ -25,6 +26,7 @@ export class VendorDashboardPage {
   }
 
   tab1 = NewrequestServicePage;
+  tab2 = PendingWorkPage;
   
   
   

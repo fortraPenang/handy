@@ -44,20 +44,24 @@
     </div> 
     <ion-list>
         <h3 ion-text text-center>Services Available</h3>
-        <div *ngFor="let handy of handys; let i = index">
+        <div *ngFor="let key of handysKeys; let i = index">
          <button clear no-padding (click)="goToSearchCategory(i)" style="width: 100%;">
             <div text-wrap >
-            <ion-item *ngIf="distance[i] < radius;" >
+            <ng-container *ngIf="distance[i] < radius;" >
+              <ion-item>
                 <ion-thumbnail item-left>
-                    <img src={{handy.image}}>
+                  <ng-container *ngIf="handys[key].image">
+                    <img src={{handys[key].image}}>
+                  </ng-container>
                 </ion-thumbnail>
-                  <h2>{{handy.organisation_name}}</h2>
-                  <h3>{{handy.info}}</h3>
-                  <p><i class="fa fa-address-book-o fa-fw" aria-hidden="true"></i>{{handy.addressLine1}}</p>
-                  <p><i class="fa fa-phone fa-fw" aria-hidden="true"></i>{{handy.phone_number1}}</p>
+                  <h2>{{handys[key].companyName}}</h2>
+                  <h3>{{handys[key].companyInfo}}</h3>
+                  <p><i class="fa fa-address-book-o fa-fw" aria-hidden="true"></i>{{handys[key].cAddress1}}</p>
+                  <p><i class="fa fa-phone fa-fw" aria-hidden="true"></i>{{handys[key].officeNumber1}}</p>
                   <p style="font-weight: bold;">{{distance[i]}}km from you</p>
-                  <p><ion-icon name="star"style= "color: #ffb400;"></ion-icon>{{handy.rating}}</p>
-              </ion-item>
+                  <p><ion-icon name="star"style= "color: #ffb400;"></ion-icon>{{handys[key].rating}}</p>
+                  </ion-item>
+                  </ng-container>
             </div>  
          </button>
         </div>

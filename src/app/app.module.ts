@@ -25,6 +25,7 @@ import { NewrequestServicePage } from '../pages/newrequest-service/newrequest-se
 import { SendquotationModalPage } from '../pages/sendquotation-modal/sendquotation-modal';
 import { SendquotationModalPageModule } from '../pages/sendquotation-modal/sendquotation-modal.module';
 import { UserSendquotationPage } from '../pages/user-sendquotation/user-sendquotation';
+import { PendingWorkPage } from '../pages/pending-work/pending-work';
 
 
 
@@ -76,7 +77,8 @@ export const firebaseConfig = {
     QuickServicePage,
     VendorDashboardPage,
     NewrequestServicePage,
-    UserSendquotationPage
+    UserSendquotationPage,
+    PendingWorkPage,
     
    
     
@@ -120,6 +122,7 @@ export const firebaseConfig = {
     NewrequestServicePage,
     SendquotationModalPage,
     UserSendquotationPage,
+    PendingWorkPage,
   
     
   ],
