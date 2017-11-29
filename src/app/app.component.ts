@@ -54,8 +54,10 @@ export class MyApp {
         // No user is signed in, go to login page
         console.log("Signed out!");
         this.menu.swipeEnable(false);
+        /*
         this.nav.popToRoot();
-        this.nav.setRoot(UserLogin);
+        this.nav.setRoot(UserLogin); 
+        */
       }
     })
   }
@@ -73,7 +75,7 @@ export class MyApp {
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
-    if(page.title == "Logout") 
+    if(page.title === "Logout") 
       this.authService.logout().then(() => {
         this.nav.setRoot(UserLogin);
       }); 

@@ -8,6 +8,7 @@ import { IonicPage, LoadingController, ToastController, ModalController, NavPara
 import { Dashboard } from '../pages/dashboard/dashboard';
 // Do not import from 'firebase' as you'll lose the tree shaking benefits
 import * as firebase from 'firebase/app';
+import { MyApp } from '../app/app.component';
 
 @Injectable()
 export class AuthService {
@@ -37,13 +38,13 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(accountInfo.email, accountInfo.password).then((newUser) => {
         if(newUser) {
           //update user display name
-          newUser.updateProfile({
+          var user = firebase.auth().currentUser;
+          user.updateProfile({
             displayName: accountInfo.fName + " " + accountInfo.lName,
             photoURL: null
           }).then(() => {
             console.log("Profile update successful!");
-            console.log(newUser);
-            this.login(accountInfo);
+            console.log(user);
           }).catch((error) => {
             console.log(error.code + ": " + error.message);
           })
