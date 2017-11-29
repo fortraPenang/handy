@@ -56,6 +56,7 @@ export class MyApp {
         this.menu.swipeEnable(false);
         this.nav.popToRoot();
         this.nav.setRoot(UserLogin);
+        this.authService.logout();
       }
     })
   }
