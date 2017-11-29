@@ -55,10 +55,6 @@ export class UserLogin {
 
  dashboardPage(){ this.navCtrl.push(Dashboard); }
  signupPage(){ this.navCtrl.push(UserSignup); }
- signup(){
-   const myModal= this.modal.create('SignupModalPage');
-    myModal.present();
-}
  forgotPasswordPage(){this.navCtrl.push(UserForgotpassword); }
 
   //attempt the normal login with email and password

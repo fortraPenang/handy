@@ -20,7 +20,8 @@ export class MyApp {
   // make HelloIonicPage the root (or first) page
   rootPage = UserLogin;
   pages: Array<{title: string,icon:string, component: any}>;
-  username: any;
+  displayName: any;
+  avatarLetter: any;
   constructor(
     public platform: Platform,
     public menu: MenuController,
@@ -42,7 +43,8 @@ export class MyApp {
       if(user) {
         // User is signed in
         var user = afAuth.auth.currentUser;
-        this.username = user.email;
+        this.displayName = (!user.displayName) ?  "" : user.displayName;
+        this.avatarLetter = (!user.displayName) ? "" : user.displayName[0];
         console.log(user);
         console.log("Signed in!");
         this.menu.swipeEnable(true);

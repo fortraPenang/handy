@@ -30,9 +30,28 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(accountInfo.email, accountInfo.password);
   }
 
+  
+
   //TODO:
   async register(accountInfo: any){
-
+    return this.afAuth.auth.createUserWithEmailAndPassword(accountInfo.email, accountInfo.password).then((newUser) => {
+        if(newUser) {
+          //update user display name
+          newUser.updateProfile({
+            displayName: accountInfo.fName + " " + accountInfo.lName,
+            photoURL: null
+          }).then(() => {
+            console.log("Profile update successful!");
+            console.log(newUser);
+            this.login(accountInfo);
+          }).catch((error) => {
+            console.log(error.code + ": " + error.message);
+          })
+        }
+    })
+    .catch((error) => {
+      console.log(error.code + ": " + error.message);
+    });
   }
 
   //TODO:

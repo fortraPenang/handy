@@ -25,7 +25,7 @@ ion-menu{
                 ion-item{
                 background: transparent;
                 h2{font-size:$size_small;font-weight: normal; color:$menu_avatar_text_color;}
-                p{font-size:$size_extrasmall;font-weight: normal; color:$menu_avatar_text_color;}
+                p{font-size:$size_small;font-weight: normal; color:$menu_avatar_text_color;}
                 ion-avatar{
                     background:$menu_avatar_bg_color;border-radius:50%;text-align: center;
                     h2{

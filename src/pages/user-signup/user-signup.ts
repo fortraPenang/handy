@@ -10,6 +10,8 @@ FormControl} from '@angular/forms';
 import * as firebase from 'firebase/app';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import moment from 'moment';
+import { AuthService } from '../../providers/auth-service';
+
 
 @IonicPage()
 @Component({
@@ -17,9 +19,15 @@ import moment from 'moment';
   templateUrl: 'user-signup.html',
 })
 
-export class UserSignup implements OnInit{
+export class UserSignup {
 
-  //First form
+
+  //Firebase references
+  userRef: any;
+  vendorRef: any;
+  currentUser:any; 
+
+  //Basic account details
   account: { email: string, fName: string, lName: string, password: string, cfmPassword: string } = {
     email: '',
     password: '',
@@ -57,6 +65,7 @@ export class UserSignup implements OnInit{
     openHours: '',
     closeHours: '',
   };
+
   submitAttempt: boolean = false;  
   public signupForm: any; //second segment
   public signupForm2: any; //third segment
@@ -71,12 +80,13 @@ export class UserSignup implements OnInit{
     public navParams: NavParams,
     public menu: MenuController,
     public builder: FormBuilder,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public authService: AuthService) {
       
       //default page for ion-segment when page loads  
       this.step = "step1";
 
-      //validation for signupForm
+      //validation for signupForm(s)
       this.signupForm = this.builder.group({
         username: ['', Validators.compose([Validators.email, Validators.required])],
         fName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z ]*')])],   
@@ -115,27 +125,19 @@ export class UserSignup implements OnInit{
         closeHours: ['', Validators.required],
       });
 
-
-
-  
+      this.userRef = firebase.database().ref('/Handys/user/');
+      this.vendorRef = firebase.database().ref('/Handys/vendor/');
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+          this.currentUser = firebase.auth().currentUser;
+        }
+      });
   }
 
-
-  getAge(){
-     //get number of years from now
-    var age = moment().diff(this.personalDetails.dob, 'years');
-    console.log(age);
-    return age;
-  }
-
-
+  //calculate age from dob via moment.js
   setAge(){
-    var age = this.getAge();
+    var age = moment().diff(this.personalDetails.dob, 'years');
     this.personalDetails.age = age;
-  }
-
-  ngOnInit(){
-
   }
 
   //validate password equals confirm password
@@ -176,7 +178,8 @@ export class UserSignup implements OnInit{
       case "step1": 
         break;
       case "step2":
-/*         let alert = this.alertCtrl.create({
+/*
+  let alert = this.alertCtrl.create({
           title: "",
           subTitle: "Are you sure to go back? This will reset the form."
 
@@ -226,11 +229,7 @@ export class UserSignup implements OnInit{
       console.log(this.vendorDetails);
       this.advanceForm();
     }
-    else{
-      //didnt pass validation 
-      
-    }
-  
+ 
   }
 
   ionViewDidLoad() {
@@ -238,9 +237,37 @@ export class UserSignup implements OnInit{
     this.menu.swipeEnable(false);
   }
 
+  //Push formControl data to firebase
+  pushToFirebase(user: any){
+    var data = (this.isUserSelected) ? this.personalDetails : Object.assign(this.personalDetails, this.vendorDetails);
+    if (this.isUserSelected) //push to user node
+      this.userRef.child(user.uid).set(data);
+    else //push to vendor node
+      this.vendorRef.child(user.uid).set(data);
+  }
+
+
   signup(){
     this.submitAttempt = true;
+    if(this.signupForm2.valid && this.step === 'step3'){
+      //sign up user
+      this.authService.register(this.account).then(() => {
+        //TODO: push personalDetails to firebase here
+        this.pushToFirebase(this.currentUser);
+        console.log("Register Successful!");
+      });
 
+    }
+
+    if(this.signupForm3.valid && this.step === 'step4'){
+      //sign up user
+      this.authService.register(this.account).then(() => {
+        //TODO: push vendorDetails and personalDetails to firebase here
+        this.pushToFirebase(this.currentUser);
+        console.log("Register Successful!");
+      });
+
+    }
 
   }
 
