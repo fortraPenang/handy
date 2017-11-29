@@ -45,7 +45,7 @@
     <ion-list>
         <h3 ion-text text-center>Services Available</h3>
         <div *ngFor="let key of handysKeys; let i = index">
-         <button clear no-padding (click)="goToSearchCategory(i)" style="width: 100%;">
+         <button clear no-padding (click)="goToSearchCategory(key)" style="width: 100%;">
             <div text-wrap >
             <ng-container *ngIf="distance[i] < radius;" >
               <ion-item>
