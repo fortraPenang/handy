@@ -24,6 +24,7 @@ export class UserLogin {
     email: '',
     password: ''
   }; 
+  
   public loginForm :any;
   submitAttempt: boolean = false;  
   constructor(public navCtrl: NavController, 
@@ -51,15 +52,12 @@ export class UserLogin {
 
  ionViewDidLoad() {
     console.log('ionViewDidLoad UserLogin');
+    this.menuCtrl.swipeEnable(false);
   }
   
 
  dashboardPage(){ this.navCtrl.push(Dashboard); }
  signupPage(){ this.navCtrl.push(UserSignup); }
- signup(){
-   const myModal= this.modal.create('SignupModalPage');
-    myModal.present();
-}
  forgotPasswordPage(){this.navCtrl.push(UserForgotpassword); }
 
   //attempt the normal login with email and password
@@ -68,6 +66,7 @@ export class UserLogin {
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
     });
+    //check client-side validation
     if(this.loginForm.valid){
       console.log(this.account);
       this.authService.login(this.account).then((authData) => {
@@ -85,7 +84,8 @@ export class UserLogin {
         toast.present();
         this.navCtrl.popToRoot();
         this.menuCtrl.swipeEnable(true);
-        this.navCtrl.setRoot(Dashboard);
+        this.navCtrl.popToRoot();
+        this.dashboardPage();
       }, (error) => {
         console.log(error);
         var errorCode = error.code;
@@ -116,23 +116,20 @@ export class UserLogin {
     phoneLogin.present();
   }
 
- 
-
+  
   //sign in via google
   signInGoogle(){
+    console.log("Google pressed");
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
     });
-    this.googlePlus.login({
-      'webClientId' : '825284463013-086mnmjrvlgetv912evn86nipekiijmd.apps.googleusercontent.com',
-      'offline' : true,  
-    }).then((res) => {
+    this.authService.loginGoogle().then((res) => {
       this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
       .then((suc) => {
         alert(JSON.stringify(suc));
         console.log(suc);
         this.navCtrl.setRoot(Dashboard);
-      }).catch((err) =>{
+      }).catch((err) => {
         let alert = this.alertCtrl.create({
           title: "Login Failed",
           subTitle: err.errorMessage,
@@ -140,8 +137,8 @@ export class UserLogin {
         });
         alert.present();
         loader.dismiss();
-      })
-    })
+      });
+    });
   }
 
   //Sign in via Facebook

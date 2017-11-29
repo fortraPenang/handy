@@ -8,7 +8,7 @@ import { SearchCategoryPage } from '../pages/search-category/search-category';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {AuthService} from '../providers/auth-service';
+import { AuthService } from '../providers/auth-service';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -20,8 +20,8 @@ export class MyApp {
   // make HelloIonicPage the root (or first) page
   rootPage = UserLogin;
   pages: Array<{title: string,icon:string, component: any}>;
-  username: any;
-  profilePic: any = "G";
+  displayName: any;
+  avatarLetter: any;
   constructor(
     public platform: Platform,
     public menu: MenuController,
@@ -34,7 +34,7 @@ export class MyApp {
     this.initializeApp();
     // set our app's pages
     this.pages = [
-      { title: 'Dashbaord', icon:'home', component: Dashboard },
+      { title: 'Dashboard', icon:'home', component: Dashboard },
       { title: 'Search Services', icon: '' , component: SearchCategoryPage },
       { title: 'Logout', icon:'lock', component: UserLogin }
     ];
@@ -42,24 +42,21 @@ export class MyApp {
     afAuth.auth.onAuthStateChanged((user) => {
       if(user) {
         // User is signed in
-        
         var user = afAuth.auth.currentUser;
-        this.username = user.displayName;
-        this.profilePic = user.photoURL;
-        this.menu.swipeEnable(true);
-        this.nav.setRoot(Dashboard);
+        this.displayName = (!user.displayName) ?  "" : user.displayName;
+        this.avatarLetter = (!user.displayName) ? "" : user.displayName[0];
         console.log(user);
+        console.log("Signed in!");
+        this.menu.swipeEnable(true);
+        this.nav.popToRoot();
+        this.nav.setRoot(Dashboard);
       } else {
-
-        const root = this.app.getRootNav();
-        root.popToRoot();
-        // No user is signed in
-        this.menu.close();
+        // No user is signed in, go to login page
+        console.log("Signed out!");
         this.menu.swipeEnable(false);
-        // navigate to the new page if it is not the current page
+        this.nav.popToRoot();
         this.nav.setRoot(UserLogin);
         this.authServ.logout();
-
       }
     })
   }

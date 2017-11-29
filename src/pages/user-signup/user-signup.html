@@ -9,18 +9,18 @@
 
 <ion-content padding>
     <div padding-bottom>
-      <ion-segment [(ngModel)]="step">
+      <ion-segment [(ngModel)]="step" [disabled]='true'>
         <ion-segment-button value="step1">
-          Step 1
+          
         </ion-segment-button>
         <ion-segment-button value="step2">
-          Step 2
+          Step 1
         </ion-segment-button>
         <ion-segment-button value="step3">
-          Step 3
+          Step 2
         </ion-segment-button>
         <ion-segment-button value="step4" [hidden]="isUserSelected">
-          Step 4
+          Step 3
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -57,36 +57,36 @@
       <ion-item>
         <ion-input type="email" [(ngModel)]="account.email" name="email" required formControlName="username" placeholder="Email"></ion-input>
       </ion-item>
-      <span *ngIf="!signupForm.controls.username.valid && (signupForm.controls.username.dirty || submitAttempt)" class="help-block text-danger">
+      <span *ngIf="!signupForm.controls.username.valid && (signupForm.controls.username.dirty || submitAttempt) && step==='step2'" class="help-block text-danger">
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.username.errors?.email && !signupForm.controls.username.errors?.required">
-          * Incorrect email format.
+          *Incorrect email format.
         </div>
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.username.errors?.required">
-          * Email is required.
+          *Email is required.
         </div>
       </span>
       
       <ion-item>
         <ion-input type="text" [(ngModel)]="account.fName" name="fName" required formControlName="fName" placeholder="First Name"></ion-input>
       </ion-item>
-      <span *ngIf="!signupForm.controls.fName.valid && (signupForm.controls.fName.dirty || submitAttempt)">
+      <span *ngIf="!signupForm.controls.fName.valid && (signupForm.controls.fName.dirty || submitAttempt) && step==='step2'">
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.pattern">
-          * First name can only contain letters.
+          *First name can only contain letters.
         </div>
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.required">
-          * First name is required.
+          *First name is required.
         </div>
       </span>
 
       <ion-item>
         <ion-input type="text" [(ngModel)]="account.lName" placeholder="Last Name" required formControlName="lName" name="lName"></ion-input>
       </ion-item>
-      <span *ngIf="!signupForm.controls.lName.valid && (signupForm.controls.lName.dirty || submitAttempt)">
+      <span *ngIf="!signupForm.controls.lName.valid && (signupForm.controls.lName.dirty || submitAttempt) && step==='step2'">
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.pattern">
-          * Last name can only contain letters.
+          *Last name can only contain letters.
         </div>
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.required">
-          * Last name is required.
+          *Last name is required.
         </div>
       </span>
 
@@ -94,18 +94,18 @@
         <ion-item>
           <ion-input type="password" [(ngModel)]="account.password" placeholder="Password" required formControlName="password" name="password"></ion-input>
         </ion-item>
-        <span *ngIf="!signupForm.controls.passwords.valid && (signupForm.controls.passwords.dirty || submitAttempt)">
+        <span *ngIf="!signupForm.controls.passwords.valid && (signupForm.controls.passwords.dirty || submitAttempt) && step==='step2'">
           <div ion-text class="warning-msg" *ngIf="!this.signupForm.get('passwords.password').valid">
-            * Password must be at least 6 characters long.
+            *Password must be at least 6 characters.
           </div>
         </span>
         
         <ion-item>
           <ion-input type="password" [(ngModel)]="account.cfmPassword" placeholder="Confirm Password" required formControlName="cfmPassword" name="cfmPasswords"></ion-input>
         </ion-item>
-        <span *ngIf="!signupForm.controls.passwords.valid  && (submitAttempt || signupForm.controls.passwords.dirty)">
+        <span *ngIf="!signupForm.controls.passwords.valid  && (submitAttempt || signupForm.controls.passwords.dirty) && step==='step2'">
           <div ion-text class="warning-msg" *ngIf="!signupForm.controls.passwords.errors?.areEqual">
-            * Passwords do not match.
+            *Passwords do not match.
           </div>
         </span>
       </div>
@@ -128,47 +128,64 @@
         </div>
 
         <ion-item>
-          <ion-label>Date of Birth</ion-label>
-          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="personalDetails.dob" name="dob" required formControlName="dob"></ion-datetime>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="personalDetails.dob" name="dob" required formControlName="dob" placeholder="Date of Birth" (ngModelChange)="setAge();"></ion-datetime>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm2.controls.dob.valid && (signupForm2.controls.dob.dirty || submitAttempt) && step==='step3'">
+          *Date of Birth is required.
+        </span>
 
         <ion-item>
           <ion-input type="tel" [(ngModel)]="personalDetails.phoneNumber" name="phoneNumber" required formControlName="phoneNumber" placeholder="Phone Number"></ion-input>
         </ion-item>
+        <span *ngIf="!signupForm2.controls.phoneNumber.valid && (signupForm2.controls.phoneNumber.dirty || submitAttempt) && step==='step3'">
+          <div ion-text class="warning-msg" *ngIf="!this.signupForm2.get('phoneNumber').valid">
+            *Phone number is required.
+          </div>
+        </span>
 
         <ion-item>
-          <ion-label>Gender</ion-label>
-          <ion-select [(ngModel)]="personalDetails.gender" name="gender" required formControlName="gender">
+          <ion-select [(ngModel)]="personalDetails.gender" name="gender" required formControlName="gender" placeholder="Gender">
               <ion-option value="male">Male</ion-option>
               <ion-option value="female">Female</ion-option>
           </ion-select>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm2.controls.gender.valid && (signupForm2.controls.gender.dirty || submitAttempt) && step==='step3'">
+          *Gender is required.
+        </span>
 
+        <!--auto calculate age based on dob-->
         <ion-item>
-            <ion-input type="number" [(ngModel)]="personalDetails.age" name="age" required formControlName="age" placeholder="Age"></ion-input>
+          <ion-input type="number" [(ngModel)]="personalDetails.age" name="age" formControlName="age" placeholder="Age" [disabled]='true'></ion-input>
         </ion-item> 
 
         <ion-item>
-          <ion-label>Race</ion-label>
-          <ion-select [(ngModel)]="personalDetails.race" name="race" formControlName="race">
-              <ion-option value="malay">Malay</ion-option>
-              <ion-option value="chinese">Chinese</ion-option>
-              <ion-option value="indian">Indian</ion-option>
-              <ion-option value="other">Other</ion-option>
+          <ion-select [(ngModel)]="personalDetails.race" name="race" formControlName="race" placeholder="Race">
+              <ion-option value="Malay">Malay</ion-option>
+              <ion-option value="Chinese">Chinese</ion-option>
+              <ion-option value="Indian">Indian</ion-option>
+              <ion-option value="Other">Other</ion-option>
           </ion-select>
         </ion-item> 
-
+        <span class="warning-msg" *ngIf="!signupForm2.controls.race.valid && (signupForm2.controls.race.dirty || submitAttempt) && step==='step3'">
+          *Race is required.
+        </span>
+        
         <ion-item>
-          <ion-label>Nationality</ion-label>
-          <ion-select [(ngModel)]="personalDetails.nationality" name="nationality" formControlName="nationality">
+          <ion-select [(ngModel)]="personalDetails.nationality" name="nationality" formControlName="nationality" placeholder="Nationality">
               <ion-option value="malaysian">Malaysian</ion-option>
               <ion-option value="foreigner">Foreigner</ion-option>
           </ion-select>
         </ion-item>
-
+        <span class="warning-msg" *ngIf="!signupForm2.controls.nationality.valid && (signupForm2.controls.nationality.dirty || submitAttempt) && step==='step3'">
+          *Nationality is required.
+        </span>
+        
         <ion-item>
           <ion-input type="text" [(ngModel)]="personalDetails.address1" name="address1" required formControlName="address1" placeholder="Address line 1"></ion-input>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm2.controls.address1.valid && (signupForm2.controls.address1.dirty || submitAttempt) && step==='step3'">
+          *Address is required.
+        </span>
 
         <ion-item>
           <ion-input type="text" [(ngModel)]="personalDetails.address2" name="address2" formControlName="address2" placeholder="Address line 2"></ion-input>
@@ -179,31 +196,41 @@
         </ion-item> 
 
         <ion-item>
-          <ion-input type="text" [(ngModel)]="personalDetails.postcode" name="postcode" required formControlName="postcode" placeholder="Postcode"></ion-input>
+          <ion-input type="number" [(ngModel)]="personalDetails.postcode" name="postcode" required formControlName="postcode" placeholder="Postcode"></ion-input>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm2.controls.postcode.valid && (signupForm2.controls.postcode.dirty || submitAttempt) && step==='step3'">
+          *Postcode is required.
+        </span>
 
         <ion-item>
           <ion-input type="text" [(ngModel)]="personalDetails.city" name="city" required formControlName="city" placeholder="City"></ion-input>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm2.controls.city.valid && (signupForm2.controls.city.dirty || submitAttempt) && step==='step3'">
+          *City is required.
+        </span>
+
 
         <ion-item>
-            <ion-label>State</ion-label>
-            <ion-select [(ngModel)]="personalDetails.state" name="state" required formControlName="state">
-                <ion-option value="johor">Johor</ion-option>
-                <ion-option value="kedah">Kedah</ion-option>
-                <ion-option value="kelantan">Kelantan</ion-option>
-                <ion-option value="malacca">Malacca</ion-option>
-                <ion-option value="negeriSembilan">Negeri Sembilan</ion-option>
-                <ion-option value="pahang">Pahang</ion-option>
-                <ion-option value="perak">Perak</ion-option>
-                <ion-option value="pulauPinang">Pulau Pinang</ion-option>
-                <ion-option value="sabah">Sabah</ion-option>
-                <ion-option value="sarawak">Sarawak</ion-option>
-                <ion-option value="selangor">Selangor</ion-option>
-                <ion-option value="terengganu">Terengganu</ion-option>
-                <ion-option value="other">Other</ion-option>
-            </ion-select>
+          <ion-select [(ngModel)]="personalDetails.state" name="state" required formControlName="state" placeholder="State">
+              <ion-option value="Johor">Johor</ion-option>
+              <ion-option value="Kedah">Kedah</ion-option>
+              <ion-option value="Kelantan">Kelantan</ion-option>
+              <ion-option value="Malacca">Malacca</ion-option>
+              <ion-option value="NegeriSembilan">Negeri Sembilan</ion-option>
+              <ion-option value="Pahang">Pahang</ion-option>
+              <ion-option value="Perak">Perak</ion-option>
+              <ion-option value="PulauPinang">Pulau Pinang</ion-option>
+              <ion-option value="Sabah">Sabah</ion-option>
+              <ion-option value="Sarawak">Sarawak</ion-option>
+              <ion-option value="Selangor">Selangor</ion-option>
+              <ion-option value="Terengganu">Terengganu</ion-option>
+              <ion-option value="Other">Other</ion-option>
+          </ion-select>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm2.controls.state.valid && (signupForm2.controls.state.dirty || submitAttempt) && step==='step3'">
+          *State is required.
+        </span>
+
     </ion-list>
     </form>
   </div>
@@ -217,35 +244,63 @@
           <h1>Vendor Details</h1>
           <em>Step 3: Please fill in your company details.</em>
         </div>
+
         <ion-item>
-            <ion-input type="text" [(ngModel)]="vendorDetails.companyName" name="companyName" required formControlName="companyName" placeholder="Company Name"></ion-input>
+          <ion-input type="text" [(ngModel)]="vendorDetails.companyName" name="companyName" required formControlName="companyName" placeholder="Company Name"></ion-input>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm3.controls.companyName.valid && (signupForm3.controls.companyName.dirty || submitAttempt) && step==='step4'">
+          *Company name is required.
+        </span>
+
         <ion-item>
-            <ion-textarea type="text" [(ngModel)]="vendorDetails.companyInfo" name="companyInfo" required formControlName="companyInfo" placeholder="Company Info"></ion-textarea>
+          <ion-textarea type="text" [(ngModel)]="vendorDetails.companyInfo" name="companyInfo" required formControlName="companyInfo" placeholder="Company Info"></ion-textarea>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm3.controls.companyInfo.valid && (signupForm3.controls.companyInfo.dirty || submitAttempt) && step==='step4'">
+            *Company Info is required.
+        </span>
+
         <ion-item>
-            <ion-input type="text" [(ngModel)]="vendorDetails.SSMNumber" name="SSMNumber" required formControlName="SSMNumber" placeholder="SSM Number"></ion-input>
+          <ion-input type="text" [(ngModel)]="vendorDetails.SSMNumber" name="SSMNumber" required formControlName="SSMNumber" placeholder="SSM Number"></ion-input>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm3.controls.SSMNumber.valid && (signupForm3.controls.SSMNumber.dirty || submitAttempt) && step==='step4'">
+            *SSM Number is required.
+        </span>
+
         <ion-item>
-            <ion-input type="tel" [(ngModel)]="vendorDetails.officeNumber1" name="officeNumber1" required formControlName="officeNumber1" placeholder="Office Number 1"></ion-input>
+          <ion-input type="tel" [(ngModel)]="vendorDetails.officeNumber1" name="officeNumber1" required formControlName="officeNumber1" placeholder="Office Number 1"></ion-input>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm3.controls.officeNumber1.valid && (signupForm3.controls.officeNumber1.dirty || submitAttempt) && step==='step4'">
+            *Office Number is required.
+        </span>
+          
         <ion-item>
             <ion-input type="tel" [(ngModel)]="vendorDetails.officeNumber2" name="officeNumber2" formControlName="officeNumber2" placeholder="Office Number 2"></ion-input>
         </ion-item>
+        
         <ion-item>
             <ion-input type="text" [(ngModel)]="vendorDetails.cAddress1" name="cAddress1" required formControlName="cAddress1" placeholder="Company Address Line 1"></ion-input>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm3.controls.cAddress1.valid && (signupForm3.controls.cAddress1.dirty || submitAttempt) && step==='step4'">
+            *Company Address is required.
+        </span>
+
         <ion-item>
             <ion-input type="text" [(ngModel)]="vendorDetails.cAddress2" name="cAddress2" formControlName="cAddress2" placeholder="Company Address Line 2"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label>Opening Hours</ion-label>
-            <ion-datetime [(ngModel)]="vendorDetails.openHours" name="openHours" displayFormat="hh:mm A" pickerFormat="hh mm A" formControlName="openHours"></ion-datetime>
+          <ion-datetime [(ngModel)]="vendorDetails.openHours" name="openHours" displayFormat="hh:mm A" pickerFormat="hh mm A" formControlName="openHours" placeholder="Opening Hours"></ion-datetime>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm3.controls.openHours.valid && (signupForm3.controls.openHours.dirty || submitAttempt) && step==='step4'">
+            *Opening Hours is required.
+        </span>
+
         <ion-item>
-            <ion-label>Closing Hours</ion-label>
-              <ion-datetime [(ngModel)]="vendorDetails.closeHours" name="closeHours" displayFormat="hh:mm A" pickerFormat="hh mm A"  formControlName="closeHours"></ion-datetime>
+            <ion-datetime [(ngModel)]="vendorDetails.closeHours" name="closeHours" displayFormat="hh:mm A" pickerFormat="hh mm A"  formControlName="closeHours" placeholder="Closing Hours"></ion-datetime>
         </ion-item>
+        <span class="warning-msg" *ngIf="!signupForm3.controls.closeHours.valid && (signupForm3.controls.closeHours.dirty || submitAttempt) && step==='step4'">
+            *Closing Hours is required.
+        </span>
     </ion-list>
     </form>
  </div>
@@ -260,21 +315,18 @@
       </ion-buttons>
 
       <ion-buttons right>
-
-          <ng-container *ngIf="isUserSelected;else handy_content">
-              <button *ngIf="step!='step3'&&step!='step1'" ion-button (click)="next()"> Next
-                </button>
-          <button *ngIf="step=='step3'" ion-button (click)="signup()"> <strong>Submit</strong>
+        <ng-container *ngIf="isUserSelected;else handy_content">
+          <button *ngIf="step!='step3'&&step!='step1'" ion-button (click)="next()"> Next
+          </button>
+          <button *ngIf="step=='step3'" ion-button (click)="signup()"><strong>Submit</strong>
           </button>
         </ng-container>
-
         <ng-template #handy_content>
             <button *ngIf="step!='step4'&&step!='step1'" ion-button (click)="next()"> Next
               </button>
             <button *ngIf="step=='step4'" ion-button (click)="signup()"> <strong>Submit</strong>
             </button>
         </ng-template>
-
       </ion-buttons>
   </ion-toolbar>
 </ion-footer>

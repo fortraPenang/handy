@@ -107,8 +107,6 @@
         "APP_NAME": "Handy"
       }
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

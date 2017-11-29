@@ -15,6 +15,20 @@
       margin-bottom: 10px;
     }
 
+    ion-input [disabled] {
+      color: black;
+      opacity: 1;
+    }
+
+    ion-segment [disabled] {
+      color: color($colors, primary);
+      opacity: 1;
+    }
+
+    ion-select {
+      width: 100%;
+      max-width: 100%;
+    }
     .item{border:$border-color 1px solid !important; margin-bottom:10px;}
   }
 }

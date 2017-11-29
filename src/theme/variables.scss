@@ -42,7 +42,7 @@ $size_extralarge:2.1rem;
 $border-color:#ccc;
 
 $rprimary : #fff;
-$rsecondary: #C9C7D3;
+$rsecondary: color($colors, dark);
 $pholder:#666;
 $border:#ccc;
 $button:#0d47a1;
@@ -57,7 +57,7 @@ $menu_font_color:color($colors, dark);
 $menu_font_size:$size_normal;
 $menu_separator_line_color:#4f0306;
 $menu_avatar_bg_color:color($colors, dark);
-$menu_avatar_font_color:color($colors, dark);
+$menu_avatar_font_color:color($colors, light);
 $menu_avatar_text_color:color($colors, dark);
 
 
