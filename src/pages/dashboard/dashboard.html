@@ -16,13 +16,13 @@
 <div *ngIf="buttonClicked">
   <ion-slides autoplay="2000" loop="true" speed="900" >
     <ion-slide>
-  	     <img src="assets/images/banners/plumbing.jpg">
+  	     <img src="assets/images/banners/plumber.jpeg">
     </ion-slide>
     <ion-slide>
-          <img src="assets/images/banners/gardening.jpg">
+          <img src="assets/images/banners/Beauty.jpeg">
     </ion-slide>
     <ion-slide>
-          <img src="assets/images/banners/electric.jpg">
+          <img src="assets/images/banners/home.jpg">
     </ion-slide>
   </ion-slides>
 
@@ -40,7 +40,58 @@
 
 </div>
 
+<h2>Featured Services</h2>
+
+  <ion-row class="header">
+    <ion-col (click)="showAlert()" col-3>
+        <img src="assets/images/home.png" />
+        <p>Home Services</p>
+    </ion-col>
+
+    <ion-col col-3>
+      <img src="assets/images/health.png" />
+      <p>Health & Beauty</p>
+    </ion-col>
+
+    <ion-col col-3>
+      <img src="assets/images/personal.png" />
+      <p>Personal</p>
+    </ion-col>
+
+    <ion-col col-3>
+      <img src="assets/images/lawn.png" />
+      <p>Gardening Lawn</p>
+    </ion-col>
+
+    </ion-row>
+  <ion-row>
+    <ion-col col-3>
+      <img src="assets/images/painting.png" />
+      <p>Painting</p>
+    </ion-col>
+
+    <ion-col col-3>
+      <img src="assets/images/electric.png" />
+      <p>Electrical Wiring</p>
+    </ion-col>
+
+    <ion-col col-3>
+      <img src="assets/images/plumbing.png" />
+      <p>Plumbing</p>
+    </ion-col>
+
+    <ion-col col-3>
+      <img src="assets/images/car.png" />
+      <p>Car Service</p>
+    </ion-col>
+  </ion-row>
+  
+
+  
+
+
   <div class="spacer" style="width: 300px; height: 20px;"></div>
+  <h2>All Services</h2>
   <ion-list id="services-list16">
     <ion-item  (click)="showAlert()" class="item-icon-left" id="services-list-item52">
       <ion-icon ios="ios-home" md="md-home"></ion-icon> Home Services and repair
@@ -58,13 +109,29 @@
       <ion-icon ios="ios-brush" md="md-brush"></ion-icon> Painting 
     </ion-item>
     <ion-item class="item-icon-left" id="services-list-item57">
-    <ion-icon ios="ios-hammer" md="md-hammer"></ion-icon> Electrics </ion-item>
+    <ion-icon ios="ios-hammer" md="md-hammer"></ion-icon> Electrical Wiring </ion-item>
     <ion-item class="item-icon-left" id="services-list-item58">
       <ion-icon ios="ios-water" md="md-water"></ion-icon> Plumbing
     </ion-item>
   </ion-list>
 
-  <button ion-button secondary block (click)="goToReview();">Review</button>
+  
+
+   <!--  <ion-col col-9 class="button-container">
+        <button class="icons" style="border: none;">
+          <ion-icon name="cog"></ion-icon>
+        </button>
+        <button class="icons">
+          <ion-icon name="people"></ion-icon>
+        </button>
+        <button class="icons">
+          Edit Profile
+        </button>
+    </ion-col> -->
+
+ 
+  
+  <button ion-button secondary block (click)="goToShowAlertReview();">Review</button>
   <button ion-button secondary block (click)="goToServiceRequest();">Incoming Request for User</button>
   <button ion-button secondary block (click)="goToVendorDashboard();">Vendor Dashboard</button>
 </ion-content>
