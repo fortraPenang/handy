@@ -42,21 +42,6 @@ export class Dashboard {
   goToQuickService() {
     this.navCtrl.push(QuickServicePage);
   }
-<<<<<<< HEAD
-  
-  
-  public checkFocus() {
-  
-    this.buttonClicked = !this.buttonClicked;
-  }
-
-  public checkBlur() {
-        
-    this.buttonClicked = !this.buttonClicked;
-  }
-=======
-
->>>>>>> 3fbffddd836946b1492b54405a1d3747d3890966
 
   public checkFocus() {
 
