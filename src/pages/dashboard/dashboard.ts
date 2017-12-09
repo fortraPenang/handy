@@ -21,8 +21,8 @@ import { VendorDashboardPage } from '../vendor-dashboard/vendor-dashboard';
 export class Dashboard {
 
   public buttonClicked: boolean = true; //Whatever you want to initialise it as
-  testRadioOpen:any;
-  testRadioResult:any;
+  testRadioOpen: any;
+  testRadioResult: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
@@ -31,16 +31,18 @@ export class Dashboard {
     console.log('ionViewDidLoad Dashboard');
   }
 
-  goToReview(){
+  goToReview() {
     this.navCtrl.push(ReviewPage);
   }
 
-  goToServiceRequest(){
+
+  goToServiceRequest() {
     this.navCtrl.push(ServiceRequestPage);
   }
-  goToQuickService(){
+  goToQuickService() {
     this.navCtrl.push(QuickServicePage);
   }
+<<<<<<< HEAD
   
   
   public checkFocus() {
@@ -52,33 +54,47 @@ export class Dashboard {
         
     this.buttonClicked = !this.buttonClicked;
   }
+=======
 
-  goToViewService(){
+>>>>>>> 3fbffddd836946b1492b54405a1d3747d3890966
+
+  public checkFocus() {
+
+    this.buttonClicked = !this.buttonClicked;
+  }
+
+  public checkBlur() {
+
+    this.buttonClicked = !this.buttonClicked;
+  }
+
+  goToViewService() {
     this.navCtrl.push(ViewServicePage)
   }
 
-  goToVendorDashboard(){
+  goToVendorDashboard() {
     this.navCtrl.push(VendorDashboardPage)
   }
+
   showAlert() {
     let alert = this.alertCtrl.create();
     alert.setTitle('Choose Service');
 
     alert.addInput({
-      type: 'radio', 
-      label: 'Quick Service',
+      type: 'radio',
+      label: 'Hire Now',
       value: 'qs',
       checked: true
     },
-  );
+    );
 
-  alert.addInput({
-    type: 'radio', 
-    label: 'Book Service',
-    value: 'bs',
-    checked: false
-  },
-);
+    alert.addInput({
+      type: 'radio',
+      label: 'Book a Service',
+      value: 'bs',
+      checked: false
+    },
+    );
 
     alert.addButton('Cancel');
     alert.addButton({
@@ -86,16 +102,57 @@ export class Dashboard {
       handler: data => {
         this.testRadioOpen = false;
         this.testRadioResult = data;
-        if (data=="bs"){
+        if (data == "bs") {
           this.goToViewService()
         }
-        else 
-        {
+        else {
           this.goToQuickService()
         }
       }
     });
     alert.present();
   }
+  goToShowAlertReview() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Rate Our Service!');
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Rate Now',
+      value: 'rn',
+      checked: true
+    },
+    );
+
+    alert.addInput({
+      type: 'radio',
+      label: 'No Thanks',
+      value: 'nt',
+      checked: false
+    },
+    );
+    alert.addInput({
+      type: 'radio',
+      label: 'Remind Me later',
+      value: 'rm',
+      checked: false
+    },
+    );
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'OK',
+      handler: data => {
+        this.testRadioOpen = false;
+        this.testRadioResult = data;
+        if (data == "rn") {
+          this.goToReview()
+        }
+
+      }
+    });
+    alert.present();
+  }
+
 
 }

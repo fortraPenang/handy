@@ -14,7 +14,22 @@
 
 
 <ion-content padding>
-  <h3 style="text-align:center">ServiceTitleHere</h3>
+  <h3 style="text-align:center">Feedback</h3>
+  <ion-label>Rate our Service</ion-label>
+  <ion-list no-lines radio-group [(ngModel)]="service">
+      <ion-item>
+        <ion-label>Good</ion-label>
+        <ion-radio value="Good" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Very Good</ion-label>
+        <ion-radio value="Very Good"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bad</ion-label>
+        <ion-radio value="Bad" [disabled]="isDisabled"></ion-radio>
+      </ion-item>
+    </ion-list>
   <rating [(ngModel)]="rate" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
   <form>
     <ion-item>
