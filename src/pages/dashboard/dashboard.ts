@@ -7,6 +7,7 @@ import { ServiceRequestPage } from '../service-request/service-request';
 import { QuickServicePage } from '../quick-service/quick-service';
 import { AlertController } from 'ionic-angular';
 import { VendorDashboardPage } from '../vendor-dashboard/vendor-dashboard';
+import { AuthService } from '../../providers/auth-service';
 /**
  * Generated class for the Dashboard page.
  *
@@ -21,64 +22,65 @@ import { VendorDashboardPage } from '../vendor-dashboard/vendor-dashboard';
 export class Dashboard {
 
   public buttonClicked: boolean = true; //Whatever you want to initialise it as
-  testRadioOpen:any;
-  testRadioResult:any;
+  testRadioOpen: any;
+  testRadioResult: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Dashboard');
+    console.log(AuthService.userType);
   }
 
-  goToReview(){
+  goToReview() {
     this.navCtrl.push(ReviewPage);
   }
 
-  goToServiceRequest(){
+  goToServiceRequest() {
     this.navCtrl.push(ServiceRequestPage);
   }
-  goToQuickService(){
+  goToQuickService() {
     this.navCtrl.push(QuickServicePage);
   }
-  
-  
-      public checkFocus() {
-  
-          this.buttonClicked = !this.buttonClicked;
-      }
 
-      public checkBlur() {
-        
-                this.buttonClicked = !this.buttonClicked;
-            }
 
-  goToViewService(){
-    this.navCtrl.push(ViewServicePage)
+  public checkFocus() {
+
+    this.buttonClicked = !this.buttonClicked;
   }
 
-  goToVendorDashboard(){
-    this.navCtrl.push(VendorDashboardPage)
+  public checkBlur() {
+
+    this.buttonClicked = !this.buttonClicked;
+  }
+
+  goToViewService() {
+    this.navCtrl.push(ViewServicePage);
+  }
+
+  goToVendorDashboard() {
+    this.navCtrl.push(VendorDashboardPage);
   }
   showAlert() {
     let alert = this.alertCtrl.create();
     alert.setTitle('Choose Service');
 
     alert.addInput({
-      type: 'radio', 
+      type: 'radio',
       label: 'Quick Service',
       value: 'qs',
       checked: true
     },
-  );
+    );
 
-  alert.addInput({
-    type: 'radio', 
-    label: 'Book Service',
-    value: 'bs',
-    checked: false
-  },
-);
+    alert.addInput({
+      type: 'radio',
+      label: 'Book Service',
+      value: 'bs',
+      checked: false
+    },
+    );
 
     alert.addButton('Cancel');
     alert.addButton({
@@ -86,12 +88,11 @@ export class Dashboard {
       handler: data => {
         this.testRadioOpen = false;
         this.testRadioResult = data;
-        if (data=="bs"){
-          this.goToViewService()
+        if (data == "bs") {
+          this.goToViewService();
         }
-        else 
-        {
-          this.goToQuickService()
+        else {
+          this.goToQuickService();
         }
       }
     });
