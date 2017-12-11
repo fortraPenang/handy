@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+
 
 /**
  * Generated class for the ReviewPage page.
@@ -15,7 +17,11 @@ var rating = 0;
 })
 export class ReviewPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public buttonClicked: boolean = true; //Whatever you want to initialise it as
+  testRadioOpen:any;
+  testRadioResult:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -26,5 +32,14 @@ export class ReviewPage {
     rating = $val;
     console.log(rating);
   }
+  showSendAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirmation',
+      subTitle: 'Your have Submmitted your feedback. Thank You!',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
 
 }

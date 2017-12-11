@@ -56,19 +56,20 @@ export class Dashboard {
   }
 
   goToViewService() {
-    this.navCtrl.push(ViewServicePage);
+    this.navCtrl.push(ViewServicePage)
   }
 
   goToVendorDashboard() {
-    this.navCtrl.push(VendorDashboardPage);
+    this.navCtrl.push(VendorDashboardPage)
   }
+
   showAlert() {
     let alert = this.alertCtrl.create();
     alert.setTitle('Choose Service');
 
     alert.addInput({
       type: 'radio',
-      label: 'Quick Service',
+      label: 'Hire Now',
       value: 'qs',
       checked: true
     },
@@ -76,7 +77,7 @@ export class Dashboard {
 
     alert.addInput({
       type: 'radio',
-      label: 'Book Service',
+      label: 'Book a Service',
       value: 'bs',
       checked: false
     },
@@ -98,5 +99,47 @@ export class Dashboard {
     });
     alert.present();
   }
+  goToShowAlertReview() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Rate Our Service!');
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Rate Now',
+      value: 'rn',
+      checked: true
+    },
+    );
+
+    alert.addInput({
+      type: 'radio',
+      label: 'No Thanks',
+      value: 'nt',
+      checked: false
+    },
+    );
+    alert.addInput({
+      type: 'radio',
+      label: 'Remind Me later',
+      value: 'rm',
+      checked: false
+    },
+    );
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'OK',
+      handler: data => {
+        this.testRadioOpen = false;
+        this.testRadioResult = data;
+        if (data == "rn") {
+          this.goToReview()
+        }
+
+      }
+    });
+    alert.present();
+  }
+
 
 }
