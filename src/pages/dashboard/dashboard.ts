@@ -7,6 +7,7 @@ import { ServiceRequestPage } from '../service-request/service-request';
 import { QuickServicePage } from '../quick-service/quick-service';
 import { AlertController } from 'ionic-angular';
 import { VendorDashboardPage } from '../vendor-dashboard/vendor-dashboard';
+import { AuthService } from '../../providers/auth-service';
 /**
  * Generated class for the Dashboard page.
  *
@@ -29,12 +30,12 @@ export class Dashboard {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Dashboard');
+    console.log(AuthService.userType);
   }
 
   goToReview() {
     this.navCtrl.push(ReviewPage);
   }
-
 
   goToServiceRequest() {
     this.navCtrl.push(ServiceRequestPage);
@@ -89,10 +90,10 @@ export class Dashboard {
         this.testRadioOpen = false;
         this.testRadioResult = data;
         if (data == "bs") {
-          this.goToViewService()
+          this.goToViewService();
         }
         else {
-          this.goToQuickService()
+          this.goToQuickService();
         }
       }
     });

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav, ToastController } from 'ionic-angular';
 
 import { UserLogin } from '../pages/user-login/user-login';
 import { Dashboard } from '../pages/dashboard/dashboard';
@@ -19,7 +19,7 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   rootPage = UserLogin;
-  pages: Array<{title: string,icon:string, component: any}>;
+  pages: Array<{ title: string, icon: string, component: any }>;
   displayName: any;
   avatarLetter: any;
   constructor(
@@ -29,34 +29,40 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public afAuth: AngularFireAuth,
     public authService: AuthService,
+    public toastCtrl: ToastController
   ) {
 
     this.initializeApp();
     // set our app's pages
     this.pages = [
-      { title: 'Dashboard', icon:'home', component: Dashboard },
-      { title: 'Search Services', icon: '' , component: SearchCategoryPage },
-      { title: 'Logout', icon:'lock', component: UserLogin }
+      { title: 'Dashboard', icon: 'home', component: Dashboard },
+      { title: 'Search Services', icon: '', component: SearchCategoryPage },
+      { title: 'Logout', icon: 'lock', component: UserLogin }
     ];
-    
+
     afAuth.auth.onAuthStateChanged((user) => {
-      if(user) {
+      if (user) {
         // User is signed in
         var user = afAuth.auth.currentUser;
-        this.displayName = (!user.displayName) ?  "" : user.displayName;
+        this.displayName = (!user.displayName) ? "" : user.displayName;
         this.avatarLetter = (!user.displayName) ? "" : user.displayName[0];
         console.log(user);
         console.log("Signed in!");
-        this.menu.swipeEnable(true);
-        this.nav.popToRoot();
-        this.nav.setRoot(Dashboard);
+        this.authService.loadType().then((snapshot) => {
+          AuthService.userType = snapshot.val().role;
+          this.menu.swipeEnable(true);
+          this.nav.popToRoot();
+          this.nav.setRoot(Dashboard);
+        });
+        
       } else {
         // No user is signed in, go to login page
         console.log("Signed out!");
         this.menu.swipeEnable(false);
+        /*
         this.nav.popToRoot();
-        this.nav.setRoot(UserLogin);
-        this.authService.logout();
+        this.nav.setRoot(UserLogin); 
+        */
       }
     })
   }
@@ -74,13 +80,24 @@ export class MyApp {
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
-    if(page.title == "Logout") 
+    //if the menu selection is log out
+    if (page.title === "Logout") {
       this.authService.logout().then(() => {
+        let toast = this.toastCtrl.create({
+          message: 'Logged out!',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.onDidDismiss(() => {
+          console.log("Dismissed toast");
+        })
+        toast.present();
         this.nav.setRoot(UserLogin);
-      }); 
+      });
+    }
     else {
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+      // navigate to the new page if it is not the current page
+      this.nav.setRoot(page.component);
     }
 
   }
