@@ -35,7 +35,6 @@
       
       <div [ngSwitch]="step">
         <ion-list *ngSwitchCase="'step1'">
-            <ion-icon name='planet' item-left></ion-icon>
             <ion-label>CHOOSE SERVICE</ion-label>
             <ion-list no-lines radio-group [(ngModel)]="service">
                 <ion-item>
@@ -153,10 +152,10 @@
                     </ng-container>
                 </ion-card-content>
               </ion-card>
-              
-              <button ion-button (click)="goToViewService()" color="danger" style="position:absolute; left:25px; bottom:40px; padding:0.5cm 1.0cm 0.5cm 1.0cm">Cancel</button>
-              <button ion-button (click)="pushData();showAlert()" color="accept" style ="color:white; position:absolute; right:25px; bottom:40px; padding:0.5cm 1.0cm 0.5cm 1.0cm" >Request Service</button>
-            
+              <ion-row>
+                <button ion-button (click)="goToViewService()" color="danger" >Cancel</button>
+                <button ion-button (click)="pushData();showAlert()" color="accept"  >Request Service</button>
+              </ion-row>
         </ion-list>
       </div>
   

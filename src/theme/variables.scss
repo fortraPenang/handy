@@ -26,11 +26,11 @@ $font-path: "../assets/fonts";
 $colors: (
   primary:    #6D213C,
   secondary:  #DECDD3,
-  danger:     #ff0000,
+  danger:     #d30000,
   light:      #CFDBD5,
   dark:       #333333,
-  accept:     #00FF00,
-  pending:    #FFFF00,      
+  accept:     rgb(33, 162, 33),
+  pending:    rgb(223, 223, 0),      
 );
 
 $size_extrasmall:1.0rem;

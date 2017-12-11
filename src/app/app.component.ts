@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, App } from 'ionic-angular';
+import { Platform, MenuController, Nav, ToastController } from 'ionic-angular';
 
 import { UserLogin } from '../pages/user-login/user-login';
 import { Dashboard } from '../pages/dashboard/dashboard';
@@ -10,6 +10,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../providers/auth-service';
 import * as firebase from 'firebase/app';
+import { VendorDashboardPage } from '../pages/vendor-dashboard/vendor-dashboard';
+import { ServiceRequestPage } from '../pages/service-request/service-request';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +21,7 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   rootPage = UserLogin;
-  pages: Array<{title: string,icon:string, component: any}>;
+  pages: Array<{ title: string, icon: string, component: any }>;
   displayName: any;
   avatarLetter: any;
   constructor(
@@ -28,35 +30,46 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public afAuth: AngularFireAuth,
-    public authServ: AuthService,
-    public app: App) {
+    public authService: AuthService,
+    public toastCtrl: ToastController
+  ) {
 
     this.initializeApp();
     // set our app's pages
     this.pages = [
-      { title: 'Dashboard', icon:'home', component: Dashboard },
-      { title: 'Search Services', icon: '' , component: SearchCategoryPage },
-      { title: 'Logout', icon:'lock', component: UserLogin }
+      { title: 'Dashboard', icon: 'home', component: Dashboard },
+      { title: 'Search Services', icon: '', component: SearchCategoryPage },
+      { title: 'My Requests', icon: 'lock', component: ServiceRequestPage},
+      { title: 'Logout', icon: 'lock', component: UserLogin }
+      
     ];
-    
+
     afAuth.auth.onAuthStateChanged((user) => {
-      if(user) {
+      if (user) {
         // User is signed in
         var user = afAuth.auth.currentUser;
-        this.displayName = (!user.displayName) ?  "" : user.displayName;
+        this.displayName = (!user.displayName) ? "" : user.displayName;
         this.avatarLetter = (!user.displayName) ? "" : user.displayName[0];
         console.log(user);
         console.log("Signed in!");
-        this.menu.swipeEnable(true);
-        this.nav.popToRoot();
-        this.nav.setRoot(Dashboard);
+        this.authService.loadType().then((snapshot) => {
+          AuthService.userType = snapshot.val().role;
+          console.log(AuthService.userType);
+          this.menu.swipeEnable(true);
+          this.nav.popToRoot();
+          if(AuthService.userType === "user")
+            this.nav.setRoot(Dashboard);
+          else if(AuthService.userType === "vendor")
+            this.nav.setRoot(VendorDashboardPage);
+        });
+        
       } else {
         // No user is signed in, go to login page
-        console.log("Signed out!");
+        console.log("Sign out!");
         this.menu.swipeEnable(false);
         this.nav.popToRoot();
         this.nav.setRoot(UserLogin);
-        this.authServ.logout();
+        this.authService.logout();
       }
     })
   }
@@ -72,21 +85,26 @@ export class MyApp {
   }
 
   openPage(page) {
-    
-    if(page.title === 'Logout'){
-      // close the menu when clicking a link from the menu
-    this.menu.close();
-    this.menu.swipeEnable(false);
-    /* this.nav.popToRoot();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component); */
-    this.authServ.logout();
-
-    }else{
-      // close the menu when clicking a link from the menu
-    this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    //if the menu selection is log out
+    if (page.title === "Logout") {
+      this.menu.close();
+      this.menu.swipeEnable(false);
+      this.authService.logout().then(() => {
+        let toast = this.toastCtrl.create({
+          message: 'Logged out!',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.onDidDismiss(() => {
+          console.log("Dismissed toast");
+        })
+        toast.present();
+      });
+    }
+    else {
+      this.menu.close();
+      // navigate to the new page if it is not the current page
+      this.nav.setRoot(page.component);
     }
   }
   

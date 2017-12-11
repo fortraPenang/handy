@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar hideBackButton="false">
-    <ion-title text-center> Search Results</ion-title>
-
+  <ion-navbar  hideBackButton="false">
+    <ion-title text-center>Home</ion-title>
+    
   </ion-navbar>
   <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
     (ionFocus)="checkFocus()" (ionBlur)="checkBlur()">
@@ -33,7 +33,55 @@
   </ion-card>
 -->
 
-  </div>
+</div>
+
+<h2>Featured Services</h2>
+
+  <ion-row class="header">
+    <ion-col (click)="showAlert()" col-4>
+        <img src="assets/images/home.png" />
+        <p>Home Services</p>
+    </ion-col>
+
+    <ion-col col-4>
+      <img src="assets/images/health.png" />
+      <p>Health & Beauty</p>
+    </ion-col>
+
+    <ion-col col-4>
+      <img src="assets/images/lawn.png" />
+      <p>Gardening Lawn</p>
+    </ion-col>
+
+    <!-- <ion-col col-4>
+      <img src="assets/images/personal.png" />
+      <p>Personal</p>
+    </ion-col> -->
+
+    <!-- <ion-col col-4>
+      <img src="assets/images/painting.png" />
+      <p>Painting</p>
+    </ion-col> -->
+
+    <ion-col col-4>
+      <img src="assets/images/electric.png" />
+      <p>Electrical Wiring</p>
+    </ion-col>
+
+    <ion-col col-4>
+      <img src="assets/images/plumbing.png" />
+      <p>Plumbing</p>
+    </ion-col>
+
+    <ion-col col-4>
+      <img src="assets/images/car.png" />
+      <p>Car Servicing</p>
+    </ion-col>
+  </ion-row>
+  
+
+  
+
 
   <div class="spacer" style="width: 300px; height: 20px;"></div>
   <ion-list id="services-list16">
@@ -53,13 +101,30 @@
       <ion-icon ios="ios-brush" md="md-brush"></ion-icon> Painting
     </ion-item>
     <ion-item class="item-icon-left" id="services-list-item57">
-      <ion-icon ios="ios-hammer" md="md-hammer"></ion-icon> Electrics </ion-item>
+    <ion-icon ios="ios-hammer" md="md-hammer"></ion-icon> Electrical Wiring 
+    </ion-item>
     <ion-item class="item-icon-left" id="services-list-item58">
       <ion-icon ios="ios-water" md="md-water"></ion-icon> Plumbing
     </ion-item>
   </ion-list>
 
-  <button ion-button secondary block (click)="goToReview();">Review</button>
-  <button ion-button secondary block (click)="goToServiceRequest();">Incoming Request for User</button>
-  <button ion-button secondary block (click)="goToVendorDashboard();">Vendor Dashboard</button>
+  
+
+   <!--  <ion-col col-9 class="button-container">
+        <button class="icons" style="border: none;">
+          <ion-icon name="cog"></ion-icon>
+        </button>
+        <button class="icons">
+          <ion-icon name="people"></ion-icon>
+        </button>
+        <button class="icons">
+          Edit Profile
+        </button>
+    </ion-col> -->
+
+ 
+  
+  <!-- <button ion-button secondary block (click)="goToShowAlertReview();">Review</button> -->
+  <button ion-button secondary block (click)="goToServiceRequest();">My Requests</button>
 </ion-content>
+

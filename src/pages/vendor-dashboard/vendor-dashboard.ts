@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,  } from 'ionic-angular';
 import {NewrequestServicePage} from '../newrequest-service/newrequest-service';
 import { PendingWorkPage } from '../pending-work/pending-work';
+import { AuthService } from '../../providers/auth-service';
 
 /**
  * Generated class for the VendorDashboardPage page.
@@ -23,6 +24,7 @@ export class VendorDashboardPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VendorDashboardPage');
+    console.log(AuthService.userType);
   }
 
   tab1 = NewrequestServicePage;

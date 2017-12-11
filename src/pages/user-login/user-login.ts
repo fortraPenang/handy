@@ -27,6 +27,7 @@ export class UserLogin {
   
   public loginForm :any;
   submitAttempt: boolean = false;  
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public authService: AuthService, 
@@ -68,23 +69,22 @@ export class UserLogin {
     });
     //check client-side validation
     if(this.loginForm.valid){
-      console.log(this.account);
       this.authService.login(this.account).then((authData) => {
         //successful
-        console.log(authData);
+        //console.log(authData);
         //toast to inform user
         let toast = this.toastCtrl.create({
-          message: 'Login Successful. Welcome ' + this.account.email + ' !',
+          message: 'Login Successful. Welcome ' + authData.displayName + '!',
           duration: 3000,
-          position: 'button'
+          position: 'bottom'
         });
         toast.onDidDismiss(() => {
           console.log("Dismissed toast");
         })
         toast.present();
-        this.navCtrl.popToRoot();
         this.menuCtrl.swipeEnable(true);
-        this.dashboardPage();
+        /* this.navCtrl.popToRoot();
+        this.dashboardPage(); */
       }, (error) => {
         console.log(error);
         var errorCode = error.code;
