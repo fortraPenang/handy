@@ -77,7 +77,7 @@ export class Dashboard {
 
     alert.addInput({
       type: 'radio',
-      label: 'Book a Service',
+      label: 'Book for Later',
       value: 'bs',
       checked: false
     },

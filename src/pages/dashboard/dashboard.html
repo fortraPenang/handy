@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar  hideBackButton="false">
-    <ion-title text-center> Search Results</ion-title>
+    <ion-title text-center>Home</ion-title>
     
   </ion-navbar>
   <ion-searchbar
@@ -43,46 +43,44 @@
 <h2>Featured Services</h2>
 
   <ion-row class="header">
-    <ion-col (click)="showAlert()" col-3>
+    <ion-col (click)="showAlert()" col-4>
         <img src="assets/images/home.png" />
         <p>Home Services</p>
     </ion-col>
 
-    <ion-col col-3>
+    <ion-col col-4>
       <img src="assets/images/health.png" />
       <p>Health & Beauty</p>
     </ion-col>
 
-    <ion-col col-3>
-      <img src="assets/images/personal.png" />
-      <p>Personal</p>
-    </ion-col>
-
-    <ion-col col-3>
+    <ion-col col-4>
       <img src="assets/images/lawn.png" />
       <p>Gardening Lawn</p>
     </ion-col>
 
-    </ion-row>
-  <ion-row>
-    <ion-col col-3>
+    <!-- <ion-col col-4>
+      <img src="assets/images/personal.png" />
+      <p>Personal</p>
+    </ion-col> -->
+
+    <!-- <ion-col col-4>
       <img src="assets/images/painting.png" />
       <p>Painting</p>
-    </ion-col>
+    </ion-col> -->
 
-    <ion-col col-3>
+    <ion-col col-4>
       <img src="assets/images/electric.png" />
       <p>Electrical Wiring</p>
     </ion-col>
 
-    <ion-col col-3>
+    <ion-col col-4>
       <img src="assets/images/plumbing.png" />
       <p>Plumbing</p>
     </ion-col>
 
-    <ion-col col-3>
+    <ion-col col-4>
       <img src="assets/images/car.png" />
-      <p>Car Service</p>
+      <p>Car Servicing</p>
     </ion-col>
   </ion-row>
   
@@ -132,8 +130,7 @@
 
  
   
-  <button ion-button secondary block (click)="goToShowAlertReview();">Review</button>
-  <button ion-button secondary block (click)="goToServiceRequest();">Incoming Request for User</button>
-  <button ion-button secondary block (click)="goToVendorDashboard();">Vendor Dashboard</button>
+  <!-- <button ion-button secondary block (click)="goToShowAlertReview();">Review</button> -->
+  <button ion-button secondary block (click)="goToServiceRequest();">My Requests</button>
 </ion-content>
 

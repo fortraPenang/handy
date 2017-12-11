@@ -96,14 +96,14 @@ requestStatus(key:any,statusUpdate:any){
   }
   name(){
     switch(this.notification){
-      case "pending":{
-       this.title = "Pending Work";
+      /* case "pending":{
+       this.title = "In Progress";
        break;
       }
-      case "accepted":{
+      case "complete":{
        this.title = "Completed";
        break;
-        }
+        } */
       
        
    }

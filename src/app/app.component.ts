@@ -10,6 +10,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../providers/auth-service';
 import * as firebase from 'firebase/app';
+import { VendorDashboardPage } from '../pages/vendor-dashboard/vendor-dashboard';
+import { ServiceRequestPage } from '../pages/service-request/service-request';
 
 @Component({
   templateUrl: 'app.html'
@@ -37,7 +39,9 @@ export class MyApp {
     this.pages = [
       { title: 'Dashboard', icon: 'home', component: Dashboard },
       { title: 'Search Services', icon: '', component: SearchCategoryPage },
+      { title: 'My Requests', icon: 'lock', component: ServiceRequestPage},
       { title: 'Logout', icon: 'lock', component: UserLogin }
+      
     ];
 
     afAuth.auth.onAuthStateChanged((user) => {
@@ -50,19 +54,22 @@ export class MyApp {
         console.log("Signed in!");
         this.authService.loadType().then((snapshot) => {
           AuthService.userType = snapshot.val().role;
+          console.log(AuthService.userType);
           this.menu.swipeEnable(true);
           this.nav.popToRoot();
-          this.nav.setRoot(Dashboard);
+          if(AuthService.userType === "user")
+            this.nav.setRoot(Dashboard);
+          else if(AuthService.userType === "vendor")
+            this.nav.setRoot(VendorDashboardPage);
         });
         
       } else {
         // No user is signed in, go to login page
-        console.log("Signed out!");
+        console.log("Sign out!");
         this.menu.swipeEnable(false);
-        /*
         this.nav.popToRoot();
         this.nav.setRoot(UserLogin); 
-        */
+       
       }
     })
   }

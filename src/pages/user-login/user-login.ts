@@ -79,8 +79,8 @@ export class UserLogin {
         })
         toast.present();
         this.menuCtrl.swipeEnable(true);
-        this.navCtrl.popToRoot();
-        this.dashboardPage();
+        /* this.navCtrl.popToRoot();
+        this.dashboardPage(); */
       }, (error) => {
         console.log(error);
         var errorCode = error.code;
