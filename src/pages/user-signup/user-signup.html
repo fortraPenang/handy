@@ -9,7 +9,7 @@
 
 <ion-content padding>
     <div padding-bottom>
-      <ion-segment [(ngModel)]="step" [disabled]='true'>
+      <ion-segment [(ngModel)]="step" [disabled]='false'>
         <ion-segment-button value="step1">
           
         </ion-segment-button>
@@ -244,6 +244,13 @@
           <h1>Vendor Details</h1>
           <em>Step 3: Please fill in your company details.</em>
         </div>
+
+          <ion-item>
+            <p>{{imageURI}}</p>
+            <button ion-button color="secondary" (click)="selectImage()">Get Image</button>
+            <h4>Image Preview</h4>
+            <img src="{{imageURI}}" *ngIf="imageURI" alt="Ionic File" width="300" />
+          </ion-item>
 
         <ion-item>
           <ion-input type="text" [(ngModel)]="vendorDetails.companyName" name="companyName" required formControlName="companyName" placeholder="Company Name"></ion-input>

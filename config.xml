@@ -3,7 +3,7 @@
     <name>Handy</name>
     <description>Get your Handyman in one app.</description>
     <author email="fortrapenang@gmail.com" href="http://opensourcetechnologies.com/">Fortra</author>
-    <content original-src="index.html" src="http://192.168.94.80:8100" />
+    <content original-src="index.html" src="http://192.168.43.206:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -57,6 +57,7 @@
     <allow-navigation href="http://192.168.1.131:8100" />
     <allow-navigation href="http://192.168.43.206:8100" />
     <allow-navigation href="http://192.168.94.80:8100" />
+    <allow-navigation href="http://192.168.90.19:8100" />
     <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
@@ -78,4 +79,7 @@
         <variable name="APP_ID" value="159340781479765" />
         <variable name="APP_NAME" value="Handy" />
     </plugin>
+    <plugin name="cordova-plugin-camera" spec="^3.0.0" />
+    <plugin name="cordova-plugin-file" spec="^5.0.0" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.0" />
 </widget>

@@ -40,6 +40,9 @@ import { Facebook } from '@ionic-native/facebook';
 import { FormsModule } from '@angular/forms';
 // Import ionic2-rating module
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
 
 export const firebaseConfig = {
       apiKey: "AIzaSyDEDyDjCV2OE7jt0HfXFdc3rf3bgoGpAJw",
@@ -126,7 +129,11 @@ export const firebaseConfig = {
     GooglePlus,
     AuthService,
     AngularFireAuth,
-    Facebook
+    Facebook,
+    FileTransfer,
+    FileTransferObject,
+    File,
+    Camera
   ]
 })
 export class AppModule {}
