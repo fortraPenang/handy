@@ -63,7 +63,7 @@ export class NewrequestServicePage {
 requestStatus(key:any,statusUpdate:any){
   let confirm = this.alertCtrl.create({
     title: 'Proceed?',
-    message: 'Request will be '+ statusUpdate +'.',
+    message: 'Request status will be '+ statusUpdate +'.',
     buttons: [
       {
         text: 'Cancel',
