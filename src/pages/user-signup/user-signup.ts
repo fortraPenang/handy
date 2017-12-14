@@ -5,10 +5,7 @@ import { IonicPage, LoadingController, NavController, ToastController, ModalCont
 import { Dashboard } from '../dashboard/dashboard';
 import { UserLogin } from '../user-login/user-login';
 import { UserForgotpassword } from '../user-forgotpassword/user-forgotpassword';
-import {
-  FormBuilder, FormGroup, Validators,
-  FormControl
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import moment from 'moment';
@@ -75,7 +72,7 @@ export class UserSignup {
   public signupForm: any; //second segment
   public signupForm2: any; //third segment
   public signupForm3: any; //fourth segment
-  public step: any; //for the segment
+  public step: any;
 
   //boolean to check user clicked user or handy during first page
   //false, if vendor
@@ -130,14 +127,10 @@ export class UserSignup {
       closeHours: ['', Validators.required],
     });
 
+    //define firebase references
     this.userRef = firebase.database().ref('/Handys/user/');
     this.vendorRef = firebase.database().ref('/Handys/vendor/');
     this.roleRef = firebase.database().ref('/Handys/user_roles/');
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.currentUser = firebase.auth().currentUser;
-      }
-    });
   }
 
   //calculate age from dob via moment.js
@@ -178,17 +171,12 @@ export class UserSignup {
 
   //to navigate back to previous segment
   back() {
+    this.submitAttempt = false;
     switch (this.step) {
       case "step1":
         break;
       case "step2":
-        /*
-          let alert = this.alertCtrl.create({
-                  title: "",
-                  subTitle: "Are you sure to go back? This will reset the form."
-        
-                }) */
-        this.step = "step1";
+        this.clearForms();
         break;
       case "step3":
         this.step = "step2";
@@ -199,19 +187,46 @@ export class UserSignup {
     }
   }
 
+
+  //clears the forms when user retreats to role selection page
+  clearForms() {
+    let alert = this.alertCtrl.create({
+      title: "Warning",
+      subTitle: "Are you sure you want to go back? This will empty the forms.",
+      buttons: [
+        {
+          text: "No",
+          role: "cancel",
+          handler: () => {
+            console.log("No Clicked");
+          }
+        },
+        {
+          text: "Yes",
+          handler: () => {
+            console.log("Yes Clicked");
+            //resets all form
+            this.signupForm.reset();
+            this.signupForm2.reset();
+            this.signupForm3.reset();
+            this.step = "step1";
+          }
+        }
+      ],
+    });
+    alert.present();
+  }
   advanceForm() {
+    this.submitAttempt = false;
     switch (this.step) {
       case "step1":
         this.step = "step2";
-        this.submitAttempt = false;
         break;
       case "step2":
         this.step = "step3";
-        this.submitAttempt = false;
         break;
       case "step3":
         this.step = "step4";
-        this.submitAttempt = false;
         break;
     }
   }

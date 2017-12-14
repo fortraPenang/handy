@@ -62,7 +62,6 @@ export class MyApp {
           else if(AuthService.userType === "vendor")
             this.nav.setRoot(VendorDashboardPage);
         });
-        
       } else {
         // No user is signed in, go to login page
         console.log("Sign out!");
