@@ -37,9 +37,10 @@ export class UserSignup {
 
   //Personal Details
   personalDetails: {
-    dob: string, phoneNumber: string, gender: string, age: any, race: string, nationality: string,
-    address1: string, address2: string, address3: string, postcode: string, city: string, state: string, type: string
+    fName: string, lName: string, dob: string, phoneNumber: string, gender: string, age: any, race: string, nationality: string, address1: string, address2: string, address3: string, postcode: string, city: string, state: string, type: string
   } = {
+      fName: '',
+      lName: '',
       dob: '',
       phoneNumber: '',
       gender: '',
@@ -131,6 +132,12 @@ export class UserSignup {
     this.userRef = firebase.database().ref('/Handys/user/');
     this.vendorRef = firebase.database().ref('/Handys/vendor/');
     this.roleRef = firebase.database().ref('/Handys/user_roles/');
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUser = firebase.auth().currentUser;
+      }
+   });
   }
 
   //calculate age from dob via moment.js
@@ -206,9 +213,7 @@ export class UserSignup {
           handler: () => {
             console.log("Yes Clicked");
             //resets all form
-            this.signupForm.reset();
-            this.signupForm2.reset();
-            this.signupForm3.reset();
+            resetForms();
             this.step = "step1";
           }
         }
@@ -216,6 +221,14 @@ export class UserSignup {
     });
     alert.present();
   }
+
+  //resets the forms back to their pristine state
+  resetForms(){
+    this.signupForm.reset();
+    this.signupForm2.reset();
+    this.signupForm3.reset();
+  }
+  
   advanceForm() {
     this.submitAttempt = false;
     switch (this.step) {
@@ -257,6 +270,8 @@ export class UserSignup {
 
   //Push formControl data to firebase
   pushToFirebase() {
+    this.personalDetails.fName = this.account.fName;
+    this.personalDetails.lName = this.account.lName;
     var data = (this.isUserSelected) ? this.personalDetails : Object.assign(this.personalDetails, this.vendorDetails);
     //push to user node
     if (this.isUserSelected) {
@@ -273,7 +288,7 @@ export class UserSignup {
 
   signup() {
     this.submitAttempt = true;
-    if (this.signupForm2.valid && this.step === 'step3') {
+    if ((this.signupForm2.valid && this.step === 'step3') || (this.signupForm3.valid && this.step === 'step4')) {
       //sign up user
       this.authService.register(this.account).then(() => {
         //push personalDetails to firebase here
@@ -282,18 +297,8 @@ export class UserSignup {
       });
 
     }
-
-    if (this.signupForm3.valid && this.step === 'step4') {
-      //sign up user
-      this.authService.register(this.account).then(() => {
-        //push vendorDetails and personalDetails to firebase here
-        this.pushToFirebase();
-        console.log("Register Successful!");
-      });
-
-    }
-
   }
+
 
   dashboardPage() { this.navCtrl.push(Dashboard); }
   loginPage() { this.navCtrl.push(UserLogin); }

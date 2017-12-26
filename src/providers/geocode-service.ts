@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/observable';
 import firebase from 'firebase';
 import { SearchCategoryPage } from '../search-category/search-category';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
-
+import { MenuController} from 'ionic-angular';
 
 /*
   Generated class for the GeocodeServiceProvider provider.
@@ -25,10 +25,15 @@ export class GeocodeServiceProvider {
     console.log('Hello GeocodeServiceProvider Provider');
   }
 
-  //Converts valid address to coordinates
+/*   //Converts valid address to coordinates
   geocode(address: any){
+    geocoder = new google.maps.Geocoder();
+    this.geocoder.geocode({'address': address}, (response, status))
+  }
+
+  //Converts coordinates to valid address
+  revGeoCode(coordinates){
 
   }
-  
-
+ */
 }

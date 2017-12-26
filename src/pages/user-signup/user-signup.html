@@ -147,6 +147,7 @@
           <ion-select [(ngModel)]="personalDetails.gender" name="gender" required formControlName="gender" placeholder="Gender">
               <ion-option value="male">Male</ion-option>
               <ion-option value="female">Female</ion-option>
+              <ion-option value="other">Other</ion-option>
           </ion-select>
         </ion-item>
         <span class="warning-msg" *ngIf="!signupForm2.controls.gender.valid && (signupForm2.controls.gender.dirty || submitAttempt) && step==='step3'">
