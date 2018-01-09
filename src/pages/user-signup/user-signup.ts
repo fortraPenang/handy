@@ -126,33 +126,6 @@ export class UserSignup {
         state: ['', Validators.required],
       });
 
-    //validation for signupForm(s)
-    this.signupForm = this.builder.group({
-      username: ['', Validators.compose([Validators.email, Validators.required])],
-      fName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-      lName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-      //Custom validator to check if password === cfmPassword
-      passwords: this.builder.group({
-        password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-        cfmPassword: ['', Validators.compose([Validators.minLength(6), Validators.required])]
-      }, { validator: this.areEqual })
-    });
-
-    this.signupForm2 = this.builder.group({
-      dob: ['', Validators.required],
-      phoneNumber: ['', Validators.compose([Validators.maxLength(11), Validators.required])],
-      gender: ['', Validators.required],
-      age: ['',],
-      race: ['', Validators.required],
-      nationality: ['', Validators.required],
-      address1: ['', Validators.required],
-      address2: ['',],
-      address3: ['',],
-      postcode: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-    });
-
     this.signupForm3 = this.builder.group({
       companyName: ['', Validators.required],
       companyInfo: ['', Validators.required],
@@ -342,6 +315,14 @@ export class UserSignup {
                 if ((this.signupForm2.valid && this.step === 'step3') || (this.signupForm3.valid && this.step === 'step4')) {
                   //sign up user
                   this.authService.register(this.account).then(() => {
+                    this.uploadImage(this.imageURI).then((snapshot : any) =>
+                    {
+                      let uploadedImage : any = snapshot.downloadURL;
+                      console.log(uploadedImage);
+                      //sets the image to user object
+                      this.vendorDetails.image = uploadedImage;
+                      console.log(this.vendorDetails.image);
+                    });
                     //push personalDetails to firebase here
                     this.pushToFirebase();
                     console.log("Register Successful!");
