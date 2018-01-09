@@ -75,7 +75,7 @@ export class UserSignup {
   public signupForm3: any; //fourth segment
   public step: any;
 
-  //boolean to check user clicked user or handy during first page
+  //boolean to check whether user clicked user or handy during first page
   //false, if vendor
   public isUserSelected = true;
 
@@ -91,9 +91,9 @@ export class UserSignup {
 
     //validation for signupForm(s)
     this.signupForm = this.builder.group({
-      username: ['', Validators.compose([Validators.email, Validators.required])],
-      fName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-      lName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      username: ['', Validators.compose([Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"), Validators.required])],
+      fName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')])],
+      lName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')])],
       //Custom validator to check if password === cfmPassword
       passwords: this.builder.group({
         password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
@@ -213,7 +213,7 @@ export class UserSignup {
           handler: () => {
             console.log("Yes Clicked");
             //resets all form
-            resetForms();
+            this.resetForms();
             this.step = "step1";
           }
         }

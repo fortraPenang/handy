@@ -57,8 +57,8 @@
       <ion-item>
         <ion-input type="email" [(ngModel)]="account.email" name="email" required formControlName="username" placeholder="Email"></ion-input>
       </ion-item>
-      <span *ngIf="!signupForm.controls.username.valid && (signupForm.controls.username.dirty || submitAttempt) && step==='step2'" class="help-block text-danger">
-        <div ion-text class="warning-msg" *ngIf="signupForm.controls.username.errors?.email && !signupForm.controls.username.errors?.required">
+      <span *ngIf="!signupForm.controls.username.valid && (signupForm.controls.username.dirty || submitAttempt) && step==='step2'">
+        <div ion-text class="warning-msg" *ngIf="signupForm.controls.username.errors?.pattern">
           *Incorrect email format.
         </div>
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.username.errors?.required">
@@ -70,9 +70,9 @@
         <ion-input type="text" [(ngModel)]="account.fName" name="fName" required formControlName="fName" placeholder="First Name"></ion-input>
       </ion-item>
       <span *ngIf="!signupForm.controls.fName.valid && (signupForm.controls.fName.dirty || submitAttempt) && step==='step2'">
-        <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.pattern">
+        <!-- <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.pattern">
           *First name can only contain letters.
-        </div>
+        </div> -->
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.required">
           *First name is required.
         </div>
@@ -82,9 +82,9 @@
         <ion-input type="text" [(ngModel)]="account.lName" placeholder="Last Name" required formControlName="lName" name="lName"></ion-input>
       </ion-item>
       <span *ngIf="!signupForm.controls.lName.valid && (signupForm.controls.lName.dirty || submitAttempt) && step==='step2'">
-        <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.pattern">
+        <!-- <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.pattern">
           *Last name can only contain letters.
-        </div>
+        </div> -->
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.required">
           *Last name is required.
         </div>
@@ -171,7 +171,7 @@
           *Race is required.
         </span>
         
-        <ion-item>
+        <!-- <ion-item>
           <ion-select [(ngModel)]="personalDetails.nationality" name="nationality" formControlName="nationality" placeholder="Nationality">
               <ion-option value="malaysian">Malaysian</ion-option>
               <ion-option value="foreigner">Foreigner</ion-option>
@@ -179,7 +179,7 @@
         </ion-item>
         <span class="warning-msg" *ngIf="!signupForm2.controls.nationality.valid && (signupForm2.controls.nationality.dirty || submitAttempt) && step==='step3'">
           *Nationality is required.
-        </span>
+        </span> -->
         
         <ion-item>
           <ion-input type="text" [(ngModel)]="personalDetails.address1" name="address1" required formControlName="address1" placeholder="Address line 1"></ion-input>
