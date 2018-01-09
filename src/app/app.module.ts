@@ -27,8 +27,6 @@ import { SendquotationModalPageModule } from '../pages/sendquotation-modal/sendq
 import { UserSendquotationPage } from '../pages/user-sendquotation/user-sendquotation';
 import { PendingWorkPage } from '../pages/pending-work/pending-work';
 
-
-
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '../providers/google-maps';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -43,6 +41,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
+import { GeocodeServiceProvider } from '../providers/geocode-service';
 
 export const firebaseConfig = {
       apiKey: "AIzaSyDEDyDjCV2OE7jt0HfXFdc3rf3bgoGpAJw",
@@ -57,7 +56,6 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-
     UserLogin,
     UserSignup,
     UserForgotpassword,
@@ -74,14 +72,8 @@ export const firebaseConfig = {
     NewrequestServicePage,
     UserSendquotationPage,
     PendingWorkPage,
-    
-   
-    
-
   ],
   imports: [
-
- 
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp,{tabsPlacement:'bottom'}),
@@ -91,10 +83,7 @@ export const firebaseConfig = {
     FormsModule,
     SignupModalPageModule,
     SendquotationModalPageModule,
-    
-    
-    
-   
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -133,7 +122,8 @@ export const firebaseConfig = {
     FileTransfer,
     FileTransferObject,
     File,
-    Camera
+    Camera,
+    GeocodeServiceProvider,
   ]
 })
 export class AppModule {}

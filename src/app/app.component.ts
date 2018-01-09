@@ -53,16 +53,17 @@ export class MyApp {
         console.log(user);
         console.log("Signed in!");
         this.authService.loadType().then((snapshot) => {
-          AuthService.userType = snapshot.val().role;
-          console.log(AuthService.userType);
+          AuthService.userType = (!snapshot.val()) ? "Not Set" : snapshot.val().role;
+          console.log(AuthService.userType);    
           this.menu.swipeEnable(true);
           this.nav.popToRoot();
           if(AuthService.userType === "user")
             this.nav.setRoot(Dashboard);
           else if(AuthService.userType === "vendor")
             this.nav.setRoot(VendorDashboardPage);
+          else
+            this.nav.setRoot(Dashboard);
         });
-        
       } else {
         // No user is signed in, go to login page
         console.log("Sign out!");

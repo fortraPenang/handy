@@ -11,7 +11,6 @@
     <div padding-bottom>
       <ion-segment [(ngModel)]="step" [disabled]='false'>
         <ion-segment-button value="step1">
-          
         </ion-segment-button>
         <ion-segment-button value="step2">
           Step 1
@@ -38,7 +37,7 @@
               <ion-col><button ion-button block (click)="signupAsHandy()">Handy</button></ion-col>
             </ion-row>
             <!--Still misaligned-->
-            <div padding-top style="position:absolute;bottom:0;width:95%;text-align:center;">
+            <div padding-top style="padding-top: 200px;">
                 <div text-center ion-text>Already have an account?</div>
                 <button ion-button block round color="primary" (click)="loginPage();">Login Here</button>
             </div>
@@ -148,6 +147,7 @@
           <ion-select [(ngModel)]="personalDetails.gender" name="gender" required formControlName="gender" placeholder="Gender">
               <ion-option value="male">Male</ion-option>
               <ion-option value="female">Female</ion-option>
+              <ion-option value="other">Other</ion-option>
           </ion-select>
         </ion-item>
         <span class="warning-msg" *ngIf="!signupForm2.controls.gender.valid && (signupForm2.controls.gender.dirty || submitAttempt) && step==='step3'">
@@ -209,8 +209,7 @@
         <span class="warning-msg" *ngIf="!signupForm2.controls.city.valid && (signupForm2.controls.city.dirty || submitAttempt) && step==='step3'">
           *City is required.
         </span>
-
-
+        
         <ion-item>
           <ion-select [(ngModel)]="personalDetails.state" name="state" required formControlName="state" placeholder="State">
               <ion-option value="Johor">Johor</ion-option>
@@ -323,7 +322,7 @@
       </ion-buttons>
 
       <ion-buttons right>
-        <ng-container *ngIf="isUserSelected;else handy_content">
+        <ng-container *ngIf="isUserSelected; else handy_content">
           <button *ngIf="step!='step3'&&step!='step1'" ion-button (click)="next()"> Next
           </button>
           <button *ngIf="step=='step3'" ion-button (click)="signup()"><strong>Submit</strong>
