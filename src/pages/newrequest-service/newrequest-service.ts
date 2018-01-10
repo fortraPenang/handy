@@ -18,6 +18,7 @@ export class NewrequestServicePage {
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/request/');
 
+
   requests:any;
   requestsKeys:any;
   description:any;
@@ -31,33 +32,35 @@ export class NewrequestServicePage {
   show:any;
   bool:any [] = [];
   title:any;
-  
-
-
+  currentUser:any;
+  vndId:any;
   public notification:any
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.title = "Incoming Request";
     this.notification = "pending";
-    
   }
   
-  
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceRequestPage');
-    this.valueRef.on('value', handy => {
-      
-      this.requests = handy.val();
-      this.requestsKeys = Object.keys(this.requests);
-      this.bool=[];
-      for(var i of this.requestsKeys){
-        this.bool.push(false);
-      }
-      
-  });
 
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUser = firebase.auth().currentUser;
+        this.vndId = this.currentUser.uid;
+        console.log(this.vndId);
+        this.valueRef.orderByChild("vendorId").equalTo(this.vndId).on('value', handy => {
+          
+          this.requests = handy.val();
+          console.log(this.requests);
+          this.requestsKeys = Object.keys(this.requests);
+          this.bool=[];
+          for(var i of this.requestsKeys){
+            this.bool.push(false);
+          }
+      });
+      }
+   });
 }
 
 requestStatus(key:any,statusUpdate:any){

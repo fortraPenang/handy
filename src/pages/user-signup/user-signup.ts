@@ -96,7 +96,7 @@ export class UserSignup {
     //default page for ion-segment when page loads  
     this.step = "step1";
 
-    //validation for signupForm(s)
+    //validation for signupForms
     //email regex passes anything that matches somestring@somestring.somestring
     this.signupForm = this.builder.group({
       username: ['', Validators.compose([Validators.pattern(/\S+@\S+\.\S+/), Validators.required])],
@@ -111,11 +111,9 @@ export class UserSignup {
 
     this.signupForm2 = this.builder.group({
       dob: ['', Validators.required],
-      phoneNumber: ['', Validators.compose([Validators.maxLength(11), Validators.required])],
+      phoneNumber: ['', Validators.required],
       gender: ['', Validators.required],
-      age: ['', ],
       race: ['', Validators.required],
-      nationality: ['', Validators.required],
       address1: ['', Validators.required],
       address2: ['', ],
       postcode: ['', Validators.required],
@@ -133,6 +131,7 @@ export class UserSignup {
       cAddress2: ['',],
       openHours: ['', Validators.required],
       closeHours: ['', Validators.required],
+      companyCategory: ['', Validators.required]
     });
 
     //define firebase references
@@ -294,7 +293,7 @@ export class UserSignup {
 
 
   signup(){
-    console.log(this.isUserSelected);
+    //console.log(this.isUserSelected);
     let confirm = this.alertCtrl.create({
       title: 'Confirmation',
       message: 'Do you confirm sign up?',
@@ -309,25 +308,26 @@ export class UserSignup {
           handler: () => {
             try {
                 this.submitAttempt = true;
+                console.log(this.signupForm2.valid);
                 if ((this.signupForm2.valid && this.step === 'step3') || (this.signupForm3.valid && this.step === 'step4')) {
                   //sign up user
                   this.authService.register(this.account).then(() => {
-                    if(!this.isUserSelected){
-                    this.uploadImage(this.imageURI).then((snapshot : any) =>
-                    {
-                      let uploadedImage : any = snapshot.downloadURL;
-                      console.log(uploadedImage);
-                      //sets the image to user object
-                      this.vendorDetails.image = uploadedImage;
-                      console.log(this.vendorDetails.image);
-                      //push personalDetails to firebase here
+                    if(!this.isUserSelected) {
+                      this.uploadImage(this.imageURI).then((snapshot : any) =>
+                      {
+                        let uploadedImage : any = snapshot.downloadURL;
+                        console.log(uploadedImage);
+                        //sets the image to user object
+                        this.vendorDetails.image = uploadedImage;
+                        console.log(this.vendorDetails.image);
+                        //push personalDetails to firebase here
+                        this.pushToFirebase();
+                        console.log("Register vendor Successful!");
+                      });
+                    }else {
                       this.pushToFirebase();
-                      console.log("Register vendor Successful!");
-                    });
-                  } else {
-                    this.pushToFirebase();
-                    console.log("Register user successful!");
-                  }
+                      console.log("Register user Successful!");
+                    }
                   });
                 }
                 let toast = this.toastCtrl.create({

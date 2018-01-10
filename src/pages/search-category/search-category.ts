@@ -23,6 +23,7 @@ export class SearchCategoryPage {
   public companyName:any;
   public cAddress1:any;
   public img: any;
+  public vndId: any;
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/vendor/');
 
@@ -32,17 +33,21 @@ export class SearchCategoryPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchCategoryPage');
     this.valueRef.on('value', handy => {
+
       this.index=this.navParams.data;
       this.img=handy.val()[this.index]['image'];
       this.companyName=handy.val()[this.index]['companyName'];
       this.cAddress1=handy.val()[this.index]['cAddress1'];
+      this.vndId=this.index;
+
       //console.log(this.handys);
       /* 
       console.log(this.handys[0]['image']);
       this.img = this.handys[0]['image']; */
     });
   }
-  goToBookService(idx){
-    this.navCtrl.push(BookservicePage,idx)
+
+  goToBookService(){
+    this.navCtrl.push(BookservicePage,this.vndId);
 }
 }
