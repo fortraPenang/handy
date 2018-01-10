@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController, AlertController  } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController, AlertController, MenuController, ToastController, NavController  } from 'ionic-angular';
+import { Dashboard } from '../dashboard/dashboard';
 
 import firebase from 'firebase';
 /**
@@ -15,7 +16,12 @@ import firebase from 'firebase';
 })
 export class ModalPage {
   public recaptchaVerifier:firebase.auth.RecaptchaVerifier;
-  constructor(public navParams: NavParams, public view: ViewController, public alertCtrl: AlertController) {
+  constructor(public navParams: NavParams, 
+    public view: ViewController, 
+    public alertCtrl: AlertController, 
+    public menuCtrl: MenuController, 
+    public toastCtrl: ToastController,
+    public navCtrl: NavController) {
   }
 
   ionViewDidLoad() {
@@ -28,6 +34,7 @@ export class ModalPage {
   }
 
   signIn(phoneNumber: number){
+    var self = this;
     const appVerifier = this.recaptchaVerifier;
     const phoneNumberString = "+6" + phoneNumber;
     firebase.auth().signInWithPhoneNumber(phoneNumberString, appVerifier)
@@ -39,18 +46,25 @@ export class ModalPage {
         inputs: [{ name: 'confirmationCode', placeholder: 'Confirmation Code' }],
         buttons: [
           { text: 'Cancel',
-            handler: data => { console.log('Cancel clicked'); }
+            handler: data => { console.log('Cancel clicked'); 
+            prompt.dismiss(); 
+            return false;
+            }
           },
           { text: 'Send',
             handler: data => {
               confirmationResult.confirm(data.confirmationCode)
                 .then(function (result) {
                   // User signed in successfully.
-                  console.log(result.user);
+                  self.menuCtrl.swipeEnable(true);
+                  prompt.dismiss();
+                  self.closeModal();
+                  return false;
                   // ...
                 }).catch(function (error) {
                   // User couldn't sign in (bad verification code?)
                   // ...
+                  console.log(error);
                 });
             }
           }

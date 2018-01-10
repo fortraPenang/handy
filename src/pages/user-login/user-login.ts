@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // import UI controllers 
-import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController , MenuController, ViewController} from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, ToastController, ModalController, NavParams, AlertController , MenuController, App, ViewController} from 'ionic-angular';
 import { Dashboard } from '../dashboard/dashboard';
 import { UserSignup } from '../user-signup/user-signup';
 import { UserForgotpassword } from '../user-forgotpassword/user-forgotpassword';
@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 // form builder and validators
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
+import { Facebook } from '@ionic-native/facebook';
 import { SignupTypePage } from '../signup-type/signup-type';
 
 @IonicPage()
@@ -38,7 +39,10 @@ export class UserLogin {
     public googlePlus: GooglePlus,
     public afAuth: AngularFireAuth,
     public menuCtrl: MenuController,
-    private modal:ModalController) {
+    public app: App,
+    public facebook: Facebook,
+    private modal:ModalController,
+    ) {
 
     this.loginForm = builder.group({
       username: ['', Validators.required],
@@ -91,7 +95,12 @@ export class UserLogin {
         let alert = this.alertCtrl.create({
           title: "Login Failed",
           subTitle: errorMsg,
-          buttons: ['Confirm']
+          buttons: [{
+            text: "Cancel", handler: () => {
+              alert.dismiss(); 
+              return false;
+            }
+          }]
         });
         alert.present();
         loader.dismiss();
@@ -116,17 +125,42 @@ export class UserLogin {
     this.authService.loginGoogle().then((res) => {
       this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
       .then((suc) => {
+        alert(JSON.stringify(suc));
         console.log(suc);
         this.navCtrl.setRoot(Dashboard);
       }).catch((err) => {
         let alert = this.alertCtrl.create({
           title: "Login Failed",
-          subTitle: err,
+          subTitle: err.errorMessage,
           buttons: ['Confirm']
         });
         alert.present();
         loader.dismiss();
       });
     });
+  }
+
+  //Sign in via Facebook
+  signInFacebook(){
+    let loader = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+    
+    this.facebook.login(["email"]).then((loginResponse) =>{
+
+      let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken);
+      
+      this.afAuth.auth.signInWithCredential(credential).then((info)=>{
+        alert(JSON.stringify(info));
+      });
+    }).catch((err) =>{
+      let alert = this.alertCtrl.create({
+        title: "Login Failed",
+        subTitle: err.errorMessage,
+        buttons: ['Confirm']
+      });
+      alert.present();
+      loader.dismiss();
+    })
   }
 }

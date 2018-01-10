@@ -2,14 +2,9 @@
   <ion-navbar  hideBackButton="false">
     <ion-title text-center>Home</ion-title>
   </ion-navbar>
-  <ion-searchbar
-  [(ngModel)]="myInput"
-  [showCancelButton]="shouldShowCancel"
-  (ionInput)="onInput($event)"
-  (ionCancel)="onCancel($event)"
-  (ionFocus)="checkFocus()"
-  (ionBlur)="checkBlur()">
-</ion-searchbar>
+  <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
+    (ionFocus)="checkFocus()" (ionBlur)="checkBlur()">
+  </ion-searchbar>
 </ion-header>
 <ion-content padding>
 <div *ngIf="buttonClicked">
@@ -60,7 +55,6 @@
 </div>
 
   <div class="spacer" style="width: 300px; height: 20px;"></div>
-  <h2>All Services</h2>
   <ion-list id="services-list16">
     <ion-item (click)="showAlert()" class="item-icon-left" id="services-list-item52">
       <ion-icon ios="ios-home" md="md-home"></ion-icon> Home Services and repair
@@ -101,7 +95,7 @@
 
  
   
-  <!-- <button ion-button secondary block (click)="goToShowAlertReview();">Review</button>
-  <button ion-button secondary block (click)="goToServiceRequest();">My Requests</button> -->
+  <!-- <button ion-button secondary block (click)="goToShowAlertReview();">Review</button> -->
+  <button ion-button secondary block (click)="goToServiceRequest();">My Requests</button>
 </ion-content>
 

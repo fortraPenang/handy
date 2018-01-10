@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
+import { Autosize } from '../components/autosize/autosize'
 
 /**
  * Generated class for the QuickServicePage page.
@@ -27,8 +28,8 @@ export class QuickServicePage {
   city:any;
   state:any;
   budget:any;
-
-  public step:any
+  public step:any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.step = "step1";
   }
@@ -36,10 +37,10 @@ export class QuickServicePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad QuickServicePage');
   }
+
   back(){
     switch(this.step) { 
       case "step1": { 
-  
          break; 
       } 
       case "step2": { 
@@ -50,17 +51,17 @@ export class QuickServicePage {
         this.step ="step2"; 
         break; 
       } 
-     case "step4": { 
-      this.step ="step3"; 
-      break; 
+      case "step4": { 
+        this.step ="step3"; 
+        break; 
       }
       case "step5": { 
-      this.step = "step4";
-      break; 
+        this.step = "step4";
+        break; 
       }  
-
     }
   }
+
   next(){
     switch(this.step) { 
       case "step1": { 
@@ -75,16 +76,14 @@ export class QuickServicePage {
         this.step ="step4"; 
         break; 
       } 
-     case "step4": { 
-      this.step ="step5"; 
-      break; 
+      case "step4": { 
+        this.step ="step5"; 
+        break; 
       }
       case "step5": { 
-      break; 
+        break; 
       }  
-
    }
-    
   }
   goToViewService(){
     this.navCtrl.pop();
@@ -92,14 +91,15 @@ export class QuickServicePage {
 
   pushData(){
     this.valueRef.push(
-      {"serviceCategory":this.service,
-       "description":this.description,
-       "date":this.myDate,
-       "time":this.myTime,
-       "address":this.address+", "+this.postCode+", "+this.city+", "+this.state,
-       "budget":"RM "+this.budget
+      {
+        "serviceCategory": this.service,
+        "description": this.description,
+        "date": this.myDate,
+        "time": this.myTime,
+        "address": this.address + ", " + this.postCode + ", " + this.city + ", " + this.state,
+        "budget": "RM " + this.budget
       }
-    )
+    );
   }
   showAlert() {
     let alert = this.alertCtrl.create({

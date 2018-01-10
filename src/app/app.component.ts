@@ -38,8 +38,8 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Dashboard', icon: 'home', component: Dashboard },
-      { title: 'Search Services', icon: '', component: SearchCategoryPage },
-      { title: 'My Requests', icon: 'lock', component: ServiceRequestPage},
+      { title: 'Search Services', icon: 'search', component: SearchCategoryPage },
+      { title: 'My Requests', icon: 'paper', component: ServiceRequestPage },
       { title: 'Logout', icon: 'lock', component: UserLogin }
       
     ];
@@ -69,8 +69,8 @@ export class MyApp {
         console.log("Sign out!");
         this.menu.swipeEnable(false);
         this.nav.popToRoot();
-        this.nav.setRoot(UserLogin); 
-       
+        this.nav.setRoot(UserLogin);
+        this.authService.logout();
       }
     })
   }
@@ -86,10 +86,10 @@ export class MyApp {
   }
 
   openPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
     //if the menu selection is log out
     if (page.title === "Logout") {
+      this.menu.close();
+      this.menu.swipeEnable(false);
       this.authService.logout().then(() => {
         let toast = this.toastCtrl.create({
           message: 'Logged out!',
@@ -100,13 +100,13 @@ export class MyApp {
           console.log("Dismissed toast");
         })
         toast.present();
-        this.nav.setRoot(UserLogin);
       });
     }
     else {
+      this.menu.close();
       // navigate to the new page if it is not the current page
       this.nav.setRoot(page.component);
     }
-
   }
+  
 }

@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar  hideBackButton="false">
+    <ion-navbar hideBackButton="false">
       <ion-title text-center>Quick Service</ion-title>
     </ion-navbar>
   </ion-header>
@@ -13,20 +13,20 @@
   
   <ion-content padding>
      <div padding>
-        <ion-segment color="primary" [disabled]="true" [(ngModel)]="step">
-          <ion-segment-button value="step1">
+        <ion-segment color="primary" [(ngModel)]="step">
+          <ion-segment-button value="step1" [disabled] = 'step!="step1"'>
             Step 1
           </ion-segment-button>
-          <ion-segment-button value="step2">
+          <ion-segment-button value="step2" [disabled] = 'step!="step2"'>
             Step 2
           </ion-segment-button>
-          <ion-segment-button value="step3">
+          <ion-segment-button value="step3" [disabled] = 'step!="step3"'>
             Step 3
           </ion-segment-button>
-          <ion-segment-button value="step4">
+          <ion-segment-button value="step4" [disabled] = 'step!="step4"'>
             Step 4
           </ion-segment-button>
-          <ion-segment-button value="step5">
+          <ion-segment-button value="step5" [disabled] = 'step!="step5"'>
             Step 5
           </ion-segment-button>
         </ion-segment>
@@ -55,7 +55,7 @@
             <h2>Problem Statement</h2>
             <ion-item>
                 <ion-label color="primary" floating>Specify your problem</ion-label>
-                <ion-textarea style="height:105px;"></ion-textarea>
+                <ion-textarea autosize></ion-textarea>
             </ion-item>
         </ion-list>
   
@@ -149,14 +149,14 @@
                   {{address}}, {{postCode}}, {{city}}, {{state}}
                   <p><strong>Quotation:</strong></p>                       
                   <ng-container *ngIf="service=='Repairing'">
-                        <ion-col width-50>RM150-RM200</ion-col>
-                    </ng-container>
-                      <ng-container *ngIf="service=='Installing'">
-                        <ion-col width-50>RM50-RM150</ion-col>
-                    </ng-container>
-                      <ng-container *ngIf="service=='Customising'">
-                          <ion-col width-50>RM30-RM100</ion-col>
-                    </ng-container>
+                    <ion-col width-50>RM150-RM200</ion-col>
+                  </ng-container>
+                  <ng-container *ngIf="service=='Installing'">
+                    <ion-col width-50>RM50-RM150</ion-col>
+                  </ng-container>
+                  <ng-container *ngIf="service=='Customising'">
+                    <ion-col width-50>RM30-RM100</ion-col>
+                  </ng-container>
                 </ion-card-content>
               </ion-card>
               <ion-row>

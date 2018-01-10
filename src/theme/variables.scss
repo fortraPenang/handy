@@ -53,7 +53,7 @@ $toolbar-background:color($colors, primary);
 
 // Manage Menu Style
 $menu_bg_color:color($colors, secondary);
-$menu_font_color:$rsecondary;
+$menu_font_color:color($colors, dark);
 $menu_font_size:$size_normal;
 $menu_separator_line_color:#4f0306;
 $menu_avatar_bg_color:color($colors, dark);

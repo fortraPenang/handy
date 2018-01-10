@@ -44,7 +44,6 @@ export class Dashboard {
     this.navCtrl.push(QuickServicePage);
   }
 
-
   public checkFocus() {
 
     this.buttonClicked = !this.buttonClicked;

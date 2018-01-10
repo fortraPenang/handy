@@ -1,36 +1,35 @@
 <ion-header>
   <ion-navbar  hideBackButton="true" primary>
     <ion-title text-center>Sign up</ion-title>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button icon-right color="light" (click)="dashboardPage()">SKIP<ion-icon name="ios-arrow-forward"></ion-icon></button>
-   </ion-buttons>
+   </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+    <ng-container *ngIf="step=='step2'||step=='step3'||step=='step4'">
     <div padding-bottom>
-      <ion-segment [(ngModel)]="step" [disabled]='true'>
-        <ion-segment-button value="step1">
-        </ion-segment-button>
-        <ion-segment-button value="step2">
+      <ion-segment [(ngModel)]="step">
+        <ion-segment-button value="step2" [disabled] = 'step!="step2"'>
           Step 1
         </ion-segment-button>
-        <ion-segment-button value="step3">
+        <ion-segment-button value="step3" [disabled] = 'step!="step3"'>
           Step 2
         </ion-segment-button>
-        <ion-segment-button value="step4" [hidden]="isUserSelected">
+        <ion-segment-button value="step4" [hidden]="isUserSelected" [disabled] = 'step!="step4"'>
           Step 3
         </ion-segment-button>
       </ion-segment>
     </div>
-
+    </ng-container>
   <!--Step1-->
   <div [ngSwitch]="step">
     <ion-list *ngSwitchCase="'step1'">
         <ion-grid class="center">
             <div ion-text text-center padding-bottom>
-              <h1>Sign up as...</h1>
-              <em>Step 1: Signup as a user or handy</em>
+              <h1 style="margin-top:50px;">Sign up as...</h1>
+              <em>Choose your account type.</em>
             </div>
             <ion-row style="height:30%;">
               <ion-col><button ion-button block (click)="signupAsUser()">User</button></ion-col>
@@ -52,7 +51,7 @@
     <ion-list no-lines>
       <div ion-text text-center padding-bottom>
         <h1>Create an account</h1>
-        <em>Step 2: Please fill in your account details.</em>
+        <em>Step 1: Please fill in your account details.</em>
       </div>
       <ion-item>
         <ion-input type="email" [(ngModel)]="account.email" name="email" required formControlName="username" placeholder="Email"></ion-input>
@@ -110,7 +109,7 @@
         </span>
       </div>
     </ion-list>
-<!--     <button ion-button block round color="primary" (click)="signup();">Confirm</button>
+    <!-- <button ion-button block round color="primary" (click)="signup();">Confirm</button>
     <div padding>
       <div text-center ion-text>Already have an account? </div>
       <button ion-button block round color="primary" (click)="loginPage();">Login Here</button>
@@ -124,11 +123,14 @@
       <ion-list no-lines>
         <div ion-text text-center padding-bottom>
           <h1>Personal Details</h1>
-          <em>Step 3: Please fill in your personal details.</em>
+          <em>Step 2: Please fill in your personal details.</em>
         </div>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="personalDetails.dob" name="dob" required formControlName="dob" placeholder="Date of Birth" (ngModelChange)="setAge();"></ion-datetime>
+        </ion-item> -->
+        <ion-item>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="personalDetails.dob" name="dob" required formControlName="dob" placeholder="Date of Birth"></ion-datetime>
         </ion-item>
         <span class="warning-msg" *ngIf="!signupForm2.controls.dob.valid && (signupForm2.controls.dob.dirty || submitAttempt) && step==='step3'">
           *Date of Birth is required.
@@ -155,9 +157,12 @@
         </span>
 
         <!--auto calculate age based on dob-->
-        <ion-item>
+        <!-- <ion-item>
+          <ion-label inline>
+              years old
+          </ion-label>
           <ion-input type="number" [(ngModel)]="personalDetails.age" name="age" formControlName="age" placeholder="Age" [disabled]='true'></ion-input>
-        </ion-item> 
+        </ion-item> --> 
 
         <ion-item>
           <ion-select [(ngModel)]="personalDetails.race" name="race" formControlName="race" placeholder="Race">
@@ -192,9 +197,9 @@
           <ion-input type="text" [(ngModel)]="personalDetails.address2" name="address2" formControlName="address2" placeholder="Address line 2"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-input type="text" [(ngModel)]="personalDetails.address3" name="address3" formControlName="address3" placeholder="Address line 3"></ion-input>
-        </ion-item> 
+        </ion-item>  -->
 
         <ion-item>
           <ion-input type="number" [(ngModel)]="personalDetails.postcode" name="postcode" required formControlName="postcode" placeholder="Postcode"></ion-input>
@@ -245,6 +250,13 @@
           <em>Step 3: Please fill in your company details.</em>
         </div>
 
+          <ion-item>
+            <p>{{imageURI}}</p>
+            <button ion-button color="secondary" (click)="selectImage()">Get Image</button>
+            <h4>Image Preview</h4>
+            <img src="{{imageURI}}" *ngIf="imageURI" alt="Ionic File" width="300" />
+          </ion-item>
+
         <ion-item>
           <ion-input type="text" [(ngModel)]="vendorDetails.companyName" name="companyName" required formControlName="companyName" placeholder="Company Name"></ion-input>
         </ion-item>
@@ -258,6 +270,18 @@
         <span class="warning-msg" *ngIf="!signupForm3.controls.companyInfo.valid && (signupForm3.controls.companyInfo.dirty || submitAttempt) && step==='step4'">
             *Company Info is required.
         </span>
+
+        <ion-item>
+          <ion-select [(ngModel)]="vendorDetails.serviceCategory" name="serviceCategory" required formControlName="serviceCategory" placeholder="Service Category">
+              <ion-option value="Home Services and Repair">Home Services and Repair</ion-option>
+              <ion-option value="Beauty and Health">Beauty and Health</ion-option>
+              <ion-option value="Personal">Personal</ion-option>
+              <ion-option value="Gardening">Gardening</ion-option>
+              <ion-option value="Painting">Painting</ion-option>
+              <ion-option value="Electrical Wiring">Electrical Wiring</ion-option>
+              <ion-option value="Plumbing">Plumbing</ion-option>
+          </ion-select>
+        </ion-item>
 
         <ion-item>
           <ion-input type="text" [(ngModel)]="vendorDetails.SSMNumber" name="SSMNumber" required formControlName="SSMNumber" placeholder="SSM Number"></ion-input>
@@ -307,8 +331,9 @@
 </ion-content>
 
 <!-- Footer -->
-<ion-footer no-border text-center color="primary">
-  <ion-toolbar primary>
+<ng-container *ngIf="step=='step2'||step=='step3'||step=='step4'">
+  <ion-footer no-border text-center color="primary">
+    <ion-toolbar primary>
       <ion-buttons left>
           <button *ngIf="step!='step1'" ion-button (click)="back()"> Back
           </button>
@@ -327,5 +352,6 @@
             </button>
         </ng-template>
       </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
+    </ion-toolbar>
+  </ion-footer>
+</ng-container>
