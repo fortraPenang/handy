@@ -16,7 +16,7 @@ import { AlertController } from 'ionic-angular';
 })
 export class QuickServicePage {
   database = firebase.database();
-  valueRef = firebase.database().ref('/Handys/request');
+  valueRef = firebase.database().ref('/Handys/QSrequest');
 
   service:any;
   description:any;
@@ -27,6 +27,8 @@ export class QuickServicePage {
   city:any;
   state:any;
   budget:any;
+  currentUser:any;
+  uId:any;
 
   public step:any
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
@@ -90,17 +92,41 @@ export class QuickServicePage {
     this.navCtrl.pop();
   }
 
-  pushData(){
-    this.valueRef.push(
-      {"serviceCategory":this.service,
-       "description":this.description,
-       "date":this.myDate,
-       "time":this.myTime,
-       "address":this.address+", "+this.postCode+", "+this.city+", "+this.state,
-       "budget":"RM "+this.budget
-      }
-    )
+  goToDashboard(){
+    this.navCtrl.popToRoot();
   }
+
+  pushData(){
+    var myTime = Date.now();
+    try{
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.currentUser = firebase.auth().currentUser;
+          this.uId = this.currentUser.uid;
+          console.log(this.uId);
+          this.valueRef.push(
+            {"serviceCategory":this.service,
+            "description":this.description,
+            "time":myTime,
+            "address":this.address+", "+this.postCode+", "+this.city+", "+this.state,
+            "budget":"RM "+this.budget,
+            "userId":this.uId
+            }
+          );
+        }
+      });
+    this.showAlert();
+    this.goToDashboard();
+    }catch(error) {
+    let alert = this.alertCtrl.create({
+      title: "Login Failed",
+      subTitle: error.errorMessage,
+      buttons: ['Ok']
+    });
+    alert.present();
+    }
+  }
+
   showAlert() {
     let alert = this.alertCtrl.create({
       title: 'Confirmation',

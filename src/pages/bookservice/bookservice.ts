@@ -7,12 +7,6 @@ import { AlertController } from 'ionic-angular';
 
 
 
-
-
-
-
-
-
 /**
  * Generated class for the BookservicePage page.
  *
@@ -42,6 +36,9 @@ export class BookservicePage  {
   city:any;
   state:any;
   budget:any;
+  vndId:any;
+  currentUser:any;
+  uId:any;
   /* autocompleteItems: any;
   autocomplete: any;
   acService:any;
@@ -55,6 +52,8 @@ export class BookservicePage  {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookservicePage');
+    this.vndId= this.navParams.data;
+    console.log(this.vndId);
   }
   /* ngOnInit() {
     this.acService = new google.maps.places.AutocompleteService();        
@@ -128,18 +127,42 @@ export class BookservicePage  {
     this.navCtrl.pop();
   }
 
-  pushData(){
-    this.valueRef.push(
-      {"serviceCategory":this.service,
-       "description":this.description,
-       "date":this.myDate,
-       "time":this.myTime,
-       "address":this.address+", "+this.postCode+", "+this.city+", "+this.state,
-       "budget":"RM "+this.budget,
-       "status":"pending"
-      }
-    )
+  goToDashboard(){
+    this.navCtrl.popToRoot();
   }
+
+  pushData(){
+    try{
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.currentUser = firebase.auth().currentUser;
+          this.uId = this.currentUser.uid;
+          console.log(this.uId);
+          this.valueRef.push(
+            {"serviceCategory":this.service,
+             "description":this.description,
+             "date":this.myDate,
+             "time":this.myTime,
+             "address":this.address+", "+this.postCode+", "+this.city+", "+this.state,
+             "budget":"RM "+this.budget,
+             "status":"pending",
+             "vendorId":this.vndId,
+             "userId":this.uId
+            }
+          )
+        }
+     });
+    this.showAlert();
+    this.goToDashboard();
+  }catch(error) {
+    let alert = this.alertCtrl.create({
+      title: "Login Failed",
+      subTitle: error.errorMessage,
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+}
   showAlert() {
     let alert = this.alertCtrl.create({
       title: 'Confirmation',
@@ -147,5 +170,6 @@ export class BookservicePage  {
       buttons: ['OK']
     });
     alert.present();
+  
   }
 }

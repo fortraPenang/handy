@@ -315,17 +315,22 @@ export class UserSignup {
                 if ((this.signupForm2.valid && this.step === 'step3') || (this.signupForm3.valid && this.step === 'step4')) {
                   //sign up user
                   this.authService.register(this.account).then(() => {
-                    this.uploadImage(this.imageURI).then((snapshot : any) =>
-                    {
-                      let uploadedImage : any = snapshot.downloadURL;
-                      console.log(uploadedImage);
-                      //sets the image to user object
-                      this.vendorDetails.image = uploadedImage;
-                      console.log(this.vendorDetails.image);
-                    });
-                    //push personalDetails to firebase here
-                    this.pushToFirebase();
-                    console.log("Register Successful!");
+                    if(!this.isUserSelected){
+                      this.uploadImage(this.imageURI).then((snapshot : any) =>
+                      {
+                        let uploadedImage : any = snapshot.downloadURL;
+                        console.log(uploadedImage);
+                        //sets the image to user object
+                        this.vendorDetails.image = uploadedImage;
+                        console.log(this.vendorDetails.image);
+                        //push personalDetails to firebase here
+                        this.pushToFirebase();
+                        console.log("Register vendor Successful!");
+                      });
+                    }else{
+                      this.pushToFirebase();
+                      console.log("Register user Successful!");
+                    }
                   });
                 }
                 let toast = this.toastCtrl.create({

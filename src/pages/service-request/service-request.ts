@@ -32,6 +32,8 @@ export class ServiceRequestPage {
   state:any;
   budget:any;
   show:any;
+  currentUser:any;
+  userId:any;
   bool:any [] = [];
 
   public notification:any
@@ -43,16 +45,22 @@ export class ServiceRequestPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceRequestPage');
-    this.valueRef.on('value', handy => {
-      
-      this.requests = handy.val();
-      this.requestsKeys = Object.keys(this.requests);
-      this.bool=[];
-      for(var i of this.requestsKeys){
-        this.bool.push(false);
+    
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUser = firebase.auth().currentUser;
+        this.userId = this.currentUser.uid;
+        this.valueRef.orderByChild("userId").equalTo(this.userId).on('value', handy => {
+          this.requests = handy.val();
+          console.log(this.requests);
+          this.requestsKeys = Object.keys(this.requests);
+          this.bool=[];
+          for(var i of this.requestsKeys){
+            this.bool.push(false);
+          }
+      });
       }
-      
-  });
+   });
 
 }
 
