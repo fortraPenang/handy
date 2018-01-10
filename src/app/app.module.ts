@@ -42,6 +42,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { GeocodeServiceProvider } from '../providers/geocode-service';
+import { Autosize } from '../directives/autosize/autosize'
 
 export const firebaseConfig = {
       apiKey: "AIzaSyDEDyDjCV2OE7jt0HfXFdc3rf3bgoGpAJw",
@@ -51,8 +52,7 @@ export const firebaseConfig = {
       storageBucket: "handy-505ed.appspot.com",
       messagingSenderId: "825284463013"
     };
-
-
+    
 @NgModule({
   declarations: [
     MyApp,
@@ -72,6 +72,7 @@ export const firebaseConfig = {
     NewrequestServicePage,
     UserSendquotationPage,
     PendingWorkPage,
+    Autosize,
   ],
   imports: [
     BrowserModule,
@@ -83,12 +84,10 @@ export const firebaseConfig = {
     FormsModule,
     SignupModalPageModule,
     SendquotationModalPageModule,
-
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    
     UserLogin,
     UserSignup,
     UserForgotpassword,
@@ -107,8 +106,6 @@ export const firebaseConfig = {
     SendquotationModalPage,
     UserSendquotationPage,
     PendingWorkPage,
-  
-    
   ],
   providers: [
     StatusBar,

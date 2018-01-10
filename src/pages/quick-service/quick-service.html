@@ -5,29 +5,28 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar  hideBackButton="false">
+    <ion-navbar hideBackButton="false">
       <ion-title text-center>Quick Service</ion-title>
-      
     </ion-navbar>
   </ion-header>
   
   
   <ion-content padding>
      <div padding>
-        <ion-segment color="primary" [disabled]="true" [(ngModel)]="step">
-          <ion-segment-button value="step1">
+        <ion-segment color="primary" [(ngModel)]="step">
+          <ion-segment-button value="step1" [disabled] = 'step!="step1"'>
             Step 1
           </ion-segment-button>
-          <ion-segment-button value="step2">
+          <ion-segment-button value="step2" [disabled] = 'step!="step2"'>
             Step 2
           </ion-segment-button>
-          <ion-segment-button value="step3">
+          <ion-segment-button value="step3" [disabled] = 'step!="step3"'>
             Step 3
           </ion-segment-button>
-          <ion-segment-button value="step4">
+          <ion-segment-button value="step4" [disabled] = 'step!="step4"'>
             Step 4
           </ion-segment-button>
-          <ion-segment-button value="step5">
+          <ion-segment-button value="step5" [disabled] = 'step!="step5"'>
             Step 5
           </ion-segment-button>
         </ion-segment>
@@ -35,7 +34,7 @@
       
       <div [ngSwitch]="step">
         <ion-list *ngSwitchCase="'step1'">
-            <ion-label>CHOOSE SERVICE</ion-label>
+            <h2>Choose Service</h2>
             <ion-list no-lines radio-group [(ngModel)]="service">
                 <ion-item>
                   <ion-label>Installing</ion-label>
@@ -53,23 +52,15 @@
         </ion-list>
       
         <ion-list *ngSwitchCase="'step2'" [(ngModel)]="description">
-          
-            <h2>Problem</h2>
+            <h2>Problem Statement</h2>
             <ion-item>
                 <ion-label color="primary" floating>Specify your problem</ion-label>
-                <ion-textarea></ion-textarea>
+                <ion-textarea autosize></ion-textarea>
             </ion-item>
-          
         </ion-list>
   
-  
-        <ion-list *ngSwitchCase="'step3'">
-          
-            
-            
-            <ion-list>
-              
-              <h3><ion-icon end ios="ios-home" md="md-home"></ion-icon>Your Address</h3>
+        <ion-list *ngSwitchCase="'step3'">              
+              <h2>Your Address</h2>
               <!-- <ion-searchbar 
               [(ngModel)]="autocomplete.query" 
               [showCancelButton]="true" 
@@ -83,55 +74,71 @@
               {{ item.description }}
               </ion-item>
                -->
-                <ion-item><ion-input type="text" placeholder="Address" [(ngModel)]="address"></ion-input></ion-item>
-                <ion-item><ion-input type="number" placeholder="Postal Code" [(ngModel)]="postCode"></ion-input></ion-item>
-                <ion-item><ion-input type="text" placeholder="City" [(ngModel)]="city"></ion-input></ion-item>
-                <ion-item><ion-input type="text" placeholder="State" [(ngModel)]="state"></ion-input></ion-item>
-      
+                <ion-item>
+                  <ion-input type="text" placeholder="Address" [(ngModel)]="address">
+                  </ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input type="number" placeholder="Postal Code" [(ngModel)]="postCode">
+                  </ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input type="text" placeholder="City" [(ngModel)]="city">
+                  </ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-select [(ngModel)]="state" placeholder="State">
+                        <ion-option value="Johor">Johor</ion-option>
+                        <ion-option value="Kedah">Kedah</ion-option>
+                        <ion-option value="Kelantan">Kelantan</ion-option>
+                        <ion-option value="Malacca">Malacca</ion-option>
+                        <ion-option value="Negeri Sembilan">Negeri Sembilan</ion-option>
+                        <ion-option value="Pahang">Pahang</ion-option>
+                        <ion-option value="Perak">Perak</ion-option>
+                        <ion-option value="Pulau Pinang">Pulau Pinang</ion-option>
+                        <ion-option value="Sabah">Sabah</ion-option>
+                        <ion-option value="Sarawak">Sarawak</ion-option>
+                        <ion-option value="Selangor">Selangor</ion-option>
+                        <ion-option value="Terengganu">Terengganu</ion-option>
+                        <ion-option value="Other">Other</ion-option>
+                    </ion-select>
+                </ion-item>
             </ion-list>
-          
-        </ion-list>
   
         <ion-list *ngSwitchCase="'step4'">
-          
             <h2>Estimated Price</h2>
             <ion-card>
-                
-                
-                  <ion-card-content>
-                      <ion-grid text-center>
-                          <ion-row>
-                            <ion-col width-50><strong>Services</strong></ion-col>
-                            <ion-col width-50><strong>Range (RM)</strong></ion-col>
-                          </ion-row>
-                          <ng-container *ngIf="service=='Repairing'">
-                          <ion-row  >
-                            <ion-col width-50>Repairing</ion-col>
-                            <ion-col width-50>150-200</ion-col>
-                          </ion-row>
-                        </ng-container>
-                          <ng-container *ngIf="service=='Installing'">
-                          <ion-row >
-                            <ion-col width-50>Installing</ion-col>
-                            <ion-col width-50>50-150</ion-col>
-                          </ion-row>
-                        </ng-container>
-                          <ng-container *ngIf="service=='Customising'">
-                          
-                          <ion-row >
-                              <ion-col width-50>Customising</ion-col>
-                              <ion-col width-50>30-100</ion-col>
-                          </ion-row>
-                        </ng-container>
-                        </ion-grid>
-                  </ion-card-content>
-                
-                </ion-card>
+              <ion-card-content>
+                  <ion-grid text-center>
+                      <ion-row>
+                        <ion-col width-50><strong>Services</strong></ion-col>
+                        <ion-col width-50><strong>Range (RM)</strong></ion-col>
+                      </ion-row>
+                      <ng-container *ngIf="service=='Repairing'">
+                      <ion-row>
+                        <ion-col width-50>Repairing</ion-col>
+                        <ion-col width-50>150-200</ion-col>
+                      </ion-row>
+                    </ng-container>
+                      <ng-container *ngIf="service=='Installing'">
+                      <ion-row>
+                        <ion-col width-50>Installing</ion-col>
+                        <ion-col width-50>50-150</ion-col>
+                      </ion-row>
+                    </ng-container>
+                      <ng-container *ngIf="service=='Customising'">
+                      <ion-row>
+                          <ion-col width-50>Customising</ion-col>
+                          <ion-col width-50>30-100</ion-col>
+                      </ion-row>
+                    </ng-container>
+                    </ion-grid>
+              </ion-card-content>
+            </ion-card>
         </ion-list>
   
         <ion-list *ngSwitchCase="'step5'">
-            
-              <h2>Summary</h2>
+              <h2>Service Summary</h2>
               <ion-card>
                 <ion-card-content>
                   <p><strong>Service Category:</strong></p>
@@ -142,14 +149,14 @@
                   {{address}}, {{postCode}}, {{city}}, {{state}}
                   <p><strong>Quotation:</strong></p>                       
                   <ng-container *ngIf="service=='Repairing'">
-                        <ion-col width-50>RM150-RM200</ion-col>
-                    </ng-container>
-                      <ng-container *ngIf="service=='Installing'">
-                        <ion-col width-50>RM50-RM150</ion-col>
-                    </ng-container>
-                      <ng-container *ngIf="service=='Customising'">
-                          <ion-col width-50>RM30-RM100</ion-col>
-                    </ng-container>
+                    <ion-col width-50>RM150-RM200</ion-col>
+                  </ng-container>
+                  <ng-container *ngIf="service=='Installing'">
+                    <ion-col width-50>RM50-RM150</ion-col>
+                  </ng-container>
+                  <ng-container *ngIf="service=='Customising'">
+                    <ion-col width-50>RM30-RM100</ion-col>
+                  </ng-container>
                 </ion-card-content>
               </ion-card>
               <ion-row>
@@ -157,10 +164,7 @@
                 <button ion-button (click)="pushData()" color="accept"  >Request Service</button>
               </ion-row>
         </ion-list>
-      </div>
-  
-      
-      
+      </div>  
   </ion-content>
   <ion-footer no-border text-center>
       <ion-toolbar>

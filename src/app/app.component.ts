@@ -38,8 +38,8 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Dashboard', icon: 'home', component: Dashboard },
-      { title: 'Search Services', icon: '', component: SearchCategoryPage },
-      { title: 'My Requests', icon: 'lock', component: ServiceRequestPage},
+      { title: 'Search Services', icon: 'search', component: SearchCategoryPage },
+      { title: 'My Requests', icon: 'paper', component: ServiceRequestPage },
       { title: 'Logout', icon: 'lock', component: UserLogin }
       
     ];

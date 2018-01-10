@@ -38,20 +38,16 @@ export class UserSignup {
   };
 
   //Personal Details
-  personalDetails: {
-    fName: string, lName: string, dob: string, phoneNumber: string, gender: string, age: any, race: string, nationality: string, address1: string, address2: string, address3: string, postcode: string, city: string, state: string, type: string
+  personalDetails: { fName: string, lName: string, dob: string, phoneNumber: string, gender: string, race: string, address1: string, address2: string, postcode: string, city: string, state: string, type: string
   } = {
       fName: '',
       lName: '',
       dob: '',
       phoneNumber: '',
       gender: '',
-      age: '',
       race: '',
-      nationality: '',
       address1: '',
       address2: '',
-      address3: '',
       postcode: '',
       city: '',
       state: '',
@@ -59,7 +55,7 @@ export class UserSignup {
     };
 
   //Vendor Details 
-  vendorDetails: {companyName: string, companyInfo: string, SSMNumber: string, officeNumber1: string, officeNumber2: string, cAddress1: string, cAddress2: string, openHours: string, closeHours: string, image: string} = {
+  vendorDetails: { companyName: string, companyInfo: string, SSMNumber: string, officeNumber1: string, officeNumber2: string, cAddress1: string, cAddress2: string, openHours: string, closeHours: string, image: string, serviceCategory: string } = {
     companyName: '',
     companyInfo: '',
     SSMNumber: '',
@@ -69,7 +65,8 @@ export class UserSignup {
     cAddress2: '',
     openHours: '',
     closeHours: '',
-    image: ''
+    image: '',
+    serviceCategory: '',
   };
 
   submitAttempt: boolean = false;
@@ -78,13 +75,14 @@ export class UserSignup {
   public signupForm3: any; //fourth segment
   public step: any;
 
-  //boolean to check user clicked user or handy during first page
+  //boolean to check whether user clicked user or handy during first page
   //false, if vendor
   public isUserSelected = true;
 
   //for holding image URI
   imageURI:any;
   imageFileName:any;  
+  camera: Camera;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -92,39 +90,38 @@ export class UserSignup {
     public builder: FormBuilder,
     public alertCtrl: AlertController,
     public authService: AuthService,
-    public toastCtrl: ToastController,
-    private transfer: FileTransfer,
-    private camera: Camera, ) {
-      
-      //default page for ion-segment when page loads  
-      this.step = "step1";
+    public toastCtrl: ToastController 
+  ) {
 
-      //validation for signupForm(s)
-      this.signupForm = this.builder.group({
-        username: ['', Validators.compose([Validators.email, Validators.required])],
-        fName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z ]*')])],   
-        lName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-        //Custom validator to check if password === cfmPassword
-        passwords: this.builder.group({
-          password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-          cfmPassword: ['', Validators.compose([Validators.minLength(6), Validators.required])]
-        }, {validator: this.areEqual})
-      });
+    //default page for ion-segment when page loads  
+    this.step = "step1";
 
-      this.signupForm2 = this.builder.group({
-        dob: ['', Validators.required],
-        phoneNumber: ['', Validators.compose([Validators.maxLength(11), Validators.required])],
-        gender: ['', Validators.required],
-        age: ['', ],
-        race: ['', Validators.required],
-        nationality: ['', Validators.required],
-        address1: ['', Validators.required],
-        address2: ['', ],
-        address3: ['', ],
-        postcode: ['', Validators.required],
-        city: ['', Validators.required],
-        state: ['', Validators.required],
-      });
+    //validation for signupForm(s)
+    //email regex passes anything that matches somestring@somestring.somestring
+    this.signupForm = this.builder.group({
+      username: ['', Validators.compose([Validators.pattern(/\S+@\S+\.\S+/), Validators.required])],
+      fName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')])],
+      lName: ['', Validators.compose([Validators.maxLength(30), Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')])],
+      //Custom validator to check if password === cfmPassword
+      passwords: this.builder.group({
+        password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+        cfmPassword: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      }, { validator: this.areEqual })
+    });
+
+    this.signupForm2 = this.builder.group({
+      dob: ['', Validators.required],
+      phoneNumber: ['', Validators.compose([Validators.maxLength(11), Validators.required])],
+      gender: ['', Validators.required],
+      age: ['', ],
+      race: ['', Validators.required],
+      nationality: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: ['', ],
+      postcode: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+    });
 
     this.signupForm3 = this.builder.group({
       companyName: ['', Validators.required],
@@ -151,10 +148,10 @@ export class UserSignup {
   }
 
   //calculate age from dob via moment.js
-  setAge() {
+  /* setAge() {
     var age = moment().diff(this.personalDetails.dob, 'years');
     this.personalDetails.age = age;
-  }
+  } */
 
   //validate password equals confirm password
   areEqual(group: FormGroup) {
@@ -224,7 +221,6 @@ export class UserSignup {
             console.log("Yes Clicked");
             //resets all form
             this.resetForms();
-            this.step = "step1";
           }
         }
       ],
@@ -237,6 +233,7 @@ export class UserSignup {
     this.signupForm.reset();
     this.signupForm2.reset();
     this.signupForm3.reset();
+    this.step = "step1";
   }
   
   advanceForm() {

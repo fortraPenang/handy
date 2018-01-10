@@ -1,13 +1,15 @@
 <ion-header >
   <ion-navbar hideBackButton="true">
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button icon-right color="dark" (click)="dashboardPage()">SKIP<ion-icon name="ios-arrow-forward"></ion-icon></button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <form [formGroup]="loginForm">
-    <div text-center><img src="assets/images/wrench.png" width="100" ></div>
+    <div text-center>
+      <img src="assets/images/wrench.png" width="100" >
+    </div>
     <ion-grid no-padding>
       
             <button ion-button icon-left block class="facebookButton" (click)="signInFacebook();">
@@ -50,7 +52,6 @@
     <div padding-top>
       <div text-center ion-text color="dark"> Don't have an account? </div>
       <button ion-button block round color="primary" (click)="signupPage();"> Register Now</button>
-<!--       <button ion-button block round color="primary" (click)="signup();"> Register Now!</button> -->
     </div>
   </form>
 </ion-content>
