@@ -33,9 +33,8 @@ export class SearchCategoryPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchCategoryPage');
     this.valueRef.on('value', handy => {
-
       this.index=this.navParams.data;
-      this.img=handy.val()[this.index]['image'];
+      //this.img=handy.val()[this.index]['image'];
       this.companyName=handy.val()[this.index]['companyName'];
       this.cAddress1=handy.val()[this.index]['cAddress1'];
       this.vndId=this.index;

@@ -7,7 +7,6 @@
 <ion-header>
   <ion-navbar hideBackButton="false">
     <ion-title text-center>My Requests</ion-title>
-
   </ion-navbar>
 </ion-header>
 
@@ -17,15 +16,15 @@
   <ion-segment [(ngModel)]="notification">
     <ion-segment-button value="pending">
       <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-      Pending
+      <span style="vertical-align: top;"> Pending</span>
     </ion-segment-button>
     <ion-segment-button value="accepted">
       <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
-      Accepted
+      <span style="vertical-align: top;"> Accepted</span>
     </ion-segment-button>
     <ion-segment-button value="rejected">
       <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
-      Rejected
+      <span style="vertical-align: top;"> Rejected</span>
     </ion-segment-button>
   </ion-segment>
 
@@ -84,7 +83,7 @@
                 </p>
                 {{requests[key].budget}}
                 <div>
-                  <button (click)="goToSend(key)" ion-button round>Accept this qutotation</button>
+                  <button (click)="goToSend(key)" ion-button round>Accept this quotation</button>
                 </div>
               </ion-item>
             </ion-list>
@@ -208,6 +207,4 @@
 
     </ion-list>
   </div>
-
-
 </ion-content>
