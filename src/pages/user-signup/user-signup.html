@@ -257,18 +257,10 @@
  <div [ngSwitch]="step">
     <form novalidate *ngSwitchCase="'step4'" [formGroup]="signupForm3" [hidden]="isUserSelected">
     <ion-list>
-<<<<<<< HEAD
         <div ion-text text-center padding-bottom>
           <h1>Vendor Details</h1>
           <em>Step 3: Please fill in your company details.</em>
         </div>
-=======
-      <div ion-text text-center padding-bottom>
-        <h1>Vendor Details</h1>
-        <em>Step 3: Please fill in your company details.</em>
-      </div>
-
->>>>>>> 8d130d0fc359895076aa644e5b66d6ba585e499b
         <ion-item>
           <p>{{imageURI}}</p>
           <button ion-button color="secondary" (click)="selectImage()">Get Image</button>
