@@ -114,6 +114,13 @@
           </div>
         </span>
       </div>
+      
+      <ion-item>
+          <p>{{imageURI}}</p>
+          <button ion-button color="secondary" (click)="selectImage()">Get Image</button>
+          <h4>Image Preview</h4>
+          <img src="{{imageURI}}" *ngIf="imageURI" alt="Ionic File" width="300" />
+        </ion-item>
     </ion-list>
     <!-- <button ion-button block round color="primary" (click)="signup();">Confirm</button>
     <div padding>
@@ -254,14 +261,6 @@
           <h1>Vendor Details</h1>
           <em>Step 3: Please fill in your company details.</em>
         </div>
-
-          <ion-item>
-            <p>{{imageURI}}</p>
-            <button ion-button color="secondary" (click)="selectImage()">Get Image</button>
-            <h4>Image Preview</h4>
-            <img src="{{imageURI}}" *ngIf="imageURI" alt="Ionic File" width="300" />
-          </ion-item>
-
         <ion-item>
           <ion-input type="text" [(ngModel)]="vendorDetails.companyName" name="companyName" required formControlName="companyName" placeholder="Company Name"></ion-input>
         </ion-item>

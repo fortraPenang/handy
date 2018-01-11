@@ -29,12 +29,13 @@ export class UserSignup {
   currentUser: any;
 
   //Basic account details
-  account: { email: string, fName: string, lName: string, password: string, cfmPassword: string } = {
+  account: { email: string, fName: string, lName: string, password: string, cfmPassword: string, image: string } = {
     email: '',
     password: '',
     fName: '',
     lName: '',
     cfmPassword: '',
+    image: ''
   };
 
   //Personal Details
@@ -55,7 +56,7 @@ export class UserSignup {
     };
 
   //Vendor Details 
-  vendorDetails: { companyName: string, companyInfo: string, SSMNumber: string, officeNumber1: string, officeNumber2: string, cAddress1: string, cAddress2: string, openHours: string, closeHours: string, image: string, serviceCategory: string } = {
+  vendorDetails: { companyName: string, companyInfo: string, SSMNumber: string, officeNumber1: string, officeNumber2: string, cAddress1: string, cAddress2: string, openHours: string, closeHours: string, serviceCategory: string } = {
     companyName: '',
     companyInfo: '',
     SSMNumber: '',
@@ -65,7 +66,6 @@ export class UserSignup {
     cAddress2: '',
     openHours: '',
     closeHours: '',
-    image: '',
     serviceCategory: '',
   };
 
@@ -131,7 +131,7 @@ export class UserSignup {
       cAddress2: ['',],
       openHours: ['', Validators.required],
       closeHours: ['', Validators.required],
-      companyCategory: ['', Validators.required]
+      serviceCategory: ['', Validators.required]
     });
 
     //define firebase references
@@ -313,20 +313,29 @@ export class UserSignup {
                   //sign up user
                   this.authService.register(this.account).then(() => {
                     if(!this.isUserSelected) {
-                      this.uploadImage(this.imageURI).then((snapshot : any) =>
+                      this.uploadImage(this.imageURI,'companyLogo-').then((snapshot : any) =>
                       {
                         let uploadedImage : any = snapshot.downloadURL;
                         console.log(uploadedImage);
                         //sets the image to user object
-                        this.vendorDetails.image = uploadedImage;
-                        console.log(this.vendorDetails.image);
+                        this.account.image = uploadedImage;
+                        console.log(this.account.image);
                         //push personalDetails to firebase here
                         this.pushToFirebase();
                         console.log("Register vendor Successful!");
                       });
                     }else {
-                      this.pushToFirebase();
-                      console.log("Register user Successful!");
+                      this.uploadImage(this.imageURI,'userPic-').then((snapshot : any) =>
+                      {
+                        let uploadedImage : any = snapshot.downloadURL;
+                        console.log(uploadedImage);
+                        //sets the image to user object
+                        this.account.image = uploadedImage;
+                        console.log(this.account.image);
+                        //push personalDetails to firebase here
+                        this.pushToFirebase();
+                        console.log("Register uendor Successful!");
+                      });
                     }
                   });
                 }
@@ -396,9 +405,9 @@ export class UserSignup {
 
 
 
-  uploadImage(imageString) : Promise<any>
+  uploadImage(imageString, userString) : Promise<any>
   {
-     let image       : string  = 'companyLogo-' + new Date().getTime() + '.jpg',
+     let image       : string  = userString + new Date().getTime() + '.jpg',
          storageRef  : any,
          parseUpload : any;
 
