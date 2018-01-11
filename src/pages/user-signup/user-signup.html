@@ -69,11 +69,14 @@
         <ion-input type="text" [(ngModel)]="account.fName" name="fName" required formControlName="fName" placeholder="First Name"></ion-input>
       </ion-item>
       <span *ngIf="!signupForm.controls.fName.valid && (signupForm.controls.fName.dirty || submitAttempt) && step==='step2'">
-        <!-- <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.pattern">
-          *First name can only contain letters.
-        </div> -->
+        <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.pattern">
+          *First name can only contain letters and numbers.
+        </div>
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.required">
           *First name is required.
+        </div>
+        <div ion-text class="warning-msg" *ngIf="signupForm.controls.fName.errors?.maxLength">
+          *First name cannot be more than 30 characters.
         </div>
       </span>
 
@@ -81,12 +84,15 @@
         <ion-input type="text" [(ngModel)]="account.lName" placeholder="Last Name" required formControlName="lName" name="lName"></ion-input>
       </ion-item>
       <span *ngIf="!signupForm.controls.lName.valid && (signupForm.controls.lName.dirty || submitAttempt) && step==='step2'">
-        <!-- <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.pattern">
-          *Last name can only contain letters.
-        </div> -->
+        <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.pattern">
+          *Last name can only contain letters and numbers.
+        </div>
         <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.required">
           *Last name is required.
         </div>
+        <div ion-text class="warning-msg" *ngIf="signupForm.controls.lName.errors?.maxLength">
+          *Last name cannot be more than 30 characters.
+        </div>   
       </span>
 
       <div formGroupName="passwords">
@@ -147,9 +153,9 @@
 
         <ion-item>
           <ion-select [(ngModel)]="personalDetails.gender" name="gender" required formControlName="gender" placeholder="Gender">
-              <ion-option value="male">Male</ion-option>
-              <ion-option value="female">Female</ion-option>
-              <ion-option value="other">Other</ion-option>
+              <ion-option value="Male">Male</ion-option>
+              <ion-option value="Female">Female</ion-option>
+              <ion-option value="Other">Other</ion-option>
           </ion-select>
         </ion-item>
         <span class="warning-msg" *ngIf="!signupForm2.controls.gender.valid && (signupForm2.controls.gender.dirty || submitAttempt) && step==='step3'">
@@ -235,7 +241,6 @@
         <span class="warning-msg" *ngIf="!signupForm2.controls.state.valid && (signupForm2.controls.state.dirty || submitAttempt) && step==='step3'">
           *State is required.
         </span>
-
     </ion-list>
     </form>
   </div>
@@ -272,7 +277,7 @@
         </span>
 
         <ion-item>
-          <ion-select [(ngModel)]="vendorDetails.serviceCategory" name="serviceCategory" required formControlName="serviceCategory" placeholder="Service Category">
+          <ion-select [(ngModel)]="vendorDetails.serviceCategory" name="serviceCategory" formControlName="serviceCategory" placeholder="Service Category">
               <ion-option value="Home Services and Repair">Home Services and Repair</ion-option>
               <ion-option value="Beauty and Health">Beauty and Health</ion-option>
               <ion-option value="Personal">Personal</ion-option>

@@ -198,7 +198,6 @@ export class ViewServicePage {
           position: new google.maps.LatLng(this.vndLat[i], this.vndLng[i]),
           map: this.map
         });
-        console.log(this.vndLat[i]+" "+this.vndLng[i]);
       }
       this.circle = new google.maps.Circle({
         map: this.map,
