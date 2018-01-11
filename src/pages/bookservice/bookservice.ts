@@ -47,7 +47,12 @@ export class BookservicePage  {
   public step:any
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,public alertCtrl: AlertController) {
     this.step = "step1";
-   
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUser = firebase.auth().currentUser;
+        this.uId = this.currentUser.uid;
+      }
+    });
   }
 
   ionViewDidLoad() {
@@ -133,10 +138,6 @@ export class BookservicePage  {
 
   pushData(){
     try{
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.currentUser = firebase.auth().currentUser;
-          this.uId = this.currentUser.uid;
           console.log(this.uId);
           this.valueRef.push(
             {"serviceCategory":this.service,
@@ -150,8 +151,7 @@ export class BookservicePage  {
              "userId":this.uId
             }
           )
-        }
-     });
+       
     this.showAlert();
     this.goToDashboard();
   }catch(error) {

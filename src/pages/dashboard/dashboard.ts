@@ -40,8 +40,8 @@ export class Dashboard {
   goToServiceRequest() {
     this.navCtrl.push(ServiceRequestPage);
   }
-  goToQuickService() {
-    this.navCtrl.push(QuickServicePage);
+  goToQuickService(category) {
+    this.navCtrl.push(QuickServicePage,category);
   }
 
   public checkFocus() {
@@ -54,15 +54,15 @@ export class Dashboard {
     this.buttonClicked = !this.buttonClicked;
   }
 
-  goToViewService() {
-    this.navCtrl.push(ViewServicePage)
+  goToViewService(category) {
+    this.navCtrl.push(ViewServicePage,category)
   }
 
   goToVendorDashboard() {
     this.navCtrl.push(VendorDashboardPage)
   }
 
-  showAlert() {
+  showAlert(category) {
     let alert = this.alertCtrl.create();
     alert.setTitle('Choose Service');
 
@@ -89,10 +89,10 @@ export class Dashboard {
         this.testRadioOpen = false;
         this.testRadioResult = data;
         if (data == "bs") {
-          this.goToViewService();
+          this.goToViewService(category);
         }
         else {
-          this.goToQuickService();
+          this.goToQuickService(category);
         }
       }
     });

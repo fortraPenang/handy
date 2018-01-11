@@ -34,6 +34,8 @@ export class ViewServicePage {
   public curLng:any;
   public radius:any;
   public handysKeys:any;
+  public catData:any;
+  public serviceCat:any;
 
   public vndLat: number[] = [];  
   public vndLng:number[] = []; 
@@ -49,6 +51,38 @@ export class ViewServicePage {
               private geolocation: Geolocation,
               public loadingCtrl: LoadingController,
               public menuCtrl: MenuController) {
+                this.catData = this.navParams.data;
+                switch (this.catData){
+                  case 0:{
+                    this.serviceCat = "Home Services and Repair"
+                    break;
+                  }
+                  case 1:{
+                    this.serviceCat = "Beauty and Health"
+                    break;
+                  }
+                  case 2:{
+                    this.serviceCat = "Personal"
+                    break;
+                  }
+                  case 3:{
+                    this.serviceCat = "Gardening"
+                    break;
+                  }
+                  case 4:{
+                    this.serviceCat = "Painting"
+                    break;
+                  }
+                  case 5:{
+                    this.serviceCat = "Electrical Wiring"
+                    break;
+                  }
+                  case 6:{
+                    this.serviceCat = "Plumbing"
+                    break;
+                  }
+                }
+                console.log(this.catData);
   }
 
   setAddressArray(callback){
@@ -130,7 +164,7 @@ export class ViewServicePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewServicePage');
-    this.valueRef.on('value', handy => {
+    this.valueRef.orderByChild("serviceCategory").equalTo(this.serviceCat).on('value', handy => {
       this.handys = handy.val();
       this.handysKeys = Object.keys(this.handys);
       console.log(this.handys)

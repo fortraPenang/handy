@@ -29,7 +29,8 @@ export class PendingWorkPage {
   budget:any;
   show:any;
   title:any;
-
+  currentUser:any;
+  vndId:any;
   bool:any [] = [];
 
   public notification:any
@@ -41,16 +42,27 @@ export class PendingWorkPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceRequestPage');
-    this.valueRef.on('value', handy => {
-      
-      this.requests = handy.val();
-      this.requestsKeys = Object.keys(this.requests);
-      this.bool=[];
-      for(var i of this.requestsKeys){
-        this.bool.push(false);
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUser = firebase.auth().currentUser;
+        this.vndId = this.currentUser.uid;
+        console.log(this.vndId);
+        this.valueRef.orderByChild("vendorId").equalTo(this.vndId).on('value', handy => {
+          this.requests = handy.val();
+          console.log(this.requests);
+          //if firebase returns null
+          if (!this.requests) { 
+            console.log("Currently there is no request associated with this vendor.");
+          } else { 
+            this.requestsKeys = Object.keys(this.requests);
+            this.bool=[];
+            for(var i of this.requestsKeys){
+              this.bool.push(false);
+            }
+          }
+      });
       }
-      
-  });
+   });
 
 }
 

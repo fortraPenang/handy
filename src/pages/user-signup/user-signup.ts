@@ -29,13 +29,12 @@ export class UserSignup {
   currentUser: any;
 
   //Basic account details
-  account: { email: string, fName: string, lName: string, password: string, cfmPassword: string, image: string } = {
+  account: { email: string, fName: string, lName: string, password: string, cfmPassword: string } = {
     email: '',
     password: '',
     fName: '',
     lName: '',
     cfmPassword: '',
-    image: ''
   };
 
   //Personal Details
@@ -309,42 +308,34 @@ export class UserSignup {
             try {
                 this.submitAttempt = true;
                 console.log(this.signupForm2.valid);
-                if ((this.signupForm2.valid && this.step === 'step3') || (this.signupForm3.valid && this.step === 'step4')) {
-                  //sign up user
-                  this.authService.register(this.account).then(() => {
-                    if(!this.isUserSelected) {
-                      this.uploadImage(this.imageURI,'companyLogo-').then((snapshot : any) =>
-                      {
-                        let uploadedImage : any = snapshot.downloadURL;
-                        console.log(uploadedImage);
-                        //sets the image to user object
-                        this.account.image = uploadedImage;
-                        console.log(this.account.image);
-                        //push personalDetails to firebase here
-                        this.pushToFirebase();
-                        console.log("Register vendor Successful!");
-                      });
-                    }else {
-                      this.uploadImage(this.imageURI,'userPic-').then((snapshot : any) =>
-                      {
-                        let uploadedImage : any = snapshot.downloadURL;
-                        console.log(uploadedImage);
-                        //sets the image to user object
-                        this.account.image = uploadedImage;
-                        console.log(this.account.image);
-                        //push personalDetails to firebase here
-                        this.pushToFirebase();
-                        console.log("Register uendor Successful!");
-                      });
-                    }
-                  });
-                }
                 let toast = this.toastCtrl.create({
                   message: 'Registration Successful! Please login now',
                   duration: 3000,
                   position: 'button'
                 });
-                toast.present();
+                if ((this.signupForm2.valid && this.step === 'step3') || (this.signupForm3.valid && this.step === 'step4')) {
+                  //sign up user
+                  this.authService.register(this.account).then(() => {
+                    if(!this.isUserSelected) {
+                      /* this.uploadImage(this.imageURI).then((snapshot : any) =>
+                      {
+                        let uploadedImage : any = snapshot.downloadURL;
+                        console.log(uploadedImage);
+                        //sets the image to user object
+                        this.vendorDetails.image = uploadedImage;
+                        console.log(this.vendorDetails.image);
+                        //push personalDetails to firebase here */
+                        this.pushToFirebase();
+                        console.log("Register vendor Successful!");
+                        toast.present();
+                      /* }); */
+                    }else {
+                      this.pushToFirebase();
+                      console.log("Register user Successful!");
+                      toast.present();
+                    }
+                  });
+                }
                 this.loginPage();      
             } catch (error) {
               let alert = this.alertCtrl.create({
@@ -380,6 +371,7 @@ export class UserSignup {
 
   selectImage() : Promise<any>
   {
+    console.log("select img!")
      return new Promise(resolve =>
      {
         let cameraOptions : CameraOptions = {
@@ -405,9 +397,9 @@ export class UserSignup {
 
 
 
-  uploadImage(imageString, userString) : Promise<any>
+  uploadImage(imageString) : Promise<any>
   {
-     let image       : string  = userString + new Date().getTime() + '.jpg',
+     let image       : string  = 'companyLogo-' + new Date().getTime() + '.jpg',
          storageRef  : any,
          parseUpload : any;
 
