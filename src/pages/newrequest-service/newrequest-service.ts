@@ -50,13 +50,17 @@ export class NewrequestServicePage {
         this.vndId = this.currentUser.uid;
         console.log(this.vndId);
         this.valueRef.orderByChild("vendorId").equalTo(this.vndId).on('value', handy => {
-          
           this.requests = handy.val();
           console.log(this.requests);
-          this.requestsKeys = Object.keys(this.requests);
-          this.bool=[];
-          for(var i of this.requestsKeys){
-            this.bool.push(false);
+          //if firebase returns null
+          if (!this.requests) { 
+            console.log("Currently there is no request associated with this vendor.");
+          } else { 
+            this.requestsKeys = Object.keys(this.requests);
+            this.bool=[];
+            for(var i of this.requestsKeys){
+              this.bool.push(false);
+            }
           }
       });
       }

@@ -257,78 +257,93 @@
  <div [ngSwitch]="step">
     <form novalidate *ngSwitchCase="'step4'" [formGroup]="signupForm3" [hidden]="isUserSelected">
     <ion-list>
+<<<<<<< HEAD
         <div ion-text text-center padding-bottom>
           <h1>Vendor Details</h1>
           <em>Step 3: Please fill in your company details.</em>
         </div>
-        <ion-item>
-          <ion-input type="text" [(ngModel)]="vendorDetails.companyName" name="companyName" required formControlName="companyName" placeholder="Company Name"></ion-input>
-        </ion-item>
-        <span class="warning-msg" *ngIf="!signupForm3.controls.companyName.valid && (signupForm3.controls.companyName.dirty || submitAttempt) && step==='step4'">
-          *Company name is required.
-        </span>
+=======
+      <div ion-text text-center padding-bottom>
+        <h1>Vendor Details</h1>
+        <em>Step 3: Please fill in your company details.</em>
+      </div>
 
+>>>>>>> 8d130d0fc359895076aa644e5b66d6ba585e499b
         <ion-item>
-          <ion-textarea type="text" [(ngModel)]="vendorDetails.companyInfo" name="companyInfo" required formControlName="companyInfo" placeholder="Company Info"></ion-textarea>
-        </ion-item>
-        <span class="warning-msg" *ngIf="!signupForm3.controls.companyInfo.valid && (signupForm3.controls.companyInfo.dirty || submitAttempt) && step==='step4'">
-            *Company Info is required.
-        </span>
-
-        <ion-item>
-          <ion-select [(ngModel)]="vendorDetails.serviceCategory" name="serviceCategory" formControlName="serviceCategory" placeholder="Service Category">
-              <ion-option value="Home Services and Repair">Home Services and Repair</ion-option>
-              <ion-option value="Beauty and Health">Beauty and Health</ion-option>
-              <ion-option value="Personal">Personal</ion-option>
-              <ion-option value="Gardening">Gardening</ion-option>
-              <ion-option value="Painting">Painting</ion-option>
-              <ion-option value="Electrical Wiring">Electrical Wiring</ion-option>
-              <ion-option value="Plumbing">Plumbing</ion-option>
-          </ion-select>
+          <p>{{imageURI}}</p>
+          <button ion-button color="secondary" (click)="selectImage()">Get Image</button>
+          <h4>Image Preview</h4>
+          <img src="{{imageURI}}" *ngIf="imageURI" alt="Ionic File" width="300" />
         </ion-item>
 
-        <ion-item>
-          <ion-input type="text" [(ngModel)]="vendorDetails.SSMNumber" name="SSMNumber" required formControlName="SSMNumber" placeholder="SSM Number"></ion-input>
-        </ion-item>
-        <span class="warning-msg" *ngIf="!signupForm3.controls.SSMNumber.valid && (signupForm3.controls.SSMNumber.dirty || submitAttempt) && step==='step4'">
-            *SSM Number is required.
-        </span>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="vendorDetails.companyName" name="companyName" required formControlName="companyName" placeholder="Company Name"></ion-input>
+      </ion-item>
+      <span class="warning-msg" *ngIf="!signupForm3.controls.companyName.valid && (signupForm3.controls.companyName.dirty || submitAttempt) && step==='step4'">
+        *Company name is required.
+      </span>
 
-        <ion-item>
-          <ion-input type="tel" [(ngModel)]="vendorDetails.officeNumber1" name="officeNumber1" required formControlName="officeNumber1" placeholder="Office Number 1"></ion-input>
-        </ion-item>
-        <span class="warning-msg" *ngIf="!signupForm3.controls.officeNumber1.valid && (signupForm3.controls.officeNumber1.dirty || submitAttempt) && step==='step4'">
-            *Office Number is required.
-        </span>
-          
-        <ion-item>
-            <ion-input type="tel" [(ngModel)]="vendorDetails.officeNumber2" name="officeNumber2" formControlName="officeNumber2" placeholder="Office Number 2"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-textarea autosize type="text" [(ngModel)]="vendorDetails.companyInfo" name="companyInfo" required formControlName="companyInfo" placeholder="Company Info"></ion-textarea>
+      </ion-item>
+      <span class="warning-msg" *ngIf="!signupForm3.controls.companyInfo.valid && (signupForm3.controls.companyInfo.dirty || submitAttempt) && step==='step4'">
+          *Company Info is required.
+      </span>
+
+      <ion-item>
+        <ion-select [(ngModel)]="vendorDetails.serviceCategory" name="serviceCategory" formControlName="serviceCategory" placeholder="Service Category">
+            <ion-option value="Home Services and Repair">Home Services and Repair</ion-option>
+            <ion-option value="Beauty and Health">Beauty and Health</ion-option>
+            <ion-option value="Personal">Personal</ion-option>
+            <ion-option value="Gardening">Gardening</ion-option>
+            <ion-option value="Painting">Painting</ion-option>
+            <ion-option value="Electrical Wiring">Electrical Wiring</ion-option>
+            <ion-option value="Plumbing">Plumbing</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="vendorDetails.SSMNumber" name="SSMNumber" required formControlName="SSMNumber" placeholder="SSM Number"></ion-input>
+      </ion-item>
+      <span class="warning-msg" *ngIf="!signupForm3.controls.SSMNumber.valid && (signupForm3.controls.SSMNumber.dirty || submitAttempt) && step==='step4'">
+          *SSM Number is required.
+      </span>
+
+      <ion-item>
+        <ion-input type="tel" [(ngModel)]="vendorDetails.officeNumber1" name="officeNumber1" required formControlName="officeNumber1" placeholder="Office Number 1"></ion-input>
+      </ion-item>
+      <span class="warning-msg" *ngIf="!signupForm3.controls.officeNumber1.valid && (signupForm3.controls.officeNumber1.dirty || submitAttempt) && step==='step4'">
+          *Office Number is required.
+      </span>
         
-        <ion-item>
-            <ion-input type="text" [(ngModel)]="vendorDetails.cAddress1" name="cAddress1" required formControlName="cAddress1" placeholder="Company Address Line 1"></ion-input>
-        </ion-item>
-        <span class="warning-msg" *ngIf="!signupForm3.controls.cAddress1.valid && (signupForm3.controls.cAddress1.dirty || submitAttempt) && step==='step4'">
-            *Company Address is required.
-        </span>
+      <ion-item>
+          <ion-input type="tel" [(ngModel)]="vendorDetails.officeNumber2" name="officeNumber2" formControlName="officeNumber2" placeholder="Office Number 2"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+          <ion-input type="text" [(ngModel)]="vendorDetails.cAddress1" name="cAddress1" required formControlName="cAddress1" placeholder="Company Address Line 1"></ion-input>
+      </ion-item>
+      <span class="warning-msg" *ngIf="!signupForm3.controls.cAddress1.valid && (signupForm3.controls.cAddress1.dirty || submitAttempt) && step==='step4'">
+          *Company Address is required.
+      </span>
 
-        <ion-item>
-            <ion-input type="text" [(ngModel)]="vendorDetails.cAddress2" name="cAddress2" formControlName="cAddress2" placeholder="Company Address Line 2"></ion-input>
-        </ion-item>
+      <ion-item>
+          <ion-input type="text" [(ngModel)]="vendorDetails.cAddress2" name="cAddress2" formControlName="cAddress2" placeholder="Company Address Line 2"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-datetime [(ngModel)]="vendorDetails.openHours" name="openHours" displayFormat="hh:mm A" pickerFormat="hh mm A" formControlName="openHours" placeholder="Opening Hours"></ion-datetime>
-        </ion-item>
-        <span class="warning-msg" *ngIf="!signupForm3.controls.openHours.valid && (signupForm3.controls.openHours.dirty || submitAttempt) && step==='step4'">
-            *Opening Hours is required.
-        </span>
+      <ion-item>
+        <ion-datetime [(ngModel)]="vendorDetails.openHours" name="openHours" displayFormat="hh:mm A" pickerFormat="hh mm A" formControlName="openHours" placeholder="Opening Hours"></ion-datetime>
+      </ion-item>
+      <span class="warning-msg" *ngIf="!signupForm3.controls.openHours.valid && (signupForm3.controls.openHours.dirty || submitAttempt) && step==='step4'">
+          *Opening Hours is required.
+      </span>
 
-        <ion-item>
-            <ion-datetime [(ngModel)]="vendorDetails.closeHours" name="closeHours" displayFormat="hh:mm A" pickerFormat="hh mm A"  formControlName="closeHours" placeholder="Closing Hours"></ion-datetime>
-        </ion-item>
-        <span class="warning-msg" *ngIf="!signupForm3.controls.closeHours.valid && (signupForm3.controls.closeHours.dirty || submitAttempt) && step==='step4'">
-            *Closing Hours is required.
-        </span>
+      <ion-item>
+          <ion-datetime [(ngModel)]="vendorDetails.closeHours" name="closeHours" displayFormat="hh:mm A" pickerFormat="hh mm A"  formControlName="closeHours" placeholder="Closing Hours"></ion-datetime>
+      </ion-item>
+      <span class="warning-msg" *ngIf="!signupForm3.controls.closeHours.valid && (signupForm3.controls.closeHours.dirty || submitAttempt) && step==='step4'">
+          *Closing Hours is required.
+      </span>
     </ion-list>
     </form>
  </div>
@@ -339,8 +354,8 @@
   <ion-footer no-border text-center color="primary">
     <ion-toolbar primary>
       <ion-buttons left>
-          <button *ngIf="step!='step1'" ion-button (click)="back()"> Back
-          </button>
+        <button *ngIf="step!='step1'" ion-button (click)="back()"> Back
+        </button>
       </ion-buttons>
       <ion-buttons right>
         <ng-container *ngIf="isUserSelected; else handy_content">
@@ -351,7 +366,7 @@
         </ng-container>
         <ng-template #handy_content>
             <button *ngIf="step!='step4'&&step!='step1'" ion-button (click)="next()"> Next
-              </button>
+            </button>
             <button *ngIf="step=='step4'" ion-button (click)="signup()"> <strong>Submit</strong>
             </button>
         </ng-template>

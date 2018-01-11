@@ -28,7 +28,6 @@
           </ion-segment>
     
           <div [ngSwitch]="notification" >
-            
               <ion-list *ngSwitchCase="'pending'" >
                   <ng-container *ngFor="let key of requestsKeys; let i = index" >
                       <ion-card *ngIf="requests[key].status=='pending' ||requests[key].status=='negotiate' ">
