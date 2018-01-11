@@ -1,5 +1,14 @@
 .ios,.md,.wp{
   page-user-signup {
+    //Yinqi's fix (Best Fix 2k18)
+    ion-item {
+      padding-left: 0;
+    }
+    
+    input {
+      padding-left: 10px;
+    }
+
     .toolbar-background{ background:primary; border-style:none;}
     .toolbar::after,.header-md::after{ background-image:none;}
     ion-content{

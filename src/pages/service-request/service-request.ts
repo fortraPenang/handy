@@ -53,11 +53,16 @@ export class ServiceRequestPage {
         this.valueRef.orderByChild("userId").equalTo(this.userId).on('value', handy => {
           this.requests = handy.val();
           console.log(this.requests);
-          this.requestsKeys = Object.keys(this.requests);
-          this.bool=[];
-          for(var i of this.requestsKeys){
-            this.bool.push(false);
+          if(!this.requests) {
+            console.log("There are no request transactions associated with this vendor.");
+          } else { 
+            this.requestsKeys = Object.keys(this.requests);
+            this.bool=[];
+            for(var i of this.requestsKeys){
+              this.bool.push(false);
+            }
           }
+
       });
       }
    });

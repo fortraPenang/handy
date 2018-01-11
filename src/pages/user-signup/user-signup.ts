@@ -12,7 +12,7 @@ import moment from 'moment';
 import { AuthService } from '../../providers/auth-service';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import { Autosize } from '../../directives/autosize/autosize';
 
 @IonicPage()
 @Component({
@@ -131,7 +131,7 @@ export class UserSignup {
       cAddress2: ['',],
       openHours: ['', Validators.required],
       closeHours: ['', Validators.required],
-      companyCategory: ['', Validators.required]
+      serviceCategory: ['', Validators.required]
     });
 
     //define firebase references
