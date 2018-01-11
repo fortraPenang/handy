@@ -37,6 +37,15 @@
             <ion-list>
               <ion-item-sliding>
                 <ion-item>
+                    <ion-thumbnail item-left>
+                        <ng-container *ngIf="vendor[requests[key].vendorId].image">
+                          <img src={{vendor[requests[key].vendorId].image}}>
+                        </ng-container>
+                      </ion-thumbnail>
+                      <p>
+                  <strong>Company name:</strong>
+                  </p>
+                  {{vendor[requests[key].vendorId].companyName}}
                   <p>
                     <strong>Service Category:</strong>
                   </p>
@@ -92,6 +101,15 @@
             <ion-list>
               <ion-item-sliding>
                 <ion-item>
+                    <ion-thumbnail item-left>
+                        <ng-container *ngIf="vendor[requests[key].vendorId].image">
+                          <img src={{vendor[requests[key].vendorId].image}}>
+                        </ng-container>
+                      </ion-thumbnail>
+                      <p>
+                  <strong>Company name:</strong>
+                  </p>
+                  {{vendor[requests[key].vendorId].companyName}}
                   <p>
                     <strong>Service Category:</strong>
                   </p>
@@ -140,6 +158,15 @@
             <ion-list>
               <ion-item-sliding>
                 <ion-item>
+                    <ion-thumbnail item-left>
+                        <ng-container *ngIf="vendor[requests[key].vendorId].image">
+                          <img src={{vendor[requests[key].vendorId].image}}>
+                        </ng-container>
+                      </ion-thumbnail>
+                      <p>
+                  <strong>Company name:</strong>
+                  </p>
+                  {{vendor[requests[key].vendorId].companyName}}
                   <p>
                     <strong>Service Category:</strong>
                   </p>
