@@ -10,44 +10,44 @@
 <div *ngIf="buttonClicked">
   <ion-slides autoplay="2000" loop="true" speed="900" >
     <ion-slide>
-  	     <img src="assets/images/banners/plumber.jpeg">
+      <img src="assets/images/banners/plumber.jpeg">
     </ion-slide>
     <ion-slide>
-          <img src="assets/images/banners/Beauty.jpeg">
+      <img src="assets/images/banners/Beauty.jpeg">
     </ion-slide>
     <ion-slide>
-          <img src="assets/images/banners/home.jpg">
+      <img src="assets/images/banners/home.jpg">
     </ion-slide>
   </ion-slides>
 
 <h2>Featured Services</h2>
   <ion-row class="header">
-    <ion-col (click)="showAlert()" col-4>
-        <img src="assets/images/home.png" />
-        <p>Home Services</p>
+    <ion-col (click)="showAlert(0)" col-4>
+      <img src="assets/images/home.png" />
+      <p>Home Services and repair</p>
     </ion-col>
 
-    <ion-col col-4>
+    <ion-col (click)="showAlert(1)" col-4>
       <img src="assets/images/health.png" />
       <p>Health & Beauty</p>
     </ion-col>
 
-    <ion-col col-4>
+    <ion-col (click)="showAlert(2)" col-4>
       <img src="assets/images/lawn.png" />
       <p>Gardening</p>
     </ion-col>
 
-    <ion-col col-4>
+    <ion-col (click)="showAlert(3)" col-4>
       <img src="assets/images/electric.png" />
       <p>Electrical Wiring</p>
     </ion-col>
 
-    <ion-col col-4>
+    <ion-col (click)="showAlert(4)" col-4>
       <img src="assets/images/plumbing.png" />
       <p>Plumbing</p>
     </ion-col>
 
-    <ion-col col-4>
+    <ion-col (click)="showAlert(5)" col-4>
       <img src="assets/images/car.png" />
       <p>Car Servicing</p>
     </ion-col>
@@ -60,7 +60,7 @@
       <ion-icon ios="ios-home" md="md-home"></ion-icon> Home Services and repair
     </ion-item>
     <ion-item (click)="showAlert(1)" class="item-icon-left" id="services-list-item53">
-      <ion-icon ios="ios-medkit" md="md-medkit"></ion-icon> Beauty and health
+      <ion-icon ios="ios-medkit" md="md-medkit"></ion-icon> Health & Beauty
     </ion-item>
     <ion-item (click)="showAlert(2)" class="item-icon-left" id="services-list-item54">
       <ion-icon ios="ios-person" md="md-person"></ion-icon> Personal 

@@ -17,14 +17,23 @@
        -->
           <ion-segment [(ngModel)]="notification">
               <ion-segment-button (click)="name()" value="pending">
-                <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon> Incoming
+                <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+                <span style="vertical-align: top;">
+                  Incoming
+                </span>
               </ion-segment-button>
               <ion-segment-button (click)="name()" value="accepted">
-                <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon> Accepted
+                <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
+                <span style="vertical-align: top;">
+                  Accepted
+                </span> 
               </ion-segment-button>
               <ion-segment-button (click)="name()" value="rejected">
-                  <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon> Rejected
-                </ion-segment-button>
+                <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
+                <span style="vertical-align: top;">
+                  Rejected
+                </span>
+              </ion-segment-button>
           </ion-segment>
     
           <div [ngSwitch]="notification" >
