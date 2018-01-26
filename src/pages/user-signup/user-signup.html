@@ -170,7 +170,7 @@
           <ion-input type="number" [(ngModel)]="personalDetails.age" name="age" formControlName="age" placeholder="Age" [disabled]='true'></ion-input>
         </ion-item> --> 
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-select [(ngModel)]="personalDetails.race" name="race" formControlName="race" placeholder="Race">
               <ion-option value="Malay">Malay</ion-option>
               <ion-option value="Chinese">Chinese</ion-option>
@@ -180,7 +180,7 @@
         </ion-item> 
         <span class="warning-msg" *ngIf="!signupForm2.controls.race.valid && (signupForm2.controls.race.dirty || submitAttempt) && step==='step3'">
           *Race is required.
-        </span>
+        </span> -->
         
         <!-- <ion-item>
           <ion-select [(ngModel)]="personalDetails.nationality" name="nationality" formControlName="nationality" placeholder="Nationality">

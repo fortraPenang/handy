@@ -38,14 +38,13 @@ export class UserSignup {
   };
 
   //Personal Details
-  personalDetails: { fName: string, lName: string, dob: string, phoneNumber: string, gender: string, race: string, address1: string, address2: string, postcode: string, city: string, state: string, type: string
+  personalDetails: { fName: string, lName: string, dob: string, phoneNumber: string, gender: string,  address1: string, address2: string, postcode: string, city: string, state: string, type: string
   } = {
       fName: '',
       lName: '',
       dob: '',
       phoneNumber: '',
       gender: '',
-      race: '',
       address1: '',
       address2: '',
       postcode: '',
