@@ -1,5 +1,5 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs/observable';
@@ -50,7 +50,8 @@ export class ViewServicePage {
               public navParams: NavParams, 
               private geolocation: Geolocation,
               public loadingCtrl: LoadingController,
-              public menuCtrl: MenuController) {
+              public menuCtrl: MenuController,
+              public toastCtrl: ToastController) {
                 this.catData = this.navParams.data;
                 switch (this.catData){
                   case 0:{
@@ -220,7 +221,7 @@ export class ViewServicePage {
       },
       (error) => {
         loader.dismiss();
-        alert("Unable to load map. Error: " +  error);
+        this.showError("Unable to display map. Error: " +  error);
       });
       let marker = new google.maps.Marker({
         map: this.map,
@@ -276,5 +277,16 @@ export class ViewServicePage {
     }
   }  */
 
+  showError(errorMsg) { 
+    let toast = this.toastCtrl.create({
+      message: errorMsg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.onDidDismiss(() => {
+      console.log("Dismissed toast");
+    })
+    toast.present();
+  }
 }
 

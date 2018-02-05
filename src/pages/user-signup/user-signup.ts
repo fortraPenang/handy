@@ -111,7 +111,6 @@ export class UserSignup {
       dob: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       gender: ['', Validators.required],
-      race: ['', Validators.required],
       address1: ['', Validators.required],
       address2: ['', ],
       postcode: ['', Validators.required],
