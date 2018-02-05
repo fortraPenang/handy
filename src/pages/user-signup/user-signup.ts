@@ -54,7 +54,7 @@ export class UserSignup {
     };
 
   //Vendor Details 
-  vendorDetails: { companyName: string, companyInfo: string, SSMNumber: string, officeNumber1: string, officeNumber2: string, cAddress1: string, cAddress2: string, openHours: string, closeHours: string, serviceCategory: string } = {
+  vendorDetails: { companyName: string, companyInfo: string, SSMNumber: string, officeNumber1: string, officeNumber2: string, cAddress1: string, cAddress2: string, openHours: string, closeHours: string, serviceCategory: string , image: string} = {
     companyName: '',
     companyInfo: '',
     SSMNumber: '',
@@ -65,6 +65,7 @@ export class UserSignup {
     openHours: '',
     closeHours: '',
     serviceCategory: '',
+    image:''
   };
 
   submitAttempt: boolean = false;
@@ -111,7 +112,6 @@ export class UserSignup {
       dob: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       gender: ['', Validators.required],
-      race: ['', Validators.required],
       address1: ['', Validators.required],
       address2: ['', ],
       postcode: ['', Validators.required],
@@ -316,7 +316,7 @@ export class UserSignup {
                   //sign up user
                   this.authService.register(this.account).then(() => {
                     if(!this.isUserSelected) {
-                      /* this.uploadImage(this.imageURI).then((snapshot : any) =>
+                       this.uploadImage(this.imageURI).then((snapshot : any) =>
                       {
                         let uploadedImage : any = snapshot.downloadURL;
                         console.log(uploadedImage);
@@ -327,7 +327,7 @@ export class UserSignup {
                         this.pushToFirebase();
                         console.log("Register vendor Successful!");
                         toast.present();
-                      /* }); */
+                       }); 
                     }else {
                       this.pushToFirebase();
                       console.log("Register user Successful!");
