@@ -4,6 +4,8 @@ import { GoogleMaps } from '../providers/google-maps';
 import { FormsModule} from '@angular/forms';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
+import {AutocompletePage} from '../autocomplete/autocomplete';
+
 
 
 
@@ -39,6 +41,8 @@ export class BookservicePage  {
   vndId:any;
   currentUser:any;
   uId:any;
+  newAddress:any;
+
   /* autocompleteItems: any;
   autocomplete: any;
   acService:any;
@@ -46,6 +50,10 @@ export class BookservicePage  {
 
   public step:any
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,public alertCtrl: AlertController) {
+    this.newAddress = {
+      place: ''
+    };
+
     this.step = "step1";
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -59,6 +67,15 @@ export class BookservicePage  {
     console.log('ionViewDidLoad BookservicePage');
     this.vndId= this.navParams.data;
     console.log(this.vndId);
+  }
+
+  showAddressModal () {
+    let modal = this.modalCtrl.create(AutocompletePage);
+    let me = this;
+    modal.onDidDismiss(data => {
+      this.newAddress.place = data;
+    });
+    modal.present();
   }
   /* ngOnInit() {
     this.acService = new google.maps.places.AutocompleteService();        

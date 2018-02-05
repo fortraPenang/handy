@@ -90,11 +90,18 @@
             {{ item.description }}
             </ion-item>
              -->
+          
+        
               <ion-item><ion-input type="text" placeholder="Address" [(ngModel)]="address"></ion-input></ion-item>
               <ion-item><ion-input type="number" placeholder="Postal Code" [(ngModel)]="postCode"></ion-input></ion-item>
               <ion-item><ion-input type="text" placeholder="City" [(ngModel)]="city"></ion-input></ion-item>
               <ion-item><ion-input type="text" placeholder="State" [(ngModel)]="state"></ion-input></ion-item>
     
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-input (click)="showAddressModal()" [(ngModel)]="newAddress.place" type="text" placeholder="Pick an address"></ion-input>
+            </ion-item>
           </ion-list>
         
       </ion-list>

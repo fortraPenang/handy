@@ -26,6 +26,7 @@ import { SendquotationModalPage } from '../pages/sendquotation-modal/sendquotati
 import { SendquotationModalPageModule } from '../pages/sendquotation-modal/sendquotation-modal.module';
 import { UserSendquotationPage } from '../pages/user-sendquotation/user-sendquotation';
 import { PendingWorkPage } from '../pages/pending-work/pending-work';
+import {AutocompletePage} from '../pages/autocomplete/autocomplete';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '../providers/google-maps';
@@ -72,6 +73,7 @@ export const firebaseConfig = {
     NewrequestServicePage,
     UserSendquotationPage,
     PendingWorkPage,
+    AutocompletePage,
     Autosize,
   ],
   imports: [
@@ -106,6 +108,7 @@ export const firebaseConfig = {
     SendquotationModalPage,
     UserSendquotationPage,
     PendingWorkPage,
+    AutocompletePage,
   ],
   providers: [
     StatusBar,
