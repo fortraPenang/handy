@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, ToastController } from 'ionic-angular';
+import { Platform, MenuController, Nav, ToastController, LoadingController } from 'ionic-angular';
 
 import { UserLogin } from '../pages/user-login/user-login';
 import { Dashboard } from '../pages/dashboard/dashboard';
@@ -19,7 +19,7 @@ import { ServiceRequestPage } from '../pages/service-request/service-request';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
+  // make UserLogin the root (or first) page
   rootPage = UserLogin;
   pages: Array<{ title: string, icon: string, component: any }>;
   displayName: any;
@@ -31,7 +31,8 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public afAuth: AngularFireAuth,
     public authService: AuthService,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController
   ) {
 
     this.initializeApp();
@@ -43,7 +44,10 @@ export class MyApp {
       { title: 'Logout', icon: 'lock', component: UserLogin }
       
     ];
-
+    let loader = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+    loader.present();
     afAuth.auth.onAuthStateChanged((user) => {
       if (user) {
         // User is signed in
