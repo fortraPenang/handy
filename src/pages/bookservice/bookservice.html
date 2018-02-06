@@ -27,15 +27,12 @@
         <ion-segment-button value="step4">
           Step 4
         </ion-segment-button>
-        <ion-segment-button value="step5">
-          Step 5
-        </ion-segment-button>
       </ion-segment>
     </div>
     
     <div [ngSwitch]="step">
       <ion-list *ngSwitchCase="'step1'">
-          <ion-label>CHOOSE SERVICE</ion-label>
+          <h2>CHOOSE SERVICE</h2>
           <ion-list no-lines radio-group [(ngModel)]="service">
               <ion-item>
                 <ion-label>Installing</ion-label>
@@ -49,21 +46,16 @@
                 <ion-label>Others</ion-label>
                 <ion-radio value="Others" [disabled]="isDisabled"></ion-radio>
               </ion-item>
+              <h2>Problem Description</h2>
+              <ion-item>
+                  <ion-label color="primary" floating>Describe your problem</ion-label>
+                  <ion-textarea></ion-textarea>
+              </ion-item>
             </ion-list>
       </ion-list>
-    
-      <ion-list *ngSwitchCase="'step2'" [(ngModel)]="description">
-        
-          <h2>Problem Description</h2>
-          <ion-item>
-              <ion-label color="primary" floating>Describe your problem</ion-label>
-              <ion-textarea></ion-textarea>
-          </ion-item>
-        
-      </ion-list>
 
 
-      <ion-list *ngSwitchCase="'step3'">
+      <ion-list *ngSwitchCase="'step2'">
         
           <h2><ion-icon end ios="ios-time" md="md-time"></ion-icon> Select Date & Time</h2>
           
@@ -90,23 +82,16 @@
             {{ item.description }}
             </ion-item>
              -->
-          
-        
               <ion-item><ion-input type="text" placeholder="Address" [(ngModel)]="address"></ion-input></ion-item>
               <ion-item><ion-input type="number" placeholder="Postal Code" [(ngModel)]="postCode"></ion-input></ion-item>
               <ion-item><ion-input type="text" placeholder="City" [(ngModel)]="city"></ion-input></ion-item>
               <ion-item><ion-input type="text" placeholder="State" [(ngModel)]="state"></ion-input></ion-item>
     
           </ion-list>
-          <ion-list>
-            <ion-item>
-              <ion-input (click)="showAddressModal()" [(ngModel)]="newAddress.place" type="text" placeholder="Pick an address"></ion-input>
-            </ion-item>
-          </ion-list>
         
       </ion-list>
 
-      <ion-list *ngSwitchCase="'step4'">
+      <ion-list *ngSwitchCase="'step3'">
         
           <h2>Estimated Quotation</h2>
           <ion-card>
@@ -145,7 +130,7 @@
                 </ion-item>
       </ion-list>
 
-      <ion-list *ngSwitchCase="'step5'">
+      <ion-list *ngSwitchCase="'step4'">
           
             <h2>Summary</h2>
             <ion-card>
@@ -176,7 +161,7 @@
             </button>
         </ion-buttons>
         <ion-buttons right>
-            <button *ngIf="step!='step5'" ion-button (click)="next()"> Next
+            <button *ngIf="step!='step4'" ion-button (click)="next()"> Next
             </button>
         </ion-buttons>
     </ion-toolbar>

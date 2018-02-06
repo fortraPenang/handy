@@ -15,10 +15,6 @@ import { GoogleMaps } from '../providers/google-maps';
   templateUrl: 'autocomplete.html',
 })
 export class AutocompletePage {
-  
-  autocompleteItems;
-  autocomplete;
-  service = new google.maps.places.AutocompleteService();
 
   constructor(public viewCtrl: ViewController, private zone: NgZone, public navCtrl: NavController, public navParams: NavParams) {
     this.autocompleteItems = [];
@@ -26,6 +22,11 @@ export class AutocompletePage {
       query: ''
     };
   }
+  
+  autocompleteItems;
+  autocomplete;
+  service = new google.maps.places.AutocompleteService();
+
   dismiss() {
     this.viewCtrl.dismiss();
   }

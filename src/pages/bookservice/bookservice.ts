@@ -119,10 +119,7 @@ export class BookservicePage  {
         break; 
       case "step4":
         this.step ="step3"; 
-        break; 
-      case "step5": 
-        this.step = "step4";
-        break; 
+        break;
     }
   }
   
@@ -137,10 +134,7 @@ export class BookservicePage  {
       case "step3": 
         this.step ="step4"; 
         break; 
-      case "step4": 
-        this.step ="step5"; 
-        break;
-      case "step5":
+      case "step4":
         break; 
     } 
   }
