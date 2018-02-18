@@ -80,8 +80,7 @@ export class UserSignup {
 
   //for holding image URI
   imageURI:any;
-  imageFileName:any;  
-  camera: Camera;
+  imageFileName:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -89,7 +88,8 @@ export class UserSignup {
     public builder: FormBuilder,
     public alertCtrl: AlertController,
     public authService: AuthService,
-    public toastCtrl: ToastController 
+    public toastCtrl: ToastController,
+    public camera: Camera 
   ) {
 
     //default page for ion-segment when page loads  
@@ -307,11 +307,6 @@ export class UserSignup {
             try {
                 this.submitAttempt = true;
                 console.log(this.signupForm2.valid);
-                let toast = this.toastCtrl.create({
-                  message: 'Registration Successful! Please login now',
-                  duration: 3000,
-                  position: 'button'
-                });
                 if ((this.signupForm2.valid && this.step === 'step3') || (this.signupForm3.valid && this.step === 'step4')) {
                   //sign up user
                   this.authService.register(this.account).then(() => {
@@ -326,12 +321,12 @@ export class UserSignup {
                         //push personalDetails to firebase here */
                         this.pushToFirebase();
                         console.log("Register vendor Successful!");
-                        toast.present();
+                        this.presentToast('Registration as a vendor Successful! Please login now');
                        }); 
                     }else {
                       this.pushToFirebase();
                       console.log("Register user Successful!");
-                      toast.present();
+                      this.presentToast('Registration as a user Successful! Please login now');
                     }
                   });
                 }
