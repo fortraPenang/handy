@@ -18,6 +18,7 @@ export class AuthService {
   rootRef: any;
   public static userType: any;
 
+
   constructor(public afAuth: AngularFireAuth,
     public googlePlus: GooglePlus,
     public toastCtrl: ToastController,
@@ -27,6 +28,7 @@ export class AuthService {
     afAuth.authState.subscribe((user: firebase.User) => this.currentUser = user);
     this.userRef = firebase.database().ref('/Handys/user/');
     this.vendorRef = firebase.database().ref('/Handys/vendor/');
+    
   }
 
   /**
@@ -93,4 +95,8 @@ export class AuthService {
   async logout() {
     return this.afAuth.auth.signOut();
   }
+  resetPassword(email: string): any {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
+  
 }
