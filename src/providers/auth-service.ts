@@ -17,6 +17,7 @@ export class AuthService {
   vendorRef: any;
   rootRef: any;
   public static userType: any;
+  
 
   constructor(public afAuth: AngularFireAuth,
     public googlePlus: GooglePlus,
@@ -78,6 +79,10 @@ export class AuthService {
   //TODO:
   async loginFacebook() {
 
+  }
+
+  resetPassword(email: string): any {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
   }
 
   //TODO:
