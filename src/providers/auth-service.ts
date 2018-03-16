@@ -62,6 +62,8 @@ export class AuthService {
         }).catch((error) => {
           console.log(error.code + ": " + error.message);
         })
+      }else{
+        
       }
     })
       .catch((error) => {
@@ -82,20 +84,13 @@ export class AuthService {
 
   }
 
-  //TODO:
-  async sendPasswordResetEmail(email: any) {
-    return this.afAuth.auth.sendPasswordResetEmail(email).then(() => {
-      console.log("Password reset email sent!");
-    })
-    .catch(() => {
-        console.log("Password reset email failed to sent");
-    });
+  async resetPassword(email: string){
+    return this.afAuth.auth.sendPasswordResetEmail(email);
   }
+
 
   async logout() {
     return this.afAuth.auth.signOut();
-  }
-  resetPassword(email: string): any {
-    return this.afAuth.auth.sendPasswordResetEmail(email);
+
   }
 }

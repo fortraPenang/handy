@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
-import { Autosize } from '../components/autosize/autosize'
+import { Autosize } from '../components/autosize/autosize';
+import {AutocompletePage} from '../autocomplete/autocomplete';
 
 /**
  * Generated class for the QuickServicePage page.
@@ -18,6 +19,9 @@ import { Autosize } from '../components/autosize/autosize'
 export class QuickServicePage {
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/QSrequest');
+  userRef = firebase.database().ref('/Handys/user');
+
+
 
   service:any;
   description:any;
@@ -30,14 +34,33 @@ export class QuickServicePage {
   budget:any;
   currentUser:any;
   uId:any;
+  newAddress:any;
+
+   autocompleteItems: any;
+  autocomplete: any;
+  acService:any;
+  placesService: any; 
 
   public step:any
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController, public alertCtrl: AlertController) {
     this.step = "step1";
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUser = firebase.auth().currentUser;
+        this.uId = this.currentUser.uid;
+      }
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad QuickServicePage');
+
+    this.userRef.on('value', handy => {
+      this.address=handy.val()[this.uId]['address1'];
+      this.postCode=handy.val()[this.uId]['postcode'];
+      this.city=handy.val()[this.uId]['city'];
+      this.state=handy.val()[this.uId]['state'];
+      });
   }
 
   back(){

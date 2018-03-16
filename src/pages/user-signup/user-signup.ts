@@ -254,10 +254,7 @@ export class UserSignup {
       this.advanceForm();
     }
     else if (this.signupForm.valid && this.step === 'step2') {
-      console.log(this.account);
-      this.authService.register(this.account);
-
-      this.advanceForm();
+      this.emailIsRegistered(this.account.email)
     }
     else if (this.signupForm2.valid && this.step === 'step3') {
       console.log(this.personalDetails);
@@ -330,12 +327,12 @@ export class UserSignup {
                       console.log("Register user Successful!");
                       this.presentToast('Registration as a user Successful! Please login now');
                     }
+                    this.loginPage();
                   });
                 }
-                this.loginPage();      
             } catch (error) {
               let alert = this.alertCtrl.create({
-                title: "Login Failed",
+                title: "Signup Failed",
                 subTitle: error.errorMessage,
                 buttons: ['Ok']
               });
@@ -347,6 +344,27 @@ export class UserSignup {
     });
     confirm.present();
 
+  }
+
+  async emailIsRegistered(email:string) {
+    firebase.auth().fetchProvidersForEmail(email).then((promise:any)=>{
+      
+      if (promise[0] != null) {
+        let alert = this.alertCtrl.create({
+          title: "Email existed",
+          subTitle: "Please enter a different email or login",
+          buttons: ['Ok']
+        });
+        alert.present();
+        //console.log("true");
+      }
+      else{
+        this.advanceForm();
+      }
+      
+    });
+    //console.log(b);
+    
   }
   
 

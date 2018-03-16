@@ -37,7 +37,7 @@ export class UserForgotpassword {
     } else {
       this.authService.resetPassword(this.resetpwdForm.value.email).then( authService => {
         let alert = this.alertCtrl.create({
-          message: "Reset password link has been sent to your.",
+          message: "Reset password link has been sent to your email.",
           buttons: [
             {
               text: "Ok",
@@ -48,7 +48,7 @@ export class UserForgotpassword {
         alert.present();
         this.loginPage();
       }, error => {
-        this.loading.dismiss().then( () => {
+        this.loading.present().then( () => {
           let alert = this.alertCtrl.create({
             message: error.message,
             buttons: [
@@ -59,22 +59,26 @@ export class UserForgotpassword {
             ]
           });
           alert.present();
-          this.loginPage();
+          this.dismissLoading();
         });
       });
-
-      this.loading = this.loadingCtrl.create({
-        dismissOnPageChange: true,
-      });
-      this.loading.present();
+      this.loading = this.loadingCtrl.create();
     }
   }
+
+  dismissLoading(){
+    if(this.loading){
+        this.loading.dismiss();
+        this.loading = null;
+    }
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserForgotpassword');
   }
 
   dashboardPage(){ this.navCtrl.push(Dashboard); }
-  loginPage(){ this.navCtrl.push(UserLogin); }
+  loginPage(){ this.navCtrl.setRoot(UserLogin); }
   signupPage(){ this.navCtrl.push(UserSignup); }
 
 }

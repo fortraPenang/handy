@@ -28,6 +28,7 @@ export class BookservicePage  {
   
   database = firebase.database();
   valueRef = firebase.database().ref('/Handys/request');
+  userRef = firebase.database().ref('/Handys/user');
 
   service:any;
   description:any;
@@ -43,10 +44,10 @@ export class BookservicePage  {
   uId:any;
   newAddress:any;
 
-  /* autocompleteItems: any;
+   autocompleteItems: any;
   autocomplete: any;
   acService:any;
-  placesService: any; */
+  placesService: any; 
 
   public step:any
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,public alertCtrl: AlertController) {
@@ -65,8 +66,13 @@ export class BookservicePage  {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookservicePage');
-    this.vndId= this.navParams.data;
-    console.log(this.vndId);
+
+    this.userRef.on('value', handy => {
+      this.address=handy.val()[this.uId]['address1'];
+      this.postCode=handy.val()[this.uId]['postcode'];
+      this.city=handy.val()[this.uId]['city'];
+      this.state=handy.val()[this.uId]['state'];
+    });
   }
 
   showAddressModal () {
@@ -77,7 +83,7 @@ export class BookservicePage  {
     });
     modal.present();
   }
-  /* ngOnInit() {
+   ngOnInit() {
     this.acService = new google.maps.places.AutocompleteService();        
     this.autocompleteItems = [];
     this.autocomplete = {
@@ -104,7 +110,10 @@ export class BookservicePage  {
         });
         });
         }
-   */  
+    
+  chooseItem(item){
+    this.address = item.description
+  }
 
   //to navigate back to previous segment
   back(){
