@@ -69,19 +69,18 @@
               <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="myTime"></ion-datetime>
             </ion-item>
             <h3><ion-icon end ios="ios-home" md="md-home"></ion-icon>Address Details</h3>
-            <!-- <ion-searchbar 
+            <ion-searchbar 
             [(ngModel)]="autocomplete.query" 
             [showCancelButton]="true" 
             (ionInput)="updateSearch()" 
             (ionCancel)="dismiss()"
             placeholder="Type your place ...">
             </ion-searchbar>
-            <ion-list>
             <ion-item *ngFor="let item of autocompleteItems" 
             (click)="chooseItem(item)">
             {{ item.description }}
             </ion-item>
-             -->
+             
               <ion-item><ion-input type="text" placeholder="Address" [(ngModel)]="address"></ion-input></ion-item>
               <ion-item><ion-input type="number" placeholder="Postal Code" [(ngModel)]="postCode"></ion-input></ion-item>
               <ion-item><ion-input type="text" placeholder="City" [(ngModel)]="city"></ion-input></ion-item>
