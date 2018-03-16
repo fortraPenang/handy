@@ -17,7 +17,6 @@ export class AuthService {
   vendorRef: any;
   rootRef: any;
   public static userType: any;
-  
 
 
   constructor(public afAuth: AngularFireAuth,
@@ -83,10 +82,6 @@ export class AuthService {
 
   }
 
-  resetPassword(email: string): any {
-    return this.afAuth.auth.sendPasswordResetEmail(email);
-  }
-
   //TODO:
   async sendPasswordResetEmail(email: any) {
     return this.afAuth.auth.sendPasswordResetEmail(email).then(() => {
@@ -100,6 +95,7 @@ export class AuthService {
   async logout() {
     return this.afAuth.auth.signOut();
   }
- 
-  
+  resetPassword(email: string): any {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
 }

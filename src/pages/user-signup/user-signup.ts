@@ -255,6 +255,8 @@ export class UserSignup {
     }
     else if (this.signupForm.valid && this.step === 'step2') {
       console.log(this.account);
+      this.authService.register(this.account);
+
       this.advanceForm();
     }
     else if (this.signupForm2.valid && this.step === 'step3') {
