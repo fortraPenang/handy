@@ -59,6 +59,7 @@ export class UserForgotpassword {
             ]
           });
           alert.present();
+          this.loginPage();
         });
       });
 

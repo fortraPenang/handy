@@ -100,8 +100,6 @@ export class AuthService {
   async logout() {
     return this.afAuth.auth.signOut();
   }
-  resetPassword(email: string): any {
-    return this.afAuth.auth.sendPasswordResetEmail(email);
-  }
+ 
   
 }
