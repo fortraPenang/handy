@@ -65,6 +65,7 @@
                                 </ion-item-options>
                               </ion-item-sliding>
                             <ion-item *ngIf="bool[i]">
+                            <img src="{{requests[key].img}}" *ngIf="requests[key].img" alt="Ionic File" width="300" />
                             <p><strong>Description:</strong></p>
                             <div class="text-wrap">{{requests[key].description}}</div>
                             <p><strong>Address:</strong></p>
@@ -106,12 +107,13 @@
                               </ion-item-options>
                             </ion-item-sliding>
                             <ion-item *ngIf="bool[i]">
-                            <p><strong>Description:</strong></p>
-                            <div class="text-wrap">{{requests[key].description}}</div>
-                            <p><strong>Address:</strong></p>
-                            <div class="text-wrap">{{requests[key].address}}</div>
-                            <p><strong>Quotation:</strong></p>
-                            {{requests[key].budget}}
+                              <img src="{{requests[key].img}}" *ngIf="requests[key].img" alt="Ionic File" width="300" />
+                              <p><strong>Description:</strong></p>
+                              <div class="text-wrap">{{requests[key].description}}</div>
+                              <p><strong>Address:</strong></p>
+                              <div class="text-wrap">{{requests[key].address}}</div>
+                              <p><strong>Quotation:</strong></p>
+                              {{requests[key].budget}}
                             </ion-item>
                           </ion-list>
                     </ion-card-content>
@@ -144,12 +146,13 @@
                         </ion-item-options>
                       </ion-item-sliding>
                           <ion-item *ngIf="bool[i]">
-                          <p><strong>Description:</strong></p>
-                          <div class="text-wrap">{{requests[key].description}}</div>
-                          <p><strong>Address:</strong></p>
-                          <div class="text-wrap">{{requests[key].address}}</div>
-                          <p><strong>Quotation:</strong></p>
-                          RM {{requests[key].budget}}
+                            <img src="{{requests[key].img}}" *ngIf="requests[key].img" alt="Ionic File" width="300" />
+                            <p><strong>Description:</strong></p>
+                            <div class="text-wrap">{{requests[key].description}}</div>
+                            <p><strong>Address:</strong></p>
+                            <div class="text-wrap">{{requests[key].address}}</div>
+                            <p><strong>Quotation:</strong></p>
+                            RM {{requests[key].budget}}
                           </ion-item>
                         </ion-list>
                   </ion-card-content>

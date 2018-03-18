@@ -33,7 +33,7 @@
     <div [ngSwitch]="step">
       <ion-list *ngSwitchCase="'step1'">
           <h2>CHOOSE SERVICE</h2>
-          <ion-list no-lines radio-group [(ngModel)]="service">
+          <ion-list no-lines radio-group [(ngModel)]="request.serviceCategory">
               <ion-item>
                 <ion-label>Installing</ion-label>
                 <ion-radio value="Installing" checked></ion-radio>
@@ -49,7 +49,13 @@
               <h2>Problem Description</h2>
               <ion-item>
                   <ion-label color="primary" floating>Describe your problem</ion-label>
-                  <ion-textarea></ion-textarea>
+                  <ion-textarea aria-placeholder="describe your problem (optional)" [(ngModel)]="request.description"></ion-textarea>
+              </ion-item>
+              <ion-item>
+                <p>{{imageURI}}</p>
+                <button ion-button color="secondary" (click)="selectImage()">Get Image</button>
+                <h4>Image Preview</h4>
+                <img src="{{imageURI}}" *ngIf="imageURI" alt="Ionic File" width="300" />
               </ion-item>
             </ion-list>
       </ion-list>
@@ -62,11 +68,11 @@
           <ion-list>
             <ion-item>
               <ion-label>Date</ion-label>
-              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DDDD MMMM YYYY" [(ngModel)]="myDate"></ion-datetime>
+              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DDDD MMMM YYYY" [(ngModel)]="request.date"></ion-datetime>
             </ion-item>
             <ion-item>
               <ion-label>Time</ion-label>
-              <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="myTime"></ion-datetime>
+              <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="request.time"></ion-datetime>
             </ion-item>
             <h3><ion-icon end ios="ios-home" md="md-home"></ion-icon>Address Details</h3>
             <ion-searchbar 
@@ -135,11 +141,11 @@
             <ion-card>
               <ion-card-content>
                 <p><strong>Service Category:</strong></p>
-                {{service}}
+                {{request.serviceCategory}}
                 <p><strong>Description:</strong></p>
-                {{description}}
+                {{request.description}}
                 <p><strong>Date & Time:</strong></p>
-                {{myDate}}, {{myTime}}
+                {{request.date}}, {{request.time}}
                 <p><strong>Address:</strong></p>
                 {{address}}, {{postCode}}, {{city}}, {{state}}
                 <p><strong>Quotation:</strong></p>
@@ -148,7 +154,7 @@
             </ion-card>
             
             <button ion-button (click)="goToViewService()" color="danger" style="position:absolute; left:25px; bottom:40px; padding:0.5cm 1.0cm 0.5cm 1.0cm">Cancel</button>
-            <button ion-button (click)="pushData()" color="accept" style ="color:white; position:absolute; right:25px; bottom:40px; padding:0.5cm 1.0cm 0.5cm 1.0cm" >Request Service</button>
+            <button ion-button (click)="submitRequest()" color="accept" style ="color:white; position:absolute; right:25px; bottom:40px; padding:0.5cm 1.0cm 0.5cm 1.0cm" >Request Service</button>
           
       </ion-list>
     </div>

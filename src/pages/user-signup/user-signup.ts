@@ -356,14 +356,12 @@ export class UserSignup {
           buttons: ['Ok']
         });
         alert.present();
-        //console.log("true");
       }
       else{
         this.advanceForm();
       }
       
     });
-    //console.log(b);
     
   }
   
